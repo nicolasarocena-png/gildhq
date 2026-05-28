@@ -261,7 +261,7 @@ export default function PodcastPage() {
             </h2>
             <p className="mx-auto mt-5 max-w-lg text-[14px] leading-[1.9] text-white/45">
               New episodes every two weeks. Founders, executives, and operators
-              sharing what's actually working.
+              sharing what&apos;s actually working.
             </p>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-5">
               <a
