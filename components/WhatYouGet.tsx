@@ -6,9 +6,6 @@ import { trackApplyClick } from "@/lib/analytics";
 import { openRequestInviteModal } from "@/components/RequestInviteModal";
 import { gsap, ScrollTrigger, reduced } from "@/lib/gsap";
 
-const heroImage =
-  "/images/698fafaef71444e6a1a61008_3278742058c10b66de59b113217d901e_website_hero_desktop.avif";
-
 const benefits = [
   {
     title: "Access to the Dinners",
@@ -33,10 +30,6 @@ const benefits = [
 ];
 
 export function WhatYouGet() {
-  const bannerRef = useRef<HTMLDivElement>(null);
-  const bannerHeadRef = useRef<HTMLHeadingElement>(null);
-  const bannerTextRef = useRef<HTMLParagraphElement>(null);
-  const bannerBtnRef = useRef<HTMLButtonElement>(null);
   const headingBlockRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
   const bottomBtnRef = useRef<HTMLDivElement>(null);
@@ -49,22 +42,7 @@ export function WhatYouGet() {
   useEffect(() => {
     if (reduced()) return;
     const ctx = gsap.context(() => {
-      // Banner content
-      if (bannerRef.current) {
-        gsap.from(
-          [bannerHeadRef.current, bannerTextRef.current, bannerBtnRef.current],
-          {
-            opacity: 0,
-            y: 24,
-            duration: 0.68,
-            stagger: 0.12,
-            ease: "power2.out",
-            scrollTrigger: { trigger: bannerRef.current, start: "top 80%", once: true },
-          }
-        );
-      }
 
-      // Section heading block
       if (headingBlockRef.current) {
         gsap.from(headingBlockRef.current.children, {
           opacity: 0,
@@ -76,8 +54,6 @@ export function WhatYouGet() {
         });
       }
 
-      // Benefit cards — use onEnter to avoid transition-transform on <article>
-      // conflicting with GSAP's initial transform set on mount
       if (cardsRef.current) {
         const cards = Array.from(cardsRef.current.querySelectorAll("article"));
         ScrollTrigger.create({
@@ -102,7 +78,6 @@ export function WhatYouGet() {
         });
       }
 
-      // Bottom CTA
       if (bottomBtnRef.current) {
         gsap.from(bottomBtnRef.current, {
           opacity: 0,
@@ -117,40 +92,8 @@ export function WhatYouGet() {
   }, []);
 
   return (
-    <section id="benefits" className="bg-[#060504] text-white">
-      <div ref={bannerRef} className="relative min-h-[280px] overflow-hidden md:min-h-[360px]">
-        <Image
-          src={heroImage}
-          alt=""
-          fill
-          sizes="100vw"
-          priority={false}
-          className="object-cover opacity-30 [filter:saturate(0.75)_contrast(1.1)]"
-        />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,3,2,0.68),rgba(4,3,2,0.76))]" />
-        <div className="section-shell relative z-10 flex min-h-[280px] flex-col justify-end pb-16 pt-20 md:min-h-[360px]">
-          <h2 ref={bannerHeadRef} className="max-w-3xl font-serif text-[30px] leading-[1.18] tracking-[-0.015em] text-white md:text-[42px]">
-            Apply To The GILD Network
-          </h2>
-          <p ref={bannerTextRef} className="mt-6 max-w-lg text-[13px] leading-[1.85] text-white/55 md:text-[14px]">
-            If you&apos;re a senior AI or engineering leader, we&apos;d like to meet you. We
-            review every application personally. Tell us who you are, what you&apos;re
-            working on, and what would be most valuable to you. We&apos;ll do the rest.
-          </p>
-          <div className="mt-8">
-            <button
-              ref={bannerBtnRef}
-              type="button"
-              onClick={() => requestAccess("networking_banner")}
-              className="bg-[#5a9a9b] px-8 py-3.5 text-[11px] font-medium uppercase tracking-[0.2em] text-white transition-colors duration-300 hover:bg-[#4d8889]"
-            >
-              Request Access
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div className="section-shell py-24 md:py-36">
+    <section id="benefits" className="section-pad bg-[#060504] text-white">
+      <div className="section-shell">
         <div ref={headingBlockRef} className="max-w-2xl">
           <p className="section-label">What You Get</p>
           <h3 className="font-serif text-[30px] leading-[1.2] tracking-[-0.015em] text-white md:text-[40px]">
