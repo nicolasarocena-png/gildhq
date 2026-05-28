@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { trackApplyClick } from "@/lib/analytics";
+import { openRequestInviteModal } from "@/components/RequestInviteModal";
 
 const heroImage =
   "/images/698fafaef71444e6a1a61008_3278742058c10b66de59b113217d901e_website_hero_desktop.avif";
@@ -32,7 +33,7 @@ const benefits = [
 export function WhatYouGet() {
   const requestAccess = (location: string) => {
     trackApplyClick(location);
-    document.getElementById("apply")?.scrollIntoView({ behavior: "smooth" });
+    openRequestInviteModal();
   };
 
   return (

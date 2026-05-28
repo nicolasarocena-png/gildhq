@@ -284,8 +284,8 @@ export function RequestInviteModal() {
                 <label className="block text-sm font-semibold text-slate-900">
                   9. What are you working on with AI right now?
                   <p className="mt-2 text-xs font-normal leading-5 text-slate-700">
-                    A sentence or two about your role, your company's AI work, and what
-                    you're navigating.
+                    A sentence or two about your role, your company&apos;s AI work, and what
+                    you&apos;re navigating.
                   </p>
                   <textarea
                     className={textAreaClass}
@@ -297,7 +297,7 @@ export function RequestInviteModal() {
                 </label>
 
                 <label className="block text-sm font-semibold text-slate-900">
-                  10. What's the most pressing challenge on your plate right now?
+                  10. What&apos;s the most pressing challenge on your plate right now?
                   <p className="mt-2 text-xs font-normal leading-5 text-slate-700">
                     Be specific. The more we understand, the more useful the network
                     becomes for you.
@@ -314,8 +314,8 @@ export function RequestInviteModal() {
                 <label className="block text-sm font-semibold text-slate-900">
                   11. What do you want from the network?
                   <p className="mt-2 text-xs font-normal leading-5 text-slate-700">
-                    Peers solving similar problems, senior leaders who've scaled where
-                    you're scaling, hiring help, advisors, or just access to the events.
+                    Peers solving similar problems, senior leaders who&apos;ve scaled where
+                    you&apos;re scaling, hiring help, advisors, or just access to the events.
                     Tell us what would actually help.
                   </p>
                   <textarea
@@ -331,7 +331,7 @@ export function RequestInviteModal() {
                   12. What can you offer other members of the network?
                   <p className="mt-2 text-xs font-normal leading-5 text-slate-700">
                     Expertise, experience, advisory or fractional work, hiring referrals,
-                    anything you'd be open to sharing with peers.
+                    anything you&apos;d be open to sharing with peers.
                   </p>
                   <textarea
                     className={textAreaClass}
@@ -352,7 +352,7 @@ export function RequestInviteModal() {
                   {isSubmitting ? "Submitting..." : "Join Now"}
                 </button>
                 <p className="mt-4 text-xs text-slate-700">
-                  For senior leaders only. We don't spam.
+                  For senior leaders only. We don&apos;t spam.
                 </p>
               </div>
             </form>
@@ -367,11 +367,11 @@ export function RequestInviteModal() {
                 Thanks for applying to GILD.
               </h2>
               <p className="mt-6 text-base leading-7 text-slate-800">
-                We review every application personally. You'll hear from us within two
+                We review every application personally. You&apos;ll hear from us within two
                 weeks.
               </p>
               <p className="mt-4 text-base leading-7 text-slate-800">
-                If you're a fit, we'll send you a personal welcome from our team with
+                If you&apos;re a fit, we&apos;ll send you a personal welcome from our team with
                 details on your next event and a link to join the GILD community.
               </p>
               <p className="mt-4 text-base leading-7 text-slate-800">

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { trackApplyClick } from "@/lib/analytics";
+import { openRequestInviteModal } from "@/components/RequestInviteModal";
 
 const insightsItems = [
   { label: "Newsletter", href: "/#benefits" },
@@ -24,13 +25,7 @@ export function Navbar() {
   const apply = () => {
     trackApplyClick("navbar");
     setIsOpen(false);
-    const applySection = document.getElementById("apply");
-    if (applySection) {
-      applySection.scrollIntoView({ behavior: "smooth" });
-      return;
-    }
-
-    window.location.href = "/#apply";
+    openRequestInviteModal();
   };
 
   return (
@@ -104,10 +99,18 @@ export function Navbar() {
       {isOpen ? (
         <div className="fixed inset-0 top-[70px] z-40 bg-[#e7eef2] px-6 py-10 md:hidden">
           <div className="flex flex-col gap-7">
-            <a href="/#events" onClick={() => setIsOpen(false)} className="font-serif text-3xl text-slate-900">
+            <a
+              href="/#events"
+              onClick={() => setIsOpen(false)}
+              className="font-serif text-3xl text-slate-900"
+            >
               Events
             </a>
-            <a href="/#fit" onClick={() => setIsOpen(false)} className="font-serif text-3xl text-slate-900">
+            <a
+              href="/#fit"
+              onClick={() => setIsOpen(false)}
+              className="font-serif text-3xl text-slate-900"
+            >
               Network
             </a>
             {insightsItems.map((item) => (

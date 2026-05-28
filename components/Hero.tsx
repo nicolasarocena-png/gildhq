@@ -2,13 +2,14 @@
 
 import Image from "next/image";
 import { trackApplyClick } from "@/lib/analytics";
+import { openRequestInviteModal } from "@/components/RequestInviteModal";
 
 const heroImage = "/images/6a075d85473e1e56a5c8df65_DSC09920.jpg";
 
 export function Hero() {
   const apply = () => {
     trackApplyClick("hero");
-    document.getElementById("apply")?.scrollIntoView({ behavior: "smooth" });
+    openRequestInviteModal();
   };
 
   return (

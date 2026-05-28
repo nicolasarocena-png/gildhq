@@ -1,18 +1,12 @@
 "use client";
 
 import { trackApplyClick } from "@/lib/analytics";
+import { openRequestInviteModal } from "@/components/RequestInviteModal";
 
 export function Footer() {
   const requestInvite = () => {
     trackApplyClick("footer");
-    const applySection = document.getElementById("apply");
-
-    if (applySection) {
-      applySection.scrollIntoView({ behavior: "smooth" });
-      return;
-    }
-
-    window.location.href = "/#apply";
+    openRequestInviteModal();
   };
 
   return (
@@ -70,12 +64,13 @@ export function Footer() {
               >
                 Request Invite
               </button>
-              <a
-                href="/#apply"
+              <button
+                type="button"
+                onClick={requestInvite}
                 className="border border-white/70 px-6 py-3 text-center text-sm font-medium text-white transition-colors hover:border-teal-400 hover:text-teal-400"
               >
                 Explore Partnerships
-              </a>
+              </button>
             </div>
           </div>
         </div>
