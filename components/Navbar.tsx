@@ -68,12 +68,22 @@ export function Navbar() {
         </div>
         <button
           type="button"
-          className="flex h-11 w-11 items-center justify-center text-slate-900 md:hidden"
+          className="flex h-11 w-11 flex-col items-center justify-center gap-1.5 text-slate-900 md:hidden"
           aria-label="Open navigation"
           aria-expanded={isOpen}
           onClick={() => setIsOpen((open) => !open)}
         >
-          <span className="text-2xl">{isOpen ? "x" : "menu"}</span>
+          <span
+            className={`h-px w-6 bg-current transition ${
+              isOpen ? "translate-y-[7px] rotate-45" : ""
+            }`}
+          />
+          <span className={`h-px w-6 bg-current transition ${isOpen ? "opacity-0" : ""}`} />
+          <span
+            className={`h-px w-6 bg-current transition ${
+              isOpen ? "-translate-y-[7px] -rotate-45" : ""
+            }`}
+          />
         </button>
       </nav>
       {isOpen ? (

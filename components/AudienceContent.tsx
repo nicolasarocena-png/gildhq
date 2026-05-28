@@ -16,8 +16,8 @@ export function AudienceContent({ selectedAudience }: Props) {
         <div key={selectedAudience} className="animate-[fadeIn_0.2s_ease-out]">
           <p className="section-label">
             {isEngineering
-              ? "—— 02 · The GILD Engineering Leaders Forum"
-              : "—— 02 · The GILD Founder Community"}
+              ? "The GILD Engineering Leaders Forum"
+              : "The GILD Founder Community"}
           </p>
           <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
             <div>
