@@ -5,14 +5,19 @@ import { useEffect, useRef } from "react";
 import { trackApplyClick } from "@/lib/analytics";
 import { openRequestInviteModal } from "@/components/RequestInviteModal";
 import { gsap, reduced } from "@/lib/gsap";
+import { sponsors } from "@/lib/sponsors";
 
-const heroImage = "/images/LANDING1_files/699386aa1bc9d6b6925f3043_3f7b9646a90570149eefeb01fac751a0_partners-hero.avif";
+const heroImage =
+  "/images/LANDING1_files/699386aa1bc9d6b6925f3043_3f7b9646a90570149eefeb01fac751a0_partners-hero.avif";
+
+const logoSet = [...sponsors, ...sponsors]; // duplicate for seamless loop
 
 export function Hero() {
   const bgRef = useRef<HTMLDivElement>(null);
   const lineRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const subRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLButtonElement>(null);
+  const logosRef = useRef<HTMLDivElement>(null);
 
   const apply = () => {
     trackApplyClick("hero");
@@ -30,13 +35,15 @@ export function Hero() {
           "-=0.48"
         )
         .from(subRef.current, { opacity: 0, y: 22, duration: 0.65 }, "-=0.38")
-        .from(ctaRef.current, { opacity: 0, y: 12, scale: 0.96, duration: 0.5 }, "-=0.32");
+        .from(ctaRef.current, { opacity: 0, y: 12, scale: 0.96, duration: 0.5 }, "-=0.32")
+        .from(logosRef.current, { opacity: 0, y: 10, duration: 0.6 }, "-=0.2");
     });
     return () => ctx.revert();
   }, []);
 
   return (
-    <section className="relative min-h-[75vh] overflow-hidden bg-[#050403] md:min-h-[calc(100vh-72px)]">
+    <section className="relative flex min-h-[75vh] flex-col overflow-hidden bg-[#050403] md:min-h-[calc(100vh-72px)]">
+      {/* Background */}
       <div ref={bgRef} className="absolute inset-0">
         <Image
           src={heroImage}
@@ -49,12 +56,12 @@ export function Hero() {
         />
         <div className="absolute inset-0 bg-black/28" />
         <div className="absolute inset-0 bg-[linear-gradient(108deg,rgba(5,4,3,0.82)_0%,rgba(5,4,3,0.38)_48%,rgba(5,4,3,0.18)_100%)]" />
-        <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-[#0d0b09] to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-[#080604] to-transparent" />
       </div>
 
-      {/* Hero content — wider container than section-shell to prevent cramped feel on large screens */}
-      <div className="relative z-10 mx-auto flex w-full max-w-[1600px] min-h-[75vh] items-center px-6 py-16 md:min-h-[calc(100vh-72px)] md:px-12 md:py-24 lg:px-16 xl:px-20 2xl:px-28">
-        <div className="hero-drift max-w-[820px] text-left">
+      {/* Main content — grows to fill space */}
+      <div className="relative z-10 mx-auto flex w-full max-w-[1600px] flex-1 items-center px-6 py-16 md:px-12 md:py-24 lg:px-16 xl:px-20 2xl:px-28">
+        <div className="hero-drift max-w-[820px] text-left 2xl:max-w-[960px]">
           <h1 className="text-[36px] font-normal leading-[1.08] tracking-[-0.018em] text-white sm:text-[48px] md:text-[60px] lg:text-[70px] xl:text-[78px] 2xl:text-[92px]">
             <span className="block overflow-hidden">
               <span
@@ -90,27 +97,53 @@ export function Hero() {
           </button>
         </div>
       </div>
-      {/* Scroll indicator — mobile only */}
-      <div className="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 md:hidden">
-        <div className="flex flex-col items-center gap-1.5 opacity-40">
-          <span className="text-[9px] font-medium uppercase tracking-[0.28em] text-white">
-            Scroll
-          </span>
-          <svg
-            width="12"
-            height="8"
-            viewBox="0 0 12 8"
-            fill="none"
-            className="animate-bounce text-white"
-            aria-hidden
+
+      {/* Logo strip — visible on load, no scroll needed */}
+      <div ref={logosRef} className="relative z-10 border-t border-white/[0.07] bg-black/20 backdrop-blur-sm">
+        <div className="mx-auto max-w-[1600px] px-6 py-5 md:px-12 lg:px-16 xl:px-20 2xl:px-28">
+          <p className="mb-4 text-[9px] font-medium uppercase tracking-[0.32em] text-white/30">
+            Where leaders from these companies come to think and connect
+          </p>
+          <div
+            className="overflow-hidden"
+            style={{
+              WebkitMaskImage: "linear-gradient(90deg, transparent, black 8%, black 92%, transparent)",
+              maskImage: "linear-gradient(90deg, transparent, black 8%, black 92%, transparent)",
+            }}
           >
-            <path
-              d="M1 1L6 6L11 1"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
+            <div className="flex w-max gap-[48px] md:gap-[80px]"
+              style={{ animation: "marquee 45s linear infinite" }}
+            >
+              {logoSet.map((logo, i) => (
+                <div
+                  key={`${logo.name}-${i}`}
+                  className="flex h-5 min-w-[72px] items-center justify-center"
+                >
+                  {logo.src ? (
+                    <Image
+                      src={logo.src}
+                      alt={logo.name}
+                      width={96}
+                      height={22}
+                      className="max-h-[18px] w-auto object-contain opacity-50"
+                    />
+                  ) : (
+                    <span className="text-[10px] font-medium uppercase tracking-[0.14em] text-white/30">
+                      {logo.name}
+                    </span>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Scroll indicator — mobile only */}
+      <div className="absolute bottom-20 left-1/2 z-10 -translate-x-1/2 md:hidden">
+        <div className="flex flex-col items-center gap-1.5 opacity-35">
+          <svg width="12" height="8" viewBox="0 0 12 8" fill="none" className="animate-bounce text-white" aria-hidden>
+            <path d="M1 1L6 6L11 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
       </div>

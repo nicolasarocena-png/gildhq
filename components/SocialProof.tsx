@@ -2,9 +2,8 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { sponsors } from "@/lib/sponsors";
 import { testimonials } from "@/lib/testimonials";
-import { gsap, ScrollTrigger, reduced } from "@/lib/gsap";
+import { gsap, reduced } from "@/lib/gsap";
 
 function initials(name: string) {
   return name
@@ -17,18 +16,12 @@ function initials(name: string) {
 
 export function SocialProof() {
   const sectionRef = useRef<HTMLElement | null>(null);
-  const marqueeRef = useRef<HTMLDivElement | null>(null);
-  const logoRowRef = useRef<HTMLDivElement | null>(null);
   const [sectionVisible, setSectionVisible] = useState(false);
-  const [marqueeVisible, setMarqueeVisible] = useState(true);
   const [visibleCards, setVisibleCards] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     const section = sectionRef.current;
-    const marquee = marqueeRef.current;
-    if (!section || !marquee) {
-      return;
-    }
+    if (!section) return;
 
     const revealObserver = new IntersectionObserver(
       ([entry]) => {
@@ -38,11 +31,6 @@ export function SocialProof() {
         }
       },
       { threshold: 0.15 }
-    );
-
-    const marqueeObserver = new IntersectionObserver(
-      ([entry]) => setMarqueeVisible(entry.isIntersecting),
-      { threshold: 0.1 }
     );
 
     const cardObserver = new IntersectionObserver(
@@ -63,36 +51,15 @@ export function SocialProof() {
     );
 
     revealObserver.observe(section);
-    marqueeObserver.observe(marquee);
     section.querySelectorAll("[data-card-key]").forEach((card) => cardObserver.observe(card));
     return () => {
       revealObserver.disconnect();
-      marqueeObserver.disconnect();
       cardObserver.disconnect();
     };
   }, []);
 
-  // Scroll-based logo row fade-out
-  useEffect(() => {
-    if (reduced() || !logoRowRef.current) return;
-    const ctx = gsap.context(() => {
-      gsap.to(logoRowRef.current, {
-        opacity: 0,
-        y: -18,
-        ease: "none",
-        scrollTrigger: {
-          trigger: logoRowRef.current,
-          start: "top 38%",
-          end: "top -8%",
-          scrub: 0.8,
-        },
-      });
-    });
-    return () => ctx.revert();
-  }, []);
-
-  const hasMarquee = sponsors.length >= 6;
-  const logoSet = hasMarquee ? [...sponsors, ...sponsors] : sponsors;
+  // Keep gsap import used
+  useEffect(() => { reduced(); }, []);
 
   return (
     <section
@@ -102,61 +69,7 @@ export function SocialProof() {
       }`}
     >
       <div className="section-shell">
-        <div ref={logoRowRef}>
-        <p className="mb-16 font-sans text-[10px] font-medium uppercase tracking-[0.32em] text-white/35">
-          Companies whose leadership is attending GILD events
-        </p>
-        <div ref={marqueeRef} className="overflow-hidden marquee-mask">
-          {hasMarquee ? (
-            <div
-              className={`flex w-max gap-[50px] md:gap-[100px] ${
-                marqueeVisible ? "sponsor-marquee" : ""
-              } hover:[animation-play-state:paused]`}
-            >
-              {logoSet.map((logo, index) => (
-                <div
-                  key={`${logo.name}-${index}`}
-                  className="flex h-5 min-w-[88px] items-center justify-center text-[11px] font-medium uppercase tracking-[0.14em] text-white/35 md:h-7 md:min-w-[112px]"
-                >
-                  {logo.src ? (
-                    <Image
-                      src={logo.src}
-                      alt={logo.name}
-                      width={112}
-                      height={28}
-                      className="max-h-5 w-auto object-contain opacity-65 transition-opacity duration-500 hover:opacity-90 md:max-h-7"
-                    />
-                  ) : (
-                    logo.name
-                  )}
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="flex flex-wrap justify-center gap-10">
-              {logoSet.map((logo, index) => (
-                <div
-                  key={`${logo.name}-${index}`}
-                  className="flex h-5 min-w-[88px] items-center justify-center text-[11px] font-medium uppercase tracking-[0.14em] text-white/35 md:h-7 md:min-w-[112px]"
-                >
-                  {logo.src ? (
-                    <Image
-                      src={logo.src}
-                      alt={logo.name}
-                      width={112}
-                      height={28}
-                      className="max-h-5 w-auto object-contain opacity-40 md:max-h-7"
-                    />
-                  ) : (
-                    logo.name
-                  )}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-        </div>{/* /logoRowRef */}
-        <div className="mt-28 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {testimonials.map((testimonial, index) => (
             <article
               key={testimonial.name}

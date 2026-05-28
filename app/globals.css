@@ -4,7 +4,7 @@
 
 :root {
   color-scheme: dark;
-  --page-bg: #0d0b09;
+  --page-bg: #080604;
   --accent: #5a9a9b;
   --accent-light: #6db0b1;
   background: var(--page-bg);
@@ -85,7 +85,7 @@ summary::-webkit-details-marker {
 }
 
 .section-label {
-  @apply mb-10 text-[10px] font-medium uppercase tracking-[0.32em] text-white/40;
+  @apply mb-10 text-[10px] font-medium uppercase tracking-[0.32em] text-white/55;
 }
 
 .reveal {
