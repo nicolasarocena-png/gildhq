@@ -82,6 +82,7 @@ export function Navbar() {
               { label: "Events", href: "/#events" },
               { label: "Network", href: "/#why" },
               { label: "Podcast", href: "/podcast" },
+              { label: "Newsletter", href: "/newsletter" },
             ].map((item) => (
               <a
                 key={item.href}
@@ -130,6 +131,9 @@ export function Navbar() {
             </a>
             <a href="/podcast" className="text-[11px] font-medium uppercase tracking-[0.2em] text-white/50 transition-colors duration-300 hover:text-white/85">
               Podcast
+            </a>
+            <a href="/newsletter" className="text-[11px] font-medium uppercase tracking-[0.2em] text-white/50 transition-colors duration-300 hover:text-white/85">
+              Newsletter
             </a>
             <button
               type="button"
