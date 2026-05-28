@@ -18,7 +18,7 @@ const visibleEvents: EventData[] = [
     location: "Austin, TX",
     href: "/past-events/ai-and-engineering-leaders-dinner-austin-may-27-2026"
   },
-  { date: "May 12, 2026", title: "Making AI Gains Stick", location: "Austin, TX" },
+  { date: "May 12, 2026", title: "Making AI Gains Stick", location: "Austin, TX", href: "/past-events/making-ai-gains-stick-austin-may-12-2026" },
   { date: "Apr 28, 2026", title: "AI Agents in Real Workflows", location: "Austin, TX" },
   { date: "Apr 14, 2026", title: "Speed as an AI Advantage", location: "Dallas, TX" },
 ];
