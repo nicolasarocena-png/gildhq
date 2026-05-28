@@ -60,7 +60,7 @@ export function WhatYouGet() {
           <button
             type="button"
             onClick={() => requestAccess("networking_banner")}
-            className="mt-10 border border-white/25 px-8 py-3.5 text-[11px] font-medium uppercase tracking-[0.2em] text-white/75 transition-all duration-500 hover:border-white/55 hover:text-white"
+            className="mt-10 bg-[#5a9a9b] px-8 py-3.5 text-[11px] font-medium uppercase tracking-[0.2em] text-white transition-all duration-300 hover:bg-[#4d8889]"
           >
             Request Access
           </button>
@@ -104,7 +104,7 @@ export function WhatYouGet() {
           <button
             type="button"
             onClick={() => requestAccess("networking_bottom")}
-            className="border border-white/20 px-8 py-3.5 text-[11px] font-medium uppercase tracking-[0.2em] text-white/65 transition-all duration-500 hover:border-white/45 hover:text-white/90"
+            className="bg-[#5a9a9b] px-8 py-3.5 text-[11px] font-medium uppercase tracking-[0.2em] text-white transition-all duration-300 hover:bg-[#4d8889]"
           >
             Request Access
           </button>

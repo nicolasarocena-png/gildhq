@@ -63,7 +63,7 @@ export function Navbar() {
           <button
             type="button"
             onClick={apply}
-            className="border border-white/20 px-6 py-2.5 text-[11px] font-medium uppercase tracking-[0.16em] text-white/70 transition-all duration-500 hover:border-white/45 hover:text-white/95"
+            className="bg-[#5a9a9b] px-6 py-2.5 text-[11px] font-medium uppercase tracking-[0.16em] text-white transition-all duration-300 hover:bg-[#4d8889]"
           >
             Request Access
           </button>
@@ -110,7 +110,7 @@ export function Navbar() {
             <button
               type="button"
               onClick={apply}
-              className="mt-4 w-fit border border-white/20 px-6 py-3 text-[11px] font-medium uppercase tracking-[0.16em] text-white/70"
+              className="mt-4 w-fit bg-[#5a9a9b] px-6 py-3 text-[11px] font-medium uppercase tracking-[0.16em] text-white"
             >
               Request Access
             </button>

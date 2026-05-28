@@ -32,7 +32,7 @@ export function Hero() {
 
       <div className="section-shell relative z-10 flex min-h-[calc(100vh-72px)] items-center py-28">
         <div className="hero-drift max-w-[860px] text-left">
-          <h1 className="text-[44px] font-normal leading-[1.04] tracking-[-0.025em] text-white md:text-[62px] lg:text-[80px]">
+          <h1 className="text-[32px] font-normal leading-[1.12] tracking-[-0.015em] text-white md:text-[44px] lg:text-[54px]">
             Invite-only Networking &amp; Community for AI Leaders
           </h1>
           <p className="mt-8 max-w-[480px] text-[15px] leading-[1.85] text-white/55 md:text-base">
@@ -42,7 +42,7 @@ export function Hero() {
           <button
             type="button"
             onClick={apply}
-            className="mt-12 border border-white/25 px-8 py-3.5 text-[11px] font-medium uppercase tracking-[0.2em] text-white/80 transition-all duration-500 hover:border-white/55 hover:text-white"
+            className="mt-12 bg-[#5a9a9b] px-8 py-3.5 text-[11px] font-medium uppercase tracking-[0.2em] text-white transition-all duration-300 hover:bg-[#4d8889]"
           >
             Request Access
           </button>

@@ -173,7 +173,7 @@ export function ApplicationForm() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="mt-4 w-full border border-white/20 px-8 py-4 text-[11px] font-medium uppercase tracking-[0.2em] text-white/70 transition-all duration-500 hover:border-white/45 hover:text-white/95 disabled:cursor-wait disabled:opacity-35 md:w-fit"
+                  className="mt-4 w-full bg-[#5a9a9b] px-8 py-4 text-[11px] font-medium uppercase tracking-[0.2em] text-white transition-all duration-300 hover:bg-[#4d8889] disabled:cursor-wait disabled:opacity-50 md:w-fit"
                 >
                   {isSubmitting ? "Submitting..." : "Submit Application"}
                 </button>
