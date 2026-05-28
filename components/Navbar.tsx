@@ -51,7 +51,7 @@ export function Navbar() {
             Events
           </a>
           <a
-            href="/#fit"
+            href="/#why"
             className="text-[11px] font-medium uppercase tracking-[0.2em] text-white/50 transition-colors duration-300 hover:text-white/85"
           >
             Network
@@ -103,7 +103,7 @@ export function Navbar() {
           <div className="flex flex-col gap-8">
             {[
               { label: "Events", href: "/#events" },
-              { label: "Network", href: "/#fit" },
+              { label: "Network", href: "/#why" },
               { label: "Podcast", href: "/podcast" }
             ].map((item) => (
               <a
