@@ -121,11 +121,11 @@ export default function PodcastPage() {
         </section>
 
         {/* ── Featured Episode ─────────────────────────────────── */}
-        <section className="bg-[#07090c] pb-0 pt-4">
+        <section className="bg-white pb-0 pt-4">
           <div className="section-shell">
-            <div className="h-px bg-[rgba(255,248,235,0.07)]" />
+            <div className="h-px bg-[#e5e7eb]" />
             <div className="py-14 md:py-18">
-              <p className="section-label mb-8">Latest Episode</p>
+              <p className="mb-8 text-[15px] font-medium uppercase tracking-[0.18em] text-[#9ca3af]">Latest Episode</p>
               <a
                 href={featured.url}
                 target="_blank"
@@ -134,20 +134,20 @@ export default function PodcastPage() {
               >
                 {/* Text */}
                 <div>
-                  <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-white/35">
+                  <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-[#9ca3af]">
                     {featured.published} &nbsp;·&nbsp; {featured.duration}
                   </p>
-                  <h2 className="mt-4 font-serif text-[26px] leading-[1.15] tracking-[-0.015em] text-white transition-colors duration-300 group-hover:text-[#6db0b1] md:text-[34px] lg:text-[40px]">
+                  <h2 className="mt-4 font-serif text-[26px] leading-[1.15] tracking-[-0.015em] text-[#111827] transition-colors duration-300 group-hover:text-[#5a9a9b] md:text-[34px] lg:text-[40px]">
                     {featured.title}
                   </h2>
                   <div className="mt-5 flex items-center gap-3">
                     <div className="h-px w-4 shrink-0 bg-[#5a9a9b]/50" />
                     <div>
-                      <p className="text-[13px] font-medium text-white/80">{featured.guest}</p>
-                      <p className="text-[12px] text-white/38">{featured.guestTitle}</p>
+                      <p className="text-[13px] font-medium text-[#374151]">{featured.guest}</p>
+                      <p className="text-[12px] text-[#9ca3af]">{featured.guestTitle}</p>
                     </div>
                   </div>
-                  <p className="mt-5 max-w-[440px] text-[14px] leading-[1.85] text-white/45">
+                  <p className="mt-5 max-w-[440px] text-[14px] leading-[1.85] text-[#6b7280]">
                     {featured.description}
                   </p>
                   {/* Tags */}
@@ -155,7 +155,7 @@ export default function PodcastPage() {
                     {featured.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="border border-[rgba(90,154,155,0.28)] px-3 py-1 text-[10px] font-medium uppercase tracking-[0.18em] text-[#5a9a9b]/70"
+                        className="rounded-full border border-[#d1e9ea] px-3 py-1 text-[10px] font-medium uppercase tracking-[0.18em] text-[#5a9a9b]"
                       >
                         {tag}
                       </span>
@@ -163,50 +163,50 @@ export default function PodcastPage() {
                   </div>
                   {/* Watch link */}
                   <div className="mt-8 flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center border border-white/15 transition-colors duration-300 group-hover:border-white/35">
-                      <YouTubeIcon className="h-4 w-4 text-white/60 group-hover:text-white" />
+                    <div className="flex h-10 w-10 items-center justify-center border border-[#e5e7eb] transition-colors duration-300 group-hover:border-[#d1d5db]">
+                      <YouTubeIcon className="h-4 w-4 text-[#9ca3af] group-hover:text-[#374151]" />
                     </div>
-                    <span className="text-[11px] font-medium uppercase tracking-[0.2em] text-white/45 transition-colors duration-300 group-hover:text-white/80">
+                    <span className="text-[11px] font-medium uppercase tracking-[0.2em] text-[#9ca3af] transition-colors duration-300 group-hover:text-[#374151]">
                       Watch on YouTube
                     </span>
                   </div>
                 </div>
 
                 {/* Thumbnail */}
-                <div className="relative aspect-video overflow-hidden rounded-card border border-[rgba(255,248,235,0.07)] bg-[#0a0806]">
+                <div className="relative aspect-video overflow-hidden rounded-card border border-[#e5e7eb] bg-[#f3f4f6]">
                   <Image
                     src={`https://img.youtube.com/vi/${featured.videoId}/maxresdefault.jpg`}
                     alt={featured.title}
                     fill
                     sizes="(min-width: 1024px) 520px, 100vw"
-                    className="object-cover opacity-90 transition-all duration-500 group-hover:scale-[1.02] group-hover:opacity-100 [filter:saturate(0.85)]"
+                    className="object-cover opacity-95 transition-all duration-500 group-hover:scale-[1.02] group-hover:opacity-100 [filter:saturate(0.9)]"
                     unoptimized
                   />
                   {/* Play overlay */}
                   <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                     <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/90 shadow-lg">
                       <svg width="18" height="20" viewBox="0 0 18 20" fill="none" aria-hidden>
-                        <path d="M2 1.5L16 10L2 18.5V1.5Z" fill="#07090c" />
+                        <path d="M2 1.5L16 10L2 18.5V1.5Z" fill="#111827" />
                       </svg>
                     </div>
                   </div>
                 </div>
               </a>
             </div>
-            <div className="h-px bg-[rgba(255,248,235,0.07)]" />
+            <div className="h-px bg-[#e5e7eb]" />
           </div>
         </section>
 
         {/* ── All Episodes ─────────────────────────────────────── */}
-        <section className="section-pad bg-[#07090c]">
+        <section className="section-pad bg-white">
           <div className="section-shell">
             <div className="mb-10 flex items-end justify-between">
-              <p className="section-label mb-0">All Episodes</p>
+              <p className="text-[15px] font-medium uppercase tracking-[0.18em] text-[#9ca3af]">All Episodes</p>
               <a
                 href="https://www.youtube.com/@GILDhq"
                 target="_blank"
                 rel="noreferrer"
-                className="text-[11px] font-medium uppercase tracking-[0.2em] text-[#5a9a9b] transition-colors duration-300 hover:text-white/70"
+                className="text-[11px] font-medium uppercase tracking-[0.2em] text-[#5a9a9b] transition-colors duration-300 hover:text-[#374151]"
               >
                 View all →
               </a>
