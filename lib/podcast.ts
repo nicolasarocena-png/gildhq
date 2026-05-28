@@ -48,7 +48,7 @@ export const youtubeEpisodes: YouTubeEpisode[] = [
 export const spotifyShow = {
   title: "GILD Podcast",
   url: "https://open.spotify.com/show/0TSnQszN4VY8tyOgIYPsQy",
-  embedUrl: "https://open.spotify.com/embed/show/0TSnQszN4VY8tyOgIYPsQy",
+  embedUrl: "https://open.spotify.com/embed/show/0TSnQszN4VY8tyOgIYPsQy?utm_source=generator&theme=0",
   description:
     "The GILD Podcast is a focused extension of GILD's private roundtables. Each episode features a senior operator in a candid conversation about how AI is reshaping real companies."
 };
