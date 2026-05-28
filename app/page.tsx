@@ -1,7 +1,6 @@
 import { Differentiator } from "@/components/Differentiator";
 import { ApplicationForm } from "@/components/ApplicationForm";
 import { FAQ } from "@/components/FAQ";
-import { FitNotFit } from "@/components/FitNotFit";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero";
 import { HowItWorks } from "@/components/HowItWorks";
@@ -20,7 +19,6 @@ export default function Home() {
         <SocialProof />
         <WhyGildExists />
         <Differentiator />
-        <FitNotFit />
         <WhatYouGet />
         <HowItWorks />
         <UpcomingForums />
