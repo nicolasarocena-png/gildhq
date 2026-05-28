@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { FormEvent, useEffect, useState } from "react";
 import { trackFormSubmit } from "@/lib/analytics";
 
@@ -137,7 +138,15 @@ export function RequestInviteModal() {
     <div className="fixed inset-0 z-[100] bg-black/70 px-2 py-2 md:px-6 md:py-6">
       <div className="mx-auto flex h-full max-w-5xl flex-col overflow-hidden border border-slate-700 bg-[#d5dde2] shadow-2xl">
         <div className="relative flex h-16 shrink-0 items-center justify-center bg-slate-800">
-          <div className="font-serif text-5xl leading-none text-white">GILD</div>
+          <div className="relative h-10 w-32">
+            <Image
+              src="/images/logo%20gild.png"
+              alt="GILD"
+              fill
+              sizes="128px"
+              className="object-contain"
+            />
+          </div>
           <button
             type="button"
             onClick={close}
