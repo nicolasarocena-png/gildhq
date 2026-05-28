@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 const steps = [
@@ -84,17 +83,7 @@ export function HowItWorks() {
     <section id="how-it-works" ref={sectionRef} className="bg-slate-900 md:h-[360vh]">
       <div className="section-shell py-20 md:sticky md:top-16 md:flex md:min-h-[calc(100vh-64px)] md:flex-col md:justify-center md:py-0">
         <div className="mb-10 md:mb-14">
-          <p className="section-label mb-0">—— 05 · How It Works</p>
-        </div>
-
-        <div className="relative mb-10 aspect-[2.8] overflow-hidden rounded-card bg-slate-800 md:mb-12 md:aspect-[4.2]">
-          <Image
-            src="/images/69c443191b1e58b9ce64b73c_b90b69231f2ce13203919586724fa1ee_bEdwXXOIlkda412XJUjib.avif"
-            alt=""
-            fill
-            sizes="100vw"
-            className="object-cover"
-          />
+          <p className="section-label mb-0">—— 04 · How It Works</p>
         </div>
 
         <div className="md:hidden">

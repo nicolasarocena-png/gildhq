@@ -42,7 +42,7 @@ export function ApplicationForm({ selectedAudience }: Props) {
   return (
     <section id="apply" className="section-pad bg-slate-900">
       <div className="section-shell">
-        <p className="section-label">—— 08 · Apply</p>
+        <p className="section-label">—— 07 · Apply</p>
         <div className="max-w-3xl">
           <h2 className="font-serif text-4xl text-white">Request access to the network.</h2>
           <p className="mt-4 text-base leading-7 text-slate-100">

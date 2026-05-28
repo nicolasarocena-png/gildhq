@@ -2,8 +2,8 @@
 
 import { useEffect } from "react";
 
-const start = { r: 27, g: 38, b: 50 };
-const end = { r: 7, g: 11, b: 16 };
+const start = { r: 8, g: 13, b: 19 };
+const end = { r: 1, g: 3, b: 6 };
 
 function mix(progress: number) {
   const clamped = Math.min(Math.max(progress, 0), 1);
