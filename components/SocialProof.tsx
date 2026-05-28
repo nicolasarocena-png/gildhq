@@ -35,7 +35,7 @@ export function SocialProof() {
           revealObserver.disconnect();
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.15 }
     );
 
     const marqueeObserver = new IntersectionObserver(
@@ -57,7 +57,7 @@ export function SocialProof() {
           }
         });
       },
-      { threshold: 0.18 }
+      { threshold: 0.15 }
     );
 
     revealObserver.observe(section);
@@ -76,12 +76,12 @@ export function SocialProof() {
   return (
     <section
       ref={sectionRef}
-      className={`section-pad bg-slate-900 transition duration-500 ${
-        sectionVisible ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
+      className={`section-pad bg-[#0a0806] transition-all duration-700 ${
+        sectionVisible ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
       }`}
     >
       <div className="section-shell">
-        <h2 className="mx-auto mb-[60px] max-w-3xl text-center text-xl font-medium text-white md:text-2xl">
+        <h2 className="mx-auto mb-16 max-w-3xl text-center font-sans text-[13px] font-medium uppercase tracking-[0.28em] text-white/35">
           Companies whose leadership is attending GILD events
         </h2>
         <div ref={marqueeRef} className="marquee-mask overflow-hidden">
@@ -94,7 +94,7 @@ export function SocialProof() {
               {logoSet.map((logo, index) => (
                 <div
                   key={`${logo.name}-${index}`}
-                  className="flex h-5 min-w-[88px] items-center justify-center text-xs font-semibold uppercase tracking-[0.12em] text-slate-100 md:h-7 md:min-w-[112px] md:text-sm"
+                  className="flex h-5 min-w-[88px] items-center justify-center text-[11px] font-medium uppercase tracking-[0.14em] text-white/35 md:h-7 md:min-w-[112px]"
                 >
                   {logo.src ? (
                     <Image
@@ -102,7 +102,7 @@ export function SocialProof() {
                       alt={logo.name}
                       width={112}
                       height={28}
-                      className="max-h-5 w-auto object-contain md:max-h-7"
+                      className="max-h-5 w-auto object-contain opacity-40 transition-opacity duration-500 hover:opacity-70 md:max-h-7"
                     />
                   ) : (
                     logo.name
@@ -111,12 +111,11 @@ export function SocialProof() {
               ))}
             </div>
           ) : (
-            // Fallback condition: fewer than 6 logos render as a static centered row.
             <div className="flex flex-wrap justify-center gap-10">
               {logoSet.map((logo, index) => (
                 <div
                   key={`${logo.name}-${index}`}
-                  className="flex h-5 min-w-[88px] items-center justify-center text-xs font-semibold uppercase tracking-[0.12em] text-slate-100 md:h-7 md:min-w-[112px] md:text-sm"
+                  className="flex h-5 min-w-[88px] items-center justify-center text-[11px] font-medium uppercase tracking-[0.14em] text-white/35 md:h-7 md:min-w-[112px]"
                 >
                   {logo.src ? (
                     <Image
@@ -124,7 +123,7 @@ export function SocialProof() {
                       alt={logo.name}
                       width={112}
                       height={28}
-                      className="max-h-5 w-auto object-contain md:max-h-7"
+                      className="max-h-5 w-auto object-contain opacity-40 md:max-h-7"
                     />
                   ) : (
                     logo.name
@@ -134,17 +133,17 @@ export function SocialProof() {
             </div>
           )}
         </div>
-        <div className="mt-24 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-28 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {testimonials.map((testimonial, index) => (
             <article
               key={testimonial.name}
               data-card-key={testimonial.name}
-              className={`rounded-card border border-[#101820] bg-[#020406] p-6 shadow-[0_18px_50px_rgba(0,0,0,0.34)] transition duration-500 hover:-translate-y-0.5 hover:border-teal-500/30 ${
+              className={`rounded-card border border-[rgba(255,248,235,0.06)] bg-[#110f0c] p-7 shadow-[0_2px_24px_rgba(0,0,0,0.45)] transition-all duration-700 hover:-translate-y-0.5 hover:border-[rgba(255,248,235,0.11)] hover:shadow-[0_8px_36px_rgba(0,0,0,0.55)] ${
                 visibleCards.has(testimonial.name)
                   ? "translate-y-0 opacity-100"
-                  : "translate-y-4 opacity-0"
+                  : "translate-y-3 opacity-0"
               }`}
-              style={{ transitionDelay: `${(index % 4) * 75}ms` }}
+              style={{ transitionDelay: `${(index % 4) * 110}ms` }}
             >
               <div className="flex items-center gap-3">
                 {testimonial.photoUrl ? (
@@ -154,19 +153,21 @@ export function SocialProof() {
                     width={56}
                     height={56}
                     unoptimized
-                    className="h-14 w-14 shrink-0 rounded-full object-cover"
+                    className="h-14 w-14 shrink-0 rounded-full object-cover opacity-90 [filter:saturate(0.85)]"
                   />
                 ) : (
-                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-slate-700 text-sm font-medium text-slate-100">
+                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#2e2820] text-sm font-medium text-white/60">
                     {initials(testimonial.name)}
                   </div>
                 )}
                 <div>
-                  <p className="text-sm font-semibold text-white">{testimonial.name}</p>
-                  <p className="mt-1 text-sm leading-5 text-slate-100">{testimonial.caption}</p>
+                  <p className="text-[13px] font-medium text-white/90">{testimonial.name}</p>
+                  <p className="mt-1 text-[12px] leading-5 text-white/45">{testimonial.caption}</p>
                 </div>
               </div>
-              <p className="mt-8 text-base leading-7 text-white">&quot;{testimonial.quote}&quot;</p>
+              <p className="mt-8 text-[14px] leading-[1.85] text-white/70">
+                &quot;{testimonial.quote}&quot;
+              </p>
             </article>
           ))}
         </div>

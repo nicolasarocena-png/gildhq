@@ -10,15 +10,15 @@ const config: Config = {
     extend: {
       colors: {
         slate: {
-          900: "#1B2632",
-          800: "#2A3A4A",
-          700: "#3A5060",
-          300: "#8FA3B3",
-          100: "#D8E0E8"
+          900: "#0d0b09",
+          800: "#181411",
+          700: "#2e2820",
+          300: "#756c62",
+          100: "#b5ada4"
         },
         teal: {
-          500: "#4A9B9B",
-          400: "#5DB5B5"
+          500: "#b5945a",
+          400: "#c9a86a"
         },
         white: "#FFFFFF"
       },
@@ -26,7 +26,7 @@ const config: Config = {
         content: "1200px"
       },
       borderRadius: {
-        card: "16px"
+        card: "6px"
       },
       keyframes: {
         marquee: {

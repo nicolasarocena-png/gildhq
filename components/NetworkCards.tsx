@@ -29,21 +29,23 @@ export function NetworkCards() {
       {cards.map((card) => (
         <article
           key={card.title}
-          className="group overflow-hidden rounded-card border border-slate-700 bg-black transition duration-300 hover:-translate-y-1 hover:border-teal-500/40"
+          className="group overflow-hidden rounded-card border border-[rgba(255,248,235,0.06)] bg-[#110f0c] transition-all duration-600 hover:-translate-y-0.5 hover:border-[rgba(255,248,235,0.1)]"
         >
-          <div className="relative aspect-[1.42] overflow-hidden bg-slate-800">
+          <div className="relative aspect-[1.42] overflow-hidden bg-[#0d0b09]">
             <Image
               src={card.image}
               alt=""
               fill
               sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
-              className="object-cover transition duration-500 group-hover:scale-[1.04]"
+              className="object-cover opacity-80 transition-all duration-700 group-hover:scale-[1.03] group-hover:opacity-90 [filter:saturate(0.85)]"
             />
-            <div className="absolute inset-0 bg-black/10 transition duration-300 group-hover:bg-black/0" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#110f0c]/60 via-transparent to-transparent" />
           </div>
           <div className="p-6">
-            <h2 className="text-sm font-bold uppercase leading-5 text-white">{card.title}</h2>
-            <p className="mt-4 text-sm leading-6 text-slate-100">{card.body}</p>
+            <h2 className="text-[11px] font-medium uppercase tracking-[0.2em] text-white/70">
+              {card.title}
+            </h2>
+            <p className="mt-4 text-[13px] leading-[1.8] text-white/50">{card.body}</p>
           </div>
         </article>
       ))}

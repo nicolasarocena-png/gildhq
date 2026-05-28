@@ -24,14 +24,16 @@ export function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b border-slate-700/30 transition-colors duration-300 ${
-        isScrolled ? "bg-[#e7eef2]/95 backdrop-blur-md" : "bg-[#e7eef2]"
+      className={`sticky top-0 z-50 transition-all duration-500 ${
+        isScrolled
+          ? "border-b border-[rgba(255,248,235,0.07)] bg-[#0a0806]/96 backdrop-blur-md"
+          : "border-b border-transparent bg-transparent"
       }`}
     >
-      <nav className="section-shell flex h-[70px] items-center justify-between">
+      <nav className="section-shell flex h-[72px] items-center justify-between">
         <a href="/" aria-label="GILD home" className="relative h-8 w-24">
           <Image
-            src="/images/logo%20gild%20blue.png"
+            src="/images/logo%20gild.png"
             alt="GILD"
             fill
             sizes="96px"
@@ -39,56 +41,58 @@ export function Navbar() {
             priority
           />
         </a>
-        <div className="hidden items-center gap-9 md:flex">
+        <div className="hidden items-center gap-10 md:flex">
           <a
             href="/#events"
-            className="text-xs font-medium tracking-[0.18em] text-slate-900 transition-colors duration-200 hover:text-teal-500"
+            className="text-[11px] font-medium uppercase tracking-[0.2em] text-white/50 transition-colors duration-300 hover:text-white/85"
           >
             Events
           </a>
           <a
             href="/#fit"
-            className="text-xs font-medium tracking-[0.18em] text-slate-900 transition-colors duration-200 hover:text-teal-500"
+            className="text-[11px] font-medium uppercase tracking-[0.2em] text-white/50 transition-colors duration-300 hover:text-white/85"
           >
             Network
           </a>
           <a
             href="/podcast"
-            className="text-xs font-medium tracking-[0.18em] text-slate-900 transition-colors duration-200 hover:text-teal-500"
+            className="text-[11px] font-medium uppercase tracking-[0.2em] text-white/50 transition-colors duration-300 hover:text-white/85"
           >
             Podcast
           </a>
           <button
             type="button"
             onClick={apply}
-            className="bg-teal-500 px-7 py-4 text-sm font-medium text-white transition-colors duration-200 hover:bg-teal-400"
+            className="border border-white/20 px-6 py-2.5 text-[11px] font-medium uppercase tracking-[0.16em] text-white/70 transition-all duration-500 hover:border-white/45 hover:text-white/95"
           >
             Request Access
           </button>
         </div>
         <button
           type="button"
-          className="flex h-11 w-11 flex-col items-center justify-center gap-1.5 text-slate-900 md:hidden"
+          className="flex h-11 w-11 flex-col items-center justify-center gap-[5px] text-white/60 md:hidden"
           aria-label="Open navigation"
           aria-expanded={isOpen}
           onClick={() => setIsOpen((open) => !open)}
         >
           <span
-            className={`h-px w-6 bg-current transition ${
+            className={`h-px w-5 bg-current transition-all duration-300 ${
               isOpen ? "translate-y-[7px] rotate-45" : ""
             }`}
           />
-          <span className={`h-px w-6 bg-current transition ${isOpen ? "opacity-0" : ""}`} />
           <span
-            className={`h-px w-6 bg-current transition ${
+            className={`h-px w-5 bg-current transition-all duration-300 ${isOpen ? "opacity-0" : ""}`}
+          />
+          <span
+            className={`h-px w-5 bg-current transition-all duration-300 ${
               isOpen ? "-translate-y-[7px] -rotate-45" : ""
             }`}
           />
         </button>
       </nav>
       {isOpen ? (
-        <div className="fixed inset-0 top-[70px] z-40 bg-[#e7eef2] px-6 py-10 md:hidden">
-          <div className="flex flex-col gap-7">
+        <div className="fixed inset-0 top-[72px] z-40 bg-[#0a0806] px-6 py-12 md:hidden">
+          <div className="flex flex-col gap-8">
             {[
               { label: "Events", href: "/#events" },
               { label: "Network", href: "/#fit" },
@@ -98,7 +102,7 @@ export function Navbar() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setIsOpen(false)}
-                className="font-serif text-3xl text-slate-900"
+                className="font-serif text-4xl text-white/85 transition-opacity duration-300 hover:opacity-60"
               >
                 {item.label}
               </a>
@@ -106,7 +110,7 @@ export function Navbar() {
             <button
               type="button"
               onClick={apply}
-              className="mt-4 w-fit bg-teal-500 px-6 py-3 text-sm font-medium text-white"
+              className="mt-4 w-fit border border-white/20 px-6 py-3 text-[11px] font-medium uppercase tracking-[0.16em] text-white/70"
             >
               Request Access
             </button>

@@ -4,7 +4,9 @@
 
 :root {
   color-scheme: dark;
-  --page-bg: #080d13;
+  --page-bg: #0d0b09;
+  --accent: #b5945a;
+  --accent-light: #c9a86a;
   background: var(--page-bg);
 }
 
@@ -19,7 +21,10 @@ html {
 body {
   margin: 0;
   background: var(--page-bg);
-  color: #ffffff;
+  color: #f0ece6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: 0.01em;
 }
 
 h1,
@@ -27,6 +32,7 @@ h2,
 h3 {
   font-family: var(--font-dm-serif), serif;
   font-weight: 400;
+  letter-spacing: -0.015em;
 }
 
 .bg-slate-900 {
@@ -52,7 +58,7 @@ input:focus-visible,
 select:focus-visible,
 textarea:focus-visible,
 summary:focus-visible {
-  outline: 2px solid #5db5b5;
+  outline: 2px solid var(--accent);
 }
 
 summary::-webkit-details-marker {
@@ -75,17 +81,18 @@ summary::-webkit-details-marker {
 }
 
 .section-pad {
-  @apply py-20 md:py-28 lg:py-36;
+  @apply py-24 md:py-36 lg:py-48;
 }
 
 .section-label {
-  @apply mb-10 text-xs font-medium uppercase tracking-[0.24em] text-slate-300;
+  @apply mb-10 text-[10px] font-medium uppercase tracking-[0.32em] text-white/40;
 }
 
 .reveal {
   opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+  transform: translateY(5px);
+  transition: opacity 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .reveal.is-visible {
