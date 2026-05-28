@@ -42,7 +42,7 @@ export default function PodcastPage() {
           {/* Background image — Frame 3.avif (dark navy) */}
           <div className="absolute inset-0">
             <Image
-              src="/images/spotify-banner.avif"
+              src="/images/GILD PODcats Banner_files/69c52b65285924258f9d85a3_890cd5a1c508425c19134bdc2771c8ad_Frame 3.avif"
               alt=""
               fill
               priority
