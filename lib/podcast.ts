@@ -3,6 +3,7 @@ export type YouTubeEpisode = {
   videoId: string;
   published: string;
   url: string;
+  spotifyUrl: string;
   guest: string;
   guestTitle: string;
   description: string;
@@ -16,6 +17,7 @@ export const youtubeEpisodes: YouTubeEpisode[] = [
     videoId: "-1CdZN-N6ak",
     published: "May 20, 2026",
     url: "https://www.youtube.com/watch?v=-1CdZN-N6ak",
+    spotifyUrl: "https://open.spotify.com/show/0TSnQszN4VY8tyOgIYPsQy",
     guest: "Kirsten Karchmer",
     guestTitle: "CEO, Conceivable",
     description:
@@ -28,6 +30,7 @@ export const youtubeEpisodes: YouTubeEpisode[] = [
     videoId: "XWjV9m4ZKwA",
     published: "May 6, 2026",
     url: "https://www.youtube.com/watch?v=XWjV9m4ZKwA",
+    spotifyUrl: "https://open.spotify.com/show/0TSnQszN4VY8tyOgIYPsQy",
     guest: "Thom Singer",
     guestTitle: "CEO, Austin Technology Council",
     description:
@@ -40,6 +43,7 @@ export const youtubeEpisodes: YouTubeEpisode[] = [
     videoId: "QBr7ZQzo0RM",
     published: "Apr 22, 2026",
     url: "https://www.youtube.com/watch?v=QBr7ZQzo0RM",
+    spotifyUrl: "https://open.spotify.com/show/0TSnQszN4VY8tyOgIYPsQy",
     guest: "Ross Hudgens",
     guestTitle: "CEO, Siege Media",
     description:
@@ -52,6 +56,7 @@ export const youtubeEpisodes: YouTubeEpisode[] = [
     videoId: "sCswyg_iSRM",
     published: "Apr 8, 2026",
     url: "https://www.youtube.com/watch?v=sCswyg_iSRM",
+    spotifyUrl: "https://open.spotify.com/show/0TSnQszN4VY8tyOgIYPsQy",
     guest: "Yasmin Abdi",
     guestTitle: "CEO, NoHack",
     description:
@@ -64,6 +69,7 @@ export const youtubeEpisodes: YouTubeEpisode[] = [
     videoId: "JUaagFr0aAA",
     published: "Mar 9, 2026",
     url: "https://www.youtube.com/watch?v=JUaagFr0aAA",
+    spotifyUrl: "https://open.spotify.com/show/0TSnQszN4VY8tyOgIYPsQy",
     guest: "Prakhar Agrawal",
     guestTitle: "CEO, Senseloaf",
     description:
@@ -76,6 +82,7 @@ export const youtubeEpisodes: YouTubeEpisode[] = [
     videoId: "xYB0ZO6W764",
     published: "Mar 6, 2026",
     url: "https://www.youtube.com/watch?v=xYB0ZO6W764",
+    spotifyUrl: "https://open.spotify.com/show/0TSnQszN4VY8tyOgIYPsQy",
     guest: "Sagar Babber",
     guestTitle: "CEO, GleanTap",
     description:

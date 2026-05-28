@@ -201,79 +201,110 @@ export default function PodcastPage() {
               </a>
             </div>
 
-            <div className="grid gap-px border border-[rgba(255,248,235,0.07)] bg-[rgba(255,248,235,0.07)] sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {rest.map((episode) => (
-                <a
+                <div
                   key={episode.videoId}
-                  href={episode.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="group flex flex-col bg-[#07090c] transition-colors duration-300 hover:bg-[#0c1319]"
+                  className="group flex flex-col overflow-hidden rounded-card bg-white shadow-[0_2px_16px_rgba(0,0,0,0.18)] transition-shadow duration-300 hover:shadow-[0_6px_32px_rgba(0,0,0,0.28)]"
                 >
-                  {/* Thumbnail */}
-                  <div className="relative aspect-video overflow-hidden bg-[#0a0806]">
+                  {/* Thumbnail — clicking goes to YouTube */}
+                  <a
+                    href={episode.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="relative block aspect-video overflow-hidden bg-[#0a0806]"
+                    tabIndex={-1}
+                    aria-label={`Watch "${episode.title}" on YouTube`}
+                  >
                     <Image
                       src={`https://img.youtube.com/vi/${episode.videoId}/maxresdefault.jpg`}
                       alt={episode.title}
                       fill
                       sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                      className="object-cover opacity-85 transition-all duration-500 group-hover:scale-[1.03] group-hover:opacity-100 [filter:saturate(0.82)]"
+                      className="object-cover opacity-95 transition-all duration-500 group-hover:scale-[1.03] [filter:saturate(0.88)]"
                       unoptimized
                     />
-                    {/* Play overlay */}
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white/85">
+                      <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white/90 shadow">
                         <svg width="14" height="16" viewBox="0 0 14 16" fill="none" aria-hidden>
                           <path d="M1.5 1L12.5 8L1.5 15V1Z" fill="#07090c" />
                         </svg>
                       </div>
                     </div>
-                  </div>
+                  </a>
 
                   {/* Content */}
                   <div className="flex flex-1 flex-col p-6">
-                    {/* Guest + duration row */}
+                    {/* Guest + duration */}
                     <div className="flex items-start justify-between gap-3">
                       <div>
-                        <p className="text-[13px] font-medium text-white/80">{episode.guest}</p>
-                        <p className="mt-0.5 text-[11px] text-white/35">{episode.guestTitle}</p>
+                        <p className="text-[13px] font-medium text-[#111827]">{episode.guest}</p>
+                        <p className="mt-0.5 text-[11px] text-[#6b7280]">{episode.guestTitle}</p>
                       </div>
-                      <span className="shrink-0 text-[11px] font-medium text-white/30">
+                      <span className="shrink-0 text-[11px] font-medium text-[#9ca3af]">
                         {episode.duration}
                       </span>
                     </div>
 
                     {/* Date */}
-                    <p className="mt-4 text-[10px] font-medium uppercase tracking-[0.22em] text-white/30">
+                    <p className="mt-4 text-[10px] font-medium uppercase tracking-[0.22em] text-[#9ca3af]">
                       {episode.published}
                     </p>
 
                     {/* Title */}
-                    <h3 className="mt-2 font-serif text-[17px] leading-[1.35] tracking-[-0.01em] text-white/88 transition-colors duration-300 group-hover:text-white">
-                      {episode.title}
-                    </h3>
+                    <a
+                      href={episode.url}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <h3 className="mt-2 font-serif text-[17px] leading-[1.35] tracking-[-0.01em] text-[#111827] transition-colors duration-300 hover:text-[#5a9a9b]">
+                        {episode.title}
+                      </h3>
+                    </a>
 
                     {/* Description */}
-                    <p className="mt-3 text-[13px] leading-[1.8] text-white/38">
+                    <p className="mt-3 text-[13px] leading-[1.8] text-[#6b7280]">
                       {episode.description}
                     </p>
 
-                    {/* Tags + YouTube icon row */}
-                    <div className="mt-auto flex items-end justify-between gap-3 pt-5">
-                      <div className="flex flex-wrap gap-1.5">
-                        {episode.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="border border-[rgba(90,154,155,0.22)] px-2 py-0.5 text-[9px] font-medium uppercase tracking-[0.16em] text-[#5a9a9b]/60"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                      <YouTubeIcon className="h-4 w-4 shrink-0 text-white/20 transition-colors duration-300 group-hover:text-white/60" />
+                    {/* Tags */}
+                    <div className="mt-4 flex flex-wrap gap-1.5">
+                      {episode.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="border border-[rgba(90,154,155,0.35)] px-2 py-0.5 text-[9px] font-medium uppercase tracking-[0.16em] text-[#5a9a9b]"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Platform links */}
+                    <div className="mt-auto flex items-center gap-4 pt-5 border-t border-[#f3f4f6]">
+                      <a
+                        href={episode.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex items-center gap-1.5 text-[10px] font-medium uppercase tracking-[0.16em] text-[#9ca3af] transition-colors duration-300 hover:text-[#374151]"
+                        aria-label="Watch on YouTube"
+                      >
+                        <YouTubeIcon className="h-3.5 w-3.5 text-[#FF0000]" />
+                        YouTube
+                      </a>
+                      <span className="text-[#e5e7eb]">·</span>
+                      <a
+                        href={episode.spotifyUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex items-center gap-1.5 text-[10px] font-medium uppercase tracking-[0.16em] text-[#9ca3af] transition-colors duration-300 hover:text-[#374151]"
+                        aria-label="Listen on Spotify"
+                      >
+                        <SpotifyIcon className="h-3.5 w-3.5 text-[#1DB954]" />
+                        Spotify
+                      </a>
                     </div>
                   </div>
-                </a>
+                </div>
               ))}
             </div>
           </div>
