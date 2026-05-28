@@ -1,7 +1,25 @@
 "use client";
 
+import Image from "next/image";
 import { trackApplyClick } from "@/lib/analytics";
 import { openRequestInviteModal } from "@/components/RequestInviteModal";
+
+function InstagramIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      className="h-5 w-5"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+    >
+      <rect x="5" y="5" width="14" height="14" rx="4" />
+      <circle cx="12" cy="12" r="3.2" />
+      <circle cx="16.7" cy="7.3" r="0.7" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
 
 export function Footer() {
   const requestInvite = () => {
@@ -14,13 +32,19 @@ export function Footer() {
       <div className="section-shell">
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
           <div>
-            <a href="/" className="font-serif text-2xl text-white" aria-label="GILD home">
-              GILD
+            <a href="/" aria-label="GILD home" className="relative block h-8 w-24">
+              <Image
+                src="/images/logo%20gild.png"
+                alt="GILD"
+                fill
+                sizes="96px"
+                className="object-contain object-left"
+              />
             </a>
             <p className="mt-4 max-w-xs text-sm leading-6 text-white">
               An exclusive space where senior leaders come together to connect.
             </p>
-            <div className="mt-5 flex items-center gap-3">
+            <div className="mt-5 flex items-center gap-4">
               <a
                 href="https://www.linkedin.com/company/joingild/about/"
                 target="_blank"
@@ -35,9 +59,9 @@ export function Footer() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="GILD on Instagram"
-                className="text-lg text-white transition-colors hover:text-teal-400"
+                className="text-white transition-colors hover:text-teal-400"
               >
-                ◎
+                <InstagramIcon />
               </a>
             </div>
           </div>

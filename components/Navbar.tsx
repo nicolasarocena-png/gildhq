@@ -1,19 +1,13 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { trackApplyClick } from "@/lib/analytics";
 import { openRequestInviteModal } from "@/components/RequestInviteModal";
 
-const insightsItems = [
-  { label: "Newsletter", href: "/#benefits" },
-  { label: "Podcast", href: "/podcast" },
-  { label: "Report", href: "/#benefits" }
-];
-
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [isInsightsOpen, setIsInsightsOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 8);
@@ -35,8 +29,15 @@ export function Navbar() {
       }`}
     >
       <nav className="section-shell flex h-[70px] items-center justify-between">
-        <a href="/" className="font-serif text-3xl text-slate-900" aria-label="GILD home">
-          GILD
+        <a href="/" aria-label="GILD home" className="relative h-8 w-24">
+          <Image
+            src="/images/logo%20gild%20blue.png"
+            alt="GILD"
+            fill
+            sizes="96px"
+            className="object-contain"
+            priority
+          />
         </a>
         <div className="hidden items-center gap-9 md:flex">
           <a
@@ -51,33 +52,12 @@ export function Navbar() {
           >
             Network
           </a>
-          <div
-            className="relative"
-            onMouseEnter={() => setIsInsightsOpen(true)}
-            onMouseLeave={() => setIsInsightsOpen(false)}
+          <a
+            href="/podcast"
+            className="text-xs font-medium tracking-[0.18em] text-slate-900 transition-colors duration-200 hover:text-teal-500"
           >
-            <button
-              type="button"
-              onClick={() => setIsInsightsOpen((open) => !open)}
-              className="text-xs font-medium tracking-[0.18em] text-slate-900 transition-colors duration-200 hover:text-teal-500"
-              aria-expanded={isInsightsOpen}
-            >
-              Insights⌄
-            </button>
-            {isInsightsOpen ? (
-              <div className="absolute left-1/2 top-8 w-36 -translate-x-1/2 bg-white py-3 shadow-xl">
-                {insightsItems.map((item) => (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    className="block px-5 py-2 text-xs tracking-[0.12em] text-slate-900 transition-colors hover:text-teal-500"
-                  >
-                    {item.label}
-                  </a>
-                ))}
-              </div>
-            ) : null}
-          </div>
+            Podcast
+          </a>
           <button
             type="button"
             onClick={apply}
@@ -99,23 +79,13 @@ export function Navbar() {
       {isOpen ? (
         <div className="fixed inset-0 top-[70px] z-40 bg-[#e7eef2] px-6 py-10 md:hidden">
           <div className="flex flex-col gap-7">
-            <a
-              href="/#events"
-              onClick={() => setIsOpen(false)}
-              className="font-serif text-3xl text-slate-900"
-            >
-              Events
-            </a>
-            <a
-              href="/#fit"
-              onClick={() => setIsOpen(false)}
-              className="font-serif text-3xl text-slate-900"
-            >
-              Network
-            </a>
-            {insightsItems.map((item) => (
+            {[
+              { label: "Events", href: "/#events" },
+              { label: "Network", href: "/#fit" },
+              { label: "Podcast", href: "/podcast" }
+            ].map((item) => (
               <a
-                key={item.label}
+                key={item.href}
                 href={item.href}
                 onClick={() => setIsOpen(false)}
                 className="font-serif text-3xl text-slate-900"
