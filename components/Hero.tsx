@@ -54,8 +54,13 @@ export function Hero() {
           className="object-cover opacity-70 [filter:saturate(0.85)_contrast(1.06)]"
           style={{ objectPosition: "center 28%" }}
         />
-        <div className="absolute inset-0 bg-black/28" />
-        <div className="absolute inset-0 bg-[linear-gradient(108deg,rgba(5,4,3,0.82)_0%,rgba(5,4,3,0.38)_48%,rgba(5,4,3,0.18)_100%)]" />
+        {/* Left fade to black — text area */}
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,9,12,0.96)_0%,rgba(7,9,12,0.72)_28%,rgba(7,9,12,0.18)_52%,rgba(7,9,12,0.0)_60%)]" />
+        {/* Right fade to black */}
+        <div className="absolute inset-0 bg-[linear-gradient(270deg,rgba(7,9,12,0.90)_0%,rgba(7,9,12,0.55)_22%,rgba(7,9,12,0.0)_48%)]" />
+        {/* Subtle overall darkening */}
+        <div className="absolute inset-0 bg-black/18" />
+        {/* Bottom fade into page bg */}
         <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-[#07090c] to-transparent" />
       </div>
 
