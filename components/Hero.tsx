@@ -62,7 +62,7 @@ export function Hero() {
       {/* Main content — grows to fill space */}
       <div className="relative z-10 mx-auto flex w-full max-w-[1600px] flex-1 items-center px-6 py-16 md:px-12 md:py-24 lg:px-16 xl:px-20 2xl:px-28">
         <div className="hero-drift max-w-[820px] text-left 2xl:max-w-[960px]">
-          <h1 className="text-[36px] font-normal leading-[1.08] tracking-[-0.018em] text-white sm:text-[48px] md:text-[60px] lg:text-[70px] xl:text-[78px] 2xl:text-[92px]">
+          <h1 className="text-[28px] font-normal leading-[1.08] tracking-[-0.018em] text-white sm:text-[36px] md:text-[48px] lg:text-[58px] xl:text-[64px] 2xl:text-[76px]">
             <span className="block overflow-hidden">
               <span
                 className="block"
@@ -82,7 +82,7 @@ export function Hero() {
           </h1>
           <p
             ref={subRef}
-            className="mt-7 max-w-[520px] text-[15px] leading-[1.9] text-white/60 md:text-[17px] lg:text-[18px] 2xl:max-w-[620px] 2xl:text-[20px]"
+            className="mt-6 max-w-[480px] text-[14px] leading-[1.9] text-white/60 md:text-[16px] lg:text-[17px] 2xl:max-w-[560px] 2xl:text-[19px]"
           >
             GILD is a curated network of senior AI and engineering leaders, strategists,
             and technical operators. Join the network to be in our next AI Forum.
