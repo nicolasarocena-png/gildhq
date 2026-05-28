@@ -1,0 +1,1186 @@
+document.addEventListener("DOMContentLoaded", () => {
+    initPodcastPage();
+});
+
+const PODCASTS_PATH = "/v1/gild/podcasts";
+const PODCAST_DETAIL_DEFAULT_PATH = "/podcast/episode";
+const DEFAULT_API_BASE_URL = "https://dashboard.tecla.io/api";
+const DEFAULT_PAGE_LIMIT = 12;
+const TAGS_FETCH_LIMIT = 50;
+const SEARCH_DEBOUNCE_MS = 250;
+const PODCAST_PAGE_VIEW_EVENT = "podcast_page_view";
+const PODCAST_YOUTUBE_CLICK_EVENT = "podcast_youtube_click";
+const PODCAST_SPOTIFY_CLICK_EVENT = "podcast_spotify_click";
+const PODCAST_ANALYTICS_CONTEXT_HUB = "podcast_hub";
+
+const podcastListCache = new Map();
+const podcastTagsCache = new Map();
+let hasTrackedPodcastHubView = false;
+
+async function initPodcastPage() {
+    trackPodcastHubPageView();
+
+    await Promise.all([
+        initPodcastSections(),
+        initFeaturedPodcastPlayers()
+    ]);
+
+    bindStaticPodcastPlatformLinks();
+}
+
+async function initPodcastSections() {
+    const sections = Array.from(document.querySelectorAll('[pod-item-data="podcasts"]'));
+    if (!sections.length) return;
+
+    await Promise.all(
+        sections.map(async (section) => {
+            const sectionState = buildPodcastSectionState(section);
+            if (!sectionState) return;
+
+            bindPodcastSectionEvents(sectionState);
+
+            await Promise.all([
+                populatePodcastTagFilter(sectionState),
+                loadPodcastSection(sectionState, { showSpinner: true })
+            ]);
+        })
+    );
+}
+
+async function initFeaturedPodcastPlayers() {
+    const playerNodes = Array.from(document.querySelectorAll('[player-data="featured"]'));
+    if (!playerNodes.length) return;
+
+    try {
+        const response = await fetchPodcastList({
+            featured: true,
+            sort: "newest",
+            limit: 1
+        });
+        const featuredEpisode = Array.isArray(response?.data) ? response.data[0] : null;
+        if (!featuredEpisode) return;
+
+        playerNodes.forEach((node) => {
+            hydrateFeaturedPodcastPlayer(node, featuredEpisode);
+        });
+
+        const featuredSections = Array.from(
+            new Set(
+                playerNodes
+                    .map((node) => node.closest("section") || node.parentElement)
+                    .filter(Boolean)
+            )
+        );
+
+        featuredSections.forEach((section) => {
+            hydrateFeaturedPodcastSection(section, featuredEpisode);
+        });
+    } catch (error) {
+        console.warn("Unable to load featured podcast player", error);
+    }
+}
+
+function buildPodcastSectionState(section) {
+    const grid = section.querySelector('[pod-item-data="grid"]');
+    const template = grid?.querySelector('[pod-item-data="card"]');
+
+    if (!grid || !template) {
+        console.warn("podcast section is missing a grid or card template", section);
+        return null;
+    }
+
+    const filters = section.querySelector('[pod-item-data="filters"]');
+    const filtersForm = filters?.querySelector("form") || null;
+    const empty = section.querySelector('[pod-item-data="empty"]');
+    const pager = section.querySelector('[pod-item-data="pager"]');
+    const searchInput = filters?.querySelector('[pod-filter-data="search"]') || null;
+    const tagSelect = filters?.querySelector('[pod-filter-data="tag"]') || null;
+    const searchIcon = filters?.querySelector('[pod-item-data="search-icon"]') || null;
+    const topicsIcon = filters?.querySelector('[pod-item-data="topics-icon"]') || null;
+    const thumbnailFallback = template.querySelector('[pod-item-data="thumbnail"]')?.getAttribute("src") || "";
+
+    const state = {
+        section,
+        filters,
+        filtersForm,
+        grid,
+        empty,
+        pager,
+        searchInput,
+        tagSelect,
+        searchIcon,
+        topicsIcon,
+        template: template.cloneNode(true),
+        thumbnailFallback,
+        emptyDefaultText: empty?.textContent?.trim() || "No episodes found!",
+        page: 1,
+        requestToken: 0,
+        limit: readPositiveIntegerAttr(section, "pod-limit", DEFAULT_PAGE_LIMIT),
+        featured: readOptionalBooleanAttr(section, "pod-featured"),
+        sort: readStringAttr(section, "pod-sort", "newest"),
+        detailPath: readStringAttr(section, "pod-detail-path", PODCAST_DETAIL_DEFAULT_PATH),
+        search: "",
+        tag: ""
+    };
+
+    const initialSearch = (searchInput?.value || readStringAttr(section, "pod-search", "")).trim();
+    const initialTag = (tagSelect?.value || readStringAttr(section, "pod-tag", "")).trim();
+
+    state.search = initialSearch;
+    state.tag = initialTag;
+
+    if (searchInput) searchInput.value = initialSearch;
+    if (tagSelect) tagSelect.value = initialTag;
+
+    grid.innerHTML = "";
+    grid.classList.add("is-loading");
+    setNodeVisible(empty, false);
+    setNodeVisible(pager, false);
+    setNodeVisible(grid, false);
+    syncPodcastFilterIcons(state);
+
+    return state;
+}
+
+function bindPodcastSectionEvents(state) {
+    if (state.filtersForm) {
+        state.filtersForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+        });
+    }
+
+    if (state.searchInput) {
+        const onSearch = debounce(() => {
+            const nextValue = String(state.searchInput.value || "").trim();
+            syncPodcastFilterIcon(state.searchIcon, nextValue);
+            if (nextValue === state.search) return;
+
+            state.search = nextValue;
+            state.page = 1;
+            loadPodcastSection(state, { showSpinner: false });
+        }, SEARCH_DEBOUNCE_MS);
+
+        state.searchInput.addEventListener("input", () => {
+            syncPodcastFilterIcon(state.searchIcon, state.searchInput.value);
+            onSearch();
+        });
+        state.searchInput.addEventListener("change", () => {
+            syncPodcastFilterIcon(state.searchIcon, state.searchInput.value);
+            onSearch();
+        });
+    }
+
+    if (state.tagSelect) {
+        state.tagSelect.addEventListener("change", () => {
+            const nextValue = String(state.tagSelect.value || "").trim();
+            syncPodcastFilterIcon(state.topicsIcon, nextValue);
+            if (nextValue === state.tag) return;
+
+            state.tag = nextValue;
+            state.page = 1;
+            loadPodcastSection(state, { showSpinner: false });
+        });
+    }
+
+    if (state.searchIcon) {
+        state.searchIcon.addEventListener("click", () => {
+            if (!state.searchIcon.classList.contains("clickable") || !state.searchInput) return;
+
+            state.searchInput.value = "";
+            state.search = "";
+            state.page = 1;
+            syncPodcastFilterIcon(state.searchIcon, "");
+            loadPodcastSection(state, { showSpinner: false });
+            state.searchInput.focus();
+        });
+    }
+
+    if (state.topicsIcon) {
+        state.topicsIcon.addEventListener("click", () => {
+            if (!state.topicsIcon.classList.contains("clickable") || !state.tagSelect) return;
+
+            state.tagSelect.value = "";
+            state.tag = "";
+            state.page = 1;
+            syncPodcastFilterIcon(state.topicsIcon, "");
+            loadPodcastSection(state, { showSpinner: false });
+            state.tagSelect.focus();
+        });
+    }
+}
+
+async function populatePodcastTagFilter(state) {
+    if (!state.tagSelect) return;
+
+    try {
+        const tags = await fetchPodcastTags({ featured: state.featured });
+        renderPodcastTagOptions(state.tagSelect, tags, state.tag);
+        syncPodcastFilterIcon(state.topicsIcon, state.tagSelect.value);
+    } catch (error) {
+        console.warn("Unable to load podcast tags", error);
+    }
+}
+
+async function loadPodcastSection(state, { scrollToTop = false, showSpinner = false } = {}) {
+    const currentToken = ++state.requestToken;
+    setSectionLoading(state, true, { showSpinner });
+
+    try {
+        const response = await fetchPodcastList(buildPodcastSectionQuery(state));
+        if (currentToken !== state.requestToken) return;
+
+        renderPodcastSection(state, response);
+
+        if (scrollToTop) {
+            scrollPodcastSectionIntoView(state.section);
+        }
+    } catch (error) {
+        if (currentToken !== state.requestToken) return;
+        console.warn("Unable to load podcast episodes", error);
+        renderPodcastSectionError(state);
+    } finally {
+        if (currentToken === state.requestToken) {
+            await waitForNextPaint();
+            if (currentToken === state.requestToken) {
+                setSectionLoading(state, false);
+            }
+        }
+    }
+}
+
+function renderPodcastSection(state, response) {
+    const items = Array.isArray(response?.data) ? response.data : [];
+
+    renderPodcastGrid(state, items);
+    renderPodcastPager(state, response);
+
+    const hasResults = items.length > 0;
+    setNodeVisible(state.grid, hasResults);
+    setNodeVisible(state.empty, !hasResults);
+    if (state.empty) {
+        state.empty.textContent = state.emptyDefaultText;
+    }
+}
+
+function renderPodcastSectionError(state) {
+    state.grid.innerHTML = "";
+    setNodeVisible(state.grid, false);
+    setNodeVisible(state.pager, false);
+    setNodeVisible(state.empty, true);
+
+    if (state.empty) {
+        state.empty.textContent = "Unable to load episodes.";
+    }
+}
+
+function renderPodcastGrid(state, items) {
+    state.grid.innerHTML = "";
+
+    if (!items.length) return;
+
+    const fragment = document.createDocumentFragment();
+
+    items.forEach((item) => {
+        const card = state.template.cloneNode(true);
+        hydratePodcastCard(card, item, state);
+        fragment.appendChild(card);
+    });
+
+    state.grid.appendChild(fragment);
+}
+
+function hydratePodcastCard(card, item, state) {
+    const title = sanitizeText(item?.title, "Podcast episode");
+    const guestName = sanitizeText(item?.guest_name, "");
+    const description = sanitizeText(item?.short_description, "");
+    const publishedAt = formatPodcastPublishedDate(item?.published_at);
+    const thumbnailUrl = sanitizeUrl(item?.thumbnail_url, state.thumbnailFallback);
+    const youtubeUrl = sanitizeUrl(item?.youtube_url, "");
+    const spotifyUrl = sanitizeUrl(item?.spotify_url, "");
+    const detailUrl = buildPodcastDetailUrl(state, item, youtubeUrl);
+    const hasInternalDetailPage = Boolean(state.detailPath && item?.id);
+    const durationLabel = getPodcastDurationLabel(item);
+
+    card.removeAttribute("aria-hidden");
+    card.classList.remove("is-template");
+    card.style.removeProperty("display");
+    card.hidden = false;
+
+    const thumbnail = card.querySelector('[pod-item-data="thumbnail"]');
+    if (thumbnail && thumbnailUrl) {
+        thumbnail.src = thumbnailUrl;
+        thumbnail.alt = title;
+    }
+
+    const titleNode = card.querySelector('[pod-item-data="title"]');
+    if (titleNode) titleNode.textContent = title;
+
+    const guestNode = card.querySelector('[pod-item-data="guest"]');
+    if (guestNode) guestNode.textContent = guestName;
+
+    const descriptionNode = card.querySelector('[pod-item-data="description"]');
+    if (descriptionNode) descriptionNode.textContent = description;
+
+    const dateNode = card.querySelector('[pod-item-data="date"]');
+    if (dateNode) {
+        dateNode.textContent = publishedAt;
+        setNodeVisible(dateNode, Boolean(publishedAt));
+    }
+
+    const durationNode = card.querySelector('[pod-item-data="duration"]');
+    if (durationNode) {
+        durationNode.textContent = durationLabel;
+        setNodeVisible(durationNode, Boolean(durationLabel));
+    }
+
+    const detailLinks = Array.from(card.querySelectorAll('[pod-item-data="detail-link"]'));
+    detailLinks.forEach((link) => {
+        link.href = detailUrl;
+        link.title = title;
+
+        if (hasInternalDetailPage) {
+            link.removeAttribute("target");
+            link.removeAttribute("rel");
+        } else {
+            link.setAttribute("target", "_blank");
+            link.setAttribute("rel", "noopener noreferrer");
+        }
+    });
+
+    hydratePodcastTags(card.querySelector('[pod-item-data="tags"]'), item?.tags);
+    hydratePodcastActionLink(
+        card.querySelector('[pod-item-data="youtube-link"]'),
+        youtubeUrl,
+        `Watch ${title} on YouTube`,
+        {
+            platform: "youtube",
+            destinationType: "episode",
+            contextPage: PODCAST_ANALYTICS_CONTEXT_HUB,
+            placement: "episode_card",
+            episode: item
+        }
+    );
+    hydratePodcastActionLink(
+        card.querySelector('[pod-item-data="spotify-link"]'),
+        spotifyUrl,
+        `Listen to ${title} on Spotify`,
+        {
+            platform: "spotify",
+            destinationType: "episode",
+            contextPage: PODCAST_ANALYTICS_CONTEXT_HUB,
+            placement: "episode_card",
+            episode: item
+        }
+    );
+}
+
+function hydratePodcastTags(container, tags) {
+    if (!container) return;
+
+    container.innerHTML = "";
+
+    const list = Array.isArray(tags)
+        ? tags.map((tag) => String(tag || "").trim()).filter(Boolean)
+        : [];
+
+    if (!list.length) {
+        setNodeVisible(container, false);
+        return;
+    }
+
+    const fragment = document.createDocumentFragment();
+    list.forEach((tag) => {
+        const tagNode = document.createElement("span");
+        tagNode.className = "topic-item";
+        tagNode.textContent = tag;
+        fragment.appendChild(tagNode);
+    });
+
+    container.appendChild(fragment);
+    setNodeVisible(container, true);
+}
+
+function hydratePodcastActionLink(node, url, title, analyticsMeta) {
+    if (!node) return;
+
+    if (!url) {
+        node.href = "#";
+        node.removeAttribute("title");
+        setNodeVisible(node, false);
+        return;
+    }
+
+    node.href = url;
+    node.title = title;
+    node.setAttribute("target", "_blank");
+    node.setAttribute("rel", "noopener noreferrer");
+    setNodeVisible(node, true);
+    bindPodcastOutboundLink(node, { ...analyticsMeta, targetUrl: url });
+}
+
+function hydrateFeaturedPodcastPlayer(node, episode) {
+    if (!node || !episode) return;
+
+    const youtubeUrl = sanitizeUrl(episode?.youtube_url, "");
+    const youtubeId = getYouTubeVideoId(episode);
+    const title = sanitizeText(episode?.title, "Featured podcast episode");
+
+    if (!youtubeUrl || !youtubeId) return;
+
+    node.setAttribute("data-featured-podcast-id", sanitizeText(episode?.id, ""));
+
+    const iframe = node.tagName === "IFRAME" ? node : node.querySelector("iframe");
+    if (iframe) {
+        iframe.src = buildFeaturedPlayerSrc(iframe.getAttribute("src") || "", youtubeUrl, youtubeId);
+        iframe.title = title;
+        return;
+    }
+
+    renderFallbackFeaturedPlayer(node, youtubeId, title);
+}
+
+function hydrateFeaturedPodcastSection(section, episode) {
+    if (!section || !episode) return;
+
+    const title = sanitizeText(episode?.title, "Featured podcast episode");
+    const guestName = sanitizeText(episode?.guest_name, "");
+    const guestPosition = sanitizeText(episode?.guest_position, "");
+    const description = sanitizeText(episode?.short_description, "");
+    const publishedAt = formatPodcastPublishedDate(episode?.published_at);
+    const youtubeUrl = sanitizeUrl(episode?.youtube_url, "");
+    const spotifyUrl = sanitizeUrl(episode?.spotify_url, "");
+    const detailPath = readStringAttr(section, "pod-detail-path", PODCAST_DETAIL_DEFAULT_PATH);
+
+    hydrateFeaturedTextNodes(section.querySelectorAll('[player-data="title"]'), title, true);
+    hydrateFeaturedTextNodes(section.querySelectorAll('[player-data="guest"]'), guestName);
+    hydrateFeaturedTextNodes(section.querySelectorAll('[player-data="guest-position"]'), guestPosition);
+    hydrateFeaturedTextNodes(section.querySelectorAll('[player-data="description"]'), description);
+    hydrateFeaturedTextNodes(section.querySelectorAll('[player-data="date"]'), publishedAt);
+    hydrateFeaturedDetailLinks(
+        section.querySelectorAll('[player-data="detail-link"]'),
+        episode,
+        detailPath,
+        youtubeUrl,
+        title
+    );
+    hydrateFeaturedActionLinks(
+        section.querySelectorAll('[player-data="youtube-link"]'),
+        youtubeUrl,
+        `Watch ${title} on YouTube`,
+        {
+            platform: "youtube",
+            destinationType: "episode",
+            contextPage: PODCAST_ANALYTICS_CONTEXT_HUB,
+            placement: "featured_clip",
+            episode
+        }
+    );
+    hydrateFeaturedActionLinks(
+        section.querySelectorAll('[player-data="spotify-link"]'),
+        spotifyUrl,
+        `Listen to ${title} on Spotify`,
+        {
+            platform: "spotify",
+            destinationType: "episode",
+            contextPage: PODCAST_ANALYTICS_CONTEXT_HUB,
+            placement: "featured_clip",
+            episode
+        }
+    );
+}
+
+function hydrateFeaturedTextNodes(nodes, value, forceVisible = false) {
+    Array.from(nodes || []).forEach((node) => {
+        node.textContent = value;
+        setNodeVisible(node, forceVisible || Boolean(value));
+    });
+}
+
+function hydrateFeaturedActionLinks(nodes, url, title, analyticsMeta) {
+    Array.from(nodes || []).forEach((node) => {
+        hydratePodcastActionLink(node, url, title, analyticsMeta);
+    });
+}
+
+function hydrateFeaturedDetailLinks(nodes, episode, detailPath, youtubeUrl, title) {
+    const detailUrl = buildPodcastDetailUrl({ detailPath }, episode, youtubeUrl);
+    const hasInternalDetailPage = Boolean(detailPath && episode?.id);
+
+    Array.from(nodes || []).forEach((node) => {
+        node.href = detailUrl;
+        node.title = title;
+        setNodeVisible(node, true);
+
+        if (hasInternalDetailPage) {
+            node.removeAttribute("target");
+            node.removeAttribute("rel");
+        } else {
+            node.setAttribute("target", "_blank");
+            node.setAttribute("rel", "noopener noreferrer");
+        }
+    });
+}
+
+function renderPodcastPager(state, response) {
+    if (!state.pager) return;
+
+    state.pager.innerHTML = "";
+
+    const totalPages = Math.max(Number(response?.total_pages) || 0, 0);
+    const currentPage = Math.max(Number(response?.page) || state.page || 1, 1);
+    state.page = currentPage;
+
+    if (totalPages <= 1) {
+        setNodeVisible(state.pager, false);
+        return;
+    }
+
+    const fragment = document.createDocumentFragment();
+    fragment.appendChild(createPagerButton({
+        label: "#previous",
+        page: currentPage - 1,
+        disabled: currentPage <= 1,
+        onClick: () => changePodcastPage(state, currentPage - 1)
+    }));
+
+    for (let item = 1; item <= totalPages; item += 1) {
+        fragment.appendChild(createPagerButton({
+            label: String(item),
+            page: item,
+            isCurrent: item === currentPage,
+            onClick: () => changePodcastPage(state, item)
+        }));
+    }
+
+    fragment.appendChild(createPagerButton({
+        label: "#next",
+        page: currentPage + 1,
+        disabled: currentPage >= totalPages,
+        onClick: () => changePodcastPage(state, currentPage + 1)
+    }));
+
+    state.pager.appendChild(fragment);
+    setNodeVisible(state.pager, state.pager.childElementCount > 0);
+}
+
+function changePodcastPage(state, nextPage) {
+    if (nextPage < 1 || nextPage === state.page) return;
+
+    state.page = nextPage;
+    loadPodcastSection(state, { scrollToTop: true, showSpinner: true });
+}
+
+function createPagerButton({ label, page, disabled = false, isCurrent = false, onClick }) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "nws-pg-btn";
+
+    switch (label) {
+        case "#previous":
+            button.innerHTML = `<svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.87004 0.389595C7.15503 0.110582 7.617 0.110482 7.90192 0.389595C8.18663 0.668726 8.18667 1.12132 7.90192 1.40043L3.24134 5.96592H18.0203L18.0953 5.96964C18.4631 6.00649 18.75 6.31082 18.75 6.68076C18.7497 7.07531 18.4231 7.39556 18.0203 7.3956H3.24134L7.90192 11.9602C8.18673 12.2392 8.18655 12.6918 7.90192 12.971C7.61696 13.2501 7.155 13.2501 6.87004 12.971L0.963788 7.18617C0.82704 7.05221 0.750115 6.87019 0.75 6.68076C0.75 6.49127 0.827073 6.30938 0.963788 6.17534L6.87004 0.389595Z" fill="currentColor"/></svg>`;
+            break;
+        case "#next":
+            button.innerHTML = `<svg width="18" height="13" viewBox="0 0 18 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.88 12.7907C11.595 13.0697 11.133 13.0698 10.8481 12.7907C10.5634 12.5116 10.5633 12.059 10.8481 11.7799L15.5087 7.21438H0.729729L0.654667 7.21066C0.286947 7.17381 0 6.86948 0 6.49954C0.000263378 6.10499 0.326908 5.78474 0.729729 5.7847H15.5087L10.8481 1.22014C10.5633 0.941076 10.5634 0.488476 10.8481 0.209309C11.133 -0.0697689 11.595 -0.0697688 11.88 0.209309L17.7862 5.99412C17.923 6.12808 17.9999 6.31011 18 6.49954C18 6.68903 17.9229 6.87092 17.7862 7.00496L11.88 12.7907Z" fill="currentColor"/></svg>`;
+            break;
+        default:
+            button.textContent = label;
+            break;
+    }
+
+    button.disabled = disabled;
+
+    if (isCurrent) {
+        button.setAttribute("aria-current", "page");
+    }
+
+    button.addEventListener("click", () => {
+        if (disabled) return;
+        onClick(page);
+    });
+
+    return button;
+}
+
+async function fetchPodcastList(params = {}) {
+    const endpoint = buildPodcastListUrl(resolvePodcastApiBaseUrl(), params);
+    const cacheKey = endpoint.toString();
+
+    if (podcastListCache.has(cacheKey)) {
+        return podcastListCache.get(cacheKey);
+    }
+
+    const request = fetch(endpoint, {
+        method: "GET",
+        cache: "no-store",
+        headers: {
+            Accept: "application/json"
+        }
+    })
+        .then(async (response) => {
+            if (!response.ok) {
+                throw new Error(`Request failed: ${response.status}`);
+            }
+
+            const json = await response.json();
+            if (!json || json.ok !== true || !Array.isArray(json.data)) {
+                throw new Error("Invalid podcast list payload");
+            }
+
+            return json;
+        })
+        .catch((error) => {
+            podcastListCache.delete(cacheKey);
+            throw error;
+        });
+
+    podcastListCache.set(cacheKey, request);
+    return request;
+}
+
+async function fetchPodcastTags(filters = {}) {
+    const cacheKey = JSON.stringify({
+        featured: filters.featured === undefined ? null : filters.featured
+    });
+
+    if (podcastTagsCache.has(cacheKey)) {
+        return podcastTagsCache.get(cacheKey);
+    }
+
+    const request = (async () => {
+        const tags = new Set();
+        let page = 1;
+        let hasNextPage = true;
+
+        while (hasNextPage) {
+            const response = await fetchPodcastList({
+                page,
+                limit: TAGS_FETCH_LIMIT,
+                featured: filters.featured
+            });
+
+            response.data.forEach((item) => {
+                const itemTags = Array.isArray(item?.tags) ? item.tags : [];
+                itemTags.forEach((tag) => {
+                    const cleanTag = String(tag || "").trim();
+                    if (cleanTag) tags.add(cleanTag);
+                });
+            });
+
+            hasNextPage = Boolean(response.has_next_page);
+            page += 1;
+        }
+
+        return Array.from(tags).sort((a, b) => a.localeCompare(b));
+    })().catch((error) => {
+        podcastTagsCache.delete(cacheKey);
+        throw error;
+    });
+
+    podcastTagsCache.set(cacheKey, request);
+    return request;
+}
+
+function renderPodcastTagOptions(select, tags, selectedValue) {
+    const placeholderOption =
+        select.querySelector('option[value=""]')?.cloneNode(true) ||
+        new Option("All topics", "");
+
+    select.innerHTML = "";
+    select.appendChild(placeholderOption);
+
+    tags.forEach((tag) => {
+        const option = document.createElement("option");
+        option.value = tag;
+        option.textContent = tag;
+        select.appendChild(option);
+    });
+
+    if (selectedValue && !tags.includes(selectedValue)) {
+        const customOption = document.createElement("option");
+        customOption.value = selectedValue;
+        customOption.textContent = selectedValue;
+        select.appendChild(customOption);
+    }
+
+    select.value = selectedValue || "";
+}
+
+function syncPodcastFilterIcons(state) {
+    syncPodcastFilterIcon(state.searchIcon, state.searchInput?.value);
+    syncPodcastFilterIcon(state.topicsIcon, state.tagSelect?.value);
+}
+
+function syncPodcastFilterIcon(icon, value) {
+    if (!icon) return;
+    const isActive = String(value || "").trim() !== "";
+    icon.classList.toggle("clickable", isActive);
+}
+
+function buildPodcastSectionQuery(state) {
+    const params = {
+        page: state.page,
+        limit: state.limit,
+        sort: state.sort
+    };
+
+    if (typeof state.featured === "boolean") {
+        params.featured = state.featured;
+    }
+
+    if (state.search) {
+        params.search = state.search;
+    }
+
+    if (state.tag) {
+        params.tag = state.tag;
+    }
+
+    return params;
+}
+
+function resolvePodcastApiBaseUrl() {
+    if (typeof TECLA_API === "string" && TECLA_API.trim().length > 0) {
+        return normalizeBaseUrl(TECLA_API);
+    }
+
+    return normalizeBaseUrl(DEFAULT_API_BASE_URL);
+}
+
+function buildPodcastListUrl(baseUrl, params = {}) {
+    const normalizedBaseUrl = normalizeBaseUrl(baseUrl);
+    const endpoint = /\/v1$/i.test(normalizedBaseUrl)
+        ? `${normalizedBaseUrl}/gild/podcasts`
+        : `${normalizedBaseUrl}${PODCASTS_PATH}`;
+
+    const url = new URL(endpoint, window.location.origin);
+
+    Object.entries(params).forEach(([key, value]) => {
+        if (value === undefined || value === null || value === "") return;
+        url.searchParams.set(key, String(value));
+    });
+
+    return url;
+}
+
+function buildPodcastDetailUrl(state, item, youtubeUrl) {
+    if (state.detailPath && item?.id) {
+        return appendQueryParam(state.detailPath, "id", item.id);
+    }
+
+    return youtubeUrl || "#";
+}
+
+function appendQueryParam(url, key, value) {
+    try {
+        const parsed = new URL(url, window.location.origin);
+        parsed.searchParams.set(key, String(value));
+
+        const isSameOrigin = parsed.origin === window.location.origin;
+        return isSameOrigin
+            ? `${parsed.pathname}${parsed.search}${parsed.hash}`
+            : parsed.toString();
+    } catch (_error) {
+    return `${String(url || "").trim() || "#"}?${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
+    }
+}
+
+function buildFeaturedPlayerSrc(currentSrc, youtubeUrl, youtubeId) {
+    const fallbackEmbedUrl = buildYouTubeEmbedUrl(youtubeId);
+    const safeCurrentSrc = sanitizeUrl(currentSrc, "");
+
+    if (!safeCurrentSrc) {
+        return fallbackEmbedUrl;
+    }
+
+    try {
+        const parsed = new URL(safeCurrentSrc, window.location.origin);
+        const hostname = parsed.hostname.toLowerCase();
+
+        if (hostname.includes("youtube.com") || hostname.includes("youtube-nocookie.com")) {
+            replaceYouTubeVideoId(parsed, youtubeId);
+            return parsed.toString();
+        }
+
+        if (hostname.includes("embedly.com")) {
+            if (parsed.searchParams.has("url")) {
+                parsed.searchParams.set("url", youtubeUrl);
+            }
+            if (parsed.searchParams.has("src")) {
+                parsed.searchParams.set(
+                    "src",
+                    replaceEmbeddedYouTubeUrl(parsed.searchParams.get("src"), youtubeId, youtubeUrl)
+                );
+            }
+            return parsed.toString();
+        }
+
+        if (parsed.searchParams.has("url")) {
+            parsed.searchParams.set("url", youtubeUrl);
+        }
+        if (parsed.searchParams.has("src")) {
+            parsed.searchParams.set("src", buildYouTubeEmbedUrl(youtubeId));
+        }
+
+        return parsed.toString();
+    } catch (_error) {
+        return fallbackEmbedUrl;
+    }
+}
+
+function renderFallbackFeaturedPlayer(node, youtubeId, title) {
+    const iframe = document.createElement("iframe");
+    iframe.src = buildYouTubeEmbedUrl(youtubeId);
+    iframe.title = title;
+    iframe.loading = "lazy";
+    iframe.allow =
+        "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+    iframe.referrerPolicy = "strict-origin-when-cross-origin";
+    iframe.allowFullscreen = true;
+
+    node.innerHTML = "";
+    node.appendChild(iframe);
+}
+
+function buildYouTubeEmbedUrl(youtubeId) {
+    return `https://www.youtube-nocookie.com/embed/${encodeURIComponent(youtubeId)}?rel=0&controls=1`;
+}
+
+function formatPodcastPublishedDate(value) {
+    const rawValue = sanitizeText(value, "");
+    if (!rawValue) return "";
+
+    const date = new Date(rawValue);
+    if (Number.isNaN(date.getTime())) return "";
+
+    return new Intl.DateTimeFormat("en-US", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+        timeZone: "UTC"
+    }).format(date);
+}
+
+function trackPodcastHubPageView() {
+    if (hasTrackedPodcastHubView) return;
+    hasTrackedPodcastHubView = true;
+
+    pushPodcastAnalyticsPayload({
+        event: PODCAST_PAGE_VIEW_EVENT,
+        page_type: PODCAST_ANALYTICS_CONTEXT_HUB,
+        page_location: window.location.href,
+        page_path: window.location.pathname,
+        page_title: document.title,
+        ...getPodcastAnalyticsAttributionParams()
+    });
+}
+
+function bindStaticPodcastPlatformLinks() {
+    const links = Array.from(document.querySelectorAll('a[href]'));
+
+    links.forEach((link) => {
+        if (link.__podcastAnalyticsHandler) return;
+
+        const destination = parsePodcastPlatformDestination(link.getAttribute("href"));
+        if (!destination) return;
+
+        bindPodcastOutboundLink(link, {
+            platform: destination.platform,
+            destinationType: destination.destinationType,
+            contextPage: PODCAST_ANALYTICS_CONTEXT_HUB,
+            placement: inferPodcastLinkPlacement(link, PODCAST_ANALYTICS_CONTEXT_HUB, destination.destinationType),
+            targetUrl: sanitizeUrl(link.getAttribute("href"), "")
+        });
+    });
+}
+
+function bindPodcastOutboundLink(node, meta = {}) {
+    if (!node) return;
+
+    if (node.__podcastAnalyticsHandler) {
+        node.removeEventListener("click", node.__podcastAnalyticsHandler);
+    }
+
+    const handler = () => {
+        const payload = buildPodcastOutboundClickPayload(node, meta);
+        if (!payload) return;
+        pushPodcastAnalyticsPayload(payload);
+    };
+
+    node.__podcastAnalyticsHandler = handler;
+    node.addEventListener("click", handler);
+}
+
+function buildPodcastOutboundClickPayload(node, meta) {
+    const targetUrl = sanitizeUrl(meta?.targetUrl || node?.href, "");
+    const destination = parsePodcastPlatformDestination(targetUrl);
+    if (!targetUrl || !destination) return null;
+
+    const episodeId = sanitizeText(meta?.episode?.id, "");
+    const episodeTitle = sanitizeText(meta?.episode?.title, "");
+    const guestName = sanitizeText(meta?.episode?.guest_name, "");
+
+    return {
+        event: destination.platform === "youtube" ? PODCAST_YOUTUBE_CLICK_EVENT : PODCAST_SPOTIFY_CLICK_EVENT,
+        platform: destination.platform,
+        destination_type: meta?.destinationType || destination.destinationType,
+        context_page: meta?.contextPage || PODCAST_ANALYTICS_CONTEXT_HUB,
+        placement: meta?.placement || inferPodcastLinkPlacement(node, PODCAST_ANALYTICS_CONTEXT_HUB, destination.destinationType),
+        target_url: targetUrl,
+        episode_id: episodeId,
+        episode_title: episodeTitle,
+        guest_name: guestName,
+        page_location: window.location.href,
+        page_path: window.location.pathname,
+        page_title: document.title,
+        ...getPodcastAnalyticsAttributionParams()
+    };
+}
+
+function parsePodcastPlatformDestination(url) {
+    const safeUrl = sanitizeUrl(url, "");
+    if (!safeUrl) return null;
+
+    try {
+        const parsed = new URL(safeUrl, window.location.origin);
+        const host = parsed.hostname.toLowerCase();
+        const pathSegments = parsed.pathname.split("/").filter(Boolean);
+
+        if (host.includes("youtube.com") || host.includes("youtu.be")) {
+            const destinationType =
+                host.includes("youtu.be") ||
+                parsed.searchParams.has("v") ||
+                pathSegments.includes("watch") ||
+                pathSegments.includes("embed")
+                    ? "episode"
+                    : "channel";
+
+            return { platform: "youtube", destinationType };
+        }
+
+        if (host.includes("spotify.com")) {
+            const destinationType = pathSegments.includes("episode") ? "episode" : "channel";
+            return { platform: "spotify", destinationType };
+        }
+    } catch (_error) {
+        return null;
+    }
+
+    return null;
+}
+
+function inferPodcastLinkPlacement(node, contextPage, destinationType) {
+    if (!node) {
+        return destinationType === "channel" ? "hub_channel_link" : "episode_card";
+    }
+
+    if (node.closest('[pod-item-data="card"]')) {
+        return "episode_card";
+    }
+
+    const section = node.closest("section");
+    if (section?.querySelector('[player-data="featured"]')) {
+        return "featured_clip";
+    }
+
+    if (destinationType === "channel") {
+        return contextPage === PODCAST_ANALYTICS_CONTEXT_HUB ? "hub_channel_link" : "episode_channel_link";
+    }
+
+    return contextPage === PODCAST_ANALYTICS_CONTEXT_HUB ? "hub_external_link" : "episode_external_link";
+}
+
+function pushPodcastAnalyticsPayload(payload) {
+    if (!payload || typeof payload !== "object") return;
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(payload);
+}
+
+function getPodcastAnalyticsAttributionParams() {
+    const params = new URLSearchParams(window.location.search);
+    const attribution = {};
+    const keys = ["utm_source", "utm_medium", "utm_campaign", "utm_id", "utm_content"];
+
+    keys.forEach((key) => {
+        const fromQuery = sanitizeText(params.get(key), "");
+        const fromStorage =
+            typeof storageAvailable === "function" && storageAvailable("localStorage")
+                ? sanitizeText(localStorage.getItem(key), "")
+                : "";
+        const value = fromQuery || fromStorage;
+        if (value) {
+            attribution[key] = value;
+        }
+    });
+
+    return attribution;
+}
+
+function replaceYouTubeVideoId(url, youtubeId) {
+    const segments = url.pathname.split("/");
+    const embedIndex = segments.findIndex((segment) => segment === "embed");
+
+    if (embedIndex > -1) {
+        segments[embedIndex + 1] = youtubeId;
+        url.pathname = segments.join("/");
+    } else {
+        url.searchParams.set("v", youtubeId);
+    }
+}
+
+function replaceEmbeddedYouTubeUrl(value, youtubeId, youtubeUrl) {
+    const safeValue = String(value || "").trim();
+    if (!safeValue) return buildYouTubeEmbedUrl(youtubeId);
+
+    try {
+        const nestedUrl = new URL(safeValue, window.location.origin);
+        const nestedHost = nestedUrl.hostname.toLowerCase();
+
+        if (nestedHost.includes("youtube.com") || nestedHost.includes("youtube-nocookie.com")) {
+            replaceYouTubeVideoId(nestedUrl, youtubeId);
+            return nestedUrl.toString();
+        }
+
+        if (nestedUrl.searchParams.has("url")) {
+            nestedUrl.searchParams.set("url", youtubeUrl);
+        }
+        if (nestedUrl.searchParams.has("src")) {
+            nestedUrl.searchParams.set("src", buildYouTubeEmbedUrl(youtubeId));
+        }
+
+        return nestedUrl.toString();
+    } catch (_error) {
+        return safeValue
+            .replace(/(youtube(?:-nocookie)?\.com\/embed\/)([^?&"']+)/i, `$1${youtubeId}`)
+            .replace(/([?&]v=)[^&"']+/i, `$1${youtubeId}`);
+    }
+}
+
+function getYouTubeVideoId(item) {
+    const explicitId = sanitizeText(item?.youtube_video_id, "");
+    if (explicitId) return explicitId;
+
+    const youtubeUrl = sanitizeUrl(item?.youtube_url, "");
+    if (!youtubeUrl) return "";
+
+    try {
+        const parsed = new URL(youtubeUrl);
+        const host = parsed.hostname.toLowerCase();
+
+        if (host.includes("youtu.be")) {
+            return parsed.pathname.replace(/^\/+/, "").split("/")[0] || "";
+        }
+
+        const idFromQuery = parsed.searchParams.get("v");
+        if (idFromQuery) return idFromQuery;
+
+        const segments = parsed.pathname.split("/").filter(Boolean);
+        const embedIndex = segments.findIndex((segment) => segment === "embed");
+        if (embedIndex > -1 && segments[embedIndex + 1]) {
+            return segments[embedIndex + 1];
+        }
+    } catch (_error) {
+        return "";
+    }
+
+    return "";
+}
+
+function getPodcastDurationLabel(item) {
+    const durationSeconds = Number(item?.duration_seconds);
+    if (Number.isFinite(durationSeconds) && durationSeconds > 0) {
+        return sanitizeText(item?.duration_label, "");
+    }
+    return "";
+}
+
+function setSectionLoading(state, isLoading, { showSpinner = false } = {}) {
+    state.section.classList.toggle("is-loading", isLoading);
+    state.section.setAttribute("aria-busy", isLoading ? "true" : "false");
+    if (state.grid) {
+        if (isLoading) {
+            state.grid.classList.toggle("is-loading", showSpinner);
+        } else {
+            state.grid.classList.remove("is-loading");
+        }
+    }
+}
+
+function setNodeVisible(node, isVisible) {
+    if (!node) return;
+    node.hidden = !isVisible;
+}
+
+function scrollPodcastSectionIntoView(section) {
+    if (!section || typeof section.scrollIntoView !== "function") return;
+    section.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function waitForNextPaint() {
+    if (typeof window === "undefined" || typeof window.requestAnimationFrame !== "function") {
+        return Promise.resolve();
+    }
+
+    return new Promise((resolve) => {
+        window.requestAnimationFrame(() => {
+            window.requestAnimationFrame(resolve);
+        });
+    });
+}
+
+function sanitizeText(value, fallback = "") {
+    const text = String(value || "").trim();
+    return text || fallback;
+}
+
+function sanitizeUrl(value, fallback = "") {
+    const rawValue = String(value || "").trim();
+    if (!rawValue) return fallback;
+
+    try {
+        const parsed = new URL(rawValue, window.location.origin);
+        if (!["http:", "https:"].includes(parsed.protocol)) {
+            return fallback;
+        }
+        return parsed.toString();
+    } catch (_error) {
+        return fallback;
+    }
+}
+
+function normalizeBaseUrl(value) {
+    return String(value || "").trim().replace(/\/+$/, "");
+}
+
+function readPositiveIntegerAttr(node, attr, fallback) {
+    const rawValue = node.getAttribute(attr);
+    if (!rawValue) return fallback;
+
+    const parsed = Number.parseInt(rawValue, 10);
+    return Number.isInteger(parsed) && parsed > 0 ? parsed : fallback;
+}
+
+function readOptionalBooleanAttr(node, attr) {
+    const rawValue = node.getAttribute(attr);
+    if (rawValue === null) return undefined;
+
+    const normalized = rawValue.trim().toLowerCase();
+    if (normalized === "true" || normalized === "1") return true;
+    if (normalized === "false" || normalized === "0") return false;
+    return undefined;
+}
+
+function readStringAttr(node, attr, fallback = "") {
+    const rawValue = node.getAttribute(attr);
+    return rawValue === null ? fallback : String(rawValue).trim();
+}
+
+function debounce(callback, delay) {
+    let timeoutId = 0;
+
+    return (...args) => {
+        window.clearTimeout(timeoutId);
+        timeoutId = window.setTimeout(() => {
+            callback(...args);
+        }, delay);
+    };
+}
