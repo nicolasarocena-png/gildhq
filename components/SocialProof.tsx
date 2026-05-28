@@ -86,22 +86,22 @@ export function SocialProof() {
                   <Image
                     src={testimonial.photoUrl}
                     alt={testimonial.name}
-                    width={56}
-                    height={56}
+                    width={64}
+                    height={64}
                     unoptimized
-                    className="h-14 w-14 shrink-0 rounded-full object-cover opacity-90 [filter:saturate(0.85)]"
+                    className="h-16 w-16 shrink-0 rounded-full object-cover opacity-90 [filter:saturate(0.85)]"
                   />
                 ) : (
-                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#2e2820] text-sm font-medium text-white/60">
+                  <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-[#2e2820] text-[15px] font-medium text-white/60">
                     {initials(testimonial.name)}
                   </div>
                 )}
                 <div>
-                  <p className="text-[13px] font-medium text-white/90">{testimonial.name}</p>
-                  <p className="mt-1 text-[12px] leading-5 text-white/45">{testimonial.caption}</p>
+                  <p className="text-[15px] font-medium text-white/90">{testimonial.name}</p>
+                  <p className="mt-1 text-[13px] leading-5 text-white/45">{testimonial.caption}</p>
                 </div>
               </div>
-              <p className="mt-8 text-[14px] leading-[1.85] text-white/70">
+              <p className="mt-8 text-[16px] leading-[1.85] text-white/70">
                 &quot;{testimonial.quote}&quot;
               </p>
             </article>
