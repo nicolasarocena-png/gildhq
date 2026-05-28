@@ -81,7 +81,7 @@ export function ApplicationForm() {
   return (
     <section ref={sectionRef} id="apply" className="section-pad bg-[#0d0b09]">
       <div className="section-shell">
-        <div className="max-w-2xl">
+        <div className="mx-auto max-w-2xl">
           <div ref={leftRef}>
             <p className="section-label">Apply</p>
             <h2 className="font-serif text-4xl leading-[1.1] tracking-[-0.015em] text-white md:text-5xl">
