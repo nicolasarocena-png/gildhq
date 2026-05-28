@@ -101,7 +101,7 @@ export function Hero() {
       {/* Logo strip — visible on load, no scroll needed */}
       <div ref={logosRef} className="relative z-10 border-t border-white/[0.07] bg-black/20 backdrop-blur-sm">
         <div className="mx-auto max-w-[1600px] px-6 py-5 md:px-12 lg:px-16 xl:px-20 2xl:px-28">
-          <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.18em] text-white/40">
+          <p className="mb-4 text-[13px] font-medium uppercase tracking-[0.14em] text-white/55">
             Where leaders from these companies come to think and connect
           </p>
           <div
