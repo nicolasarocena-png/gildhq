@@ -24,11 +24,15 @@ export function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 ${!isOpen ? "transition-colors duration-500" : ""} ${
-        isScrolled || isOpen
-          ? "border-b border-[rgba(255,248,235,0.07)] bg-[#0a0806] backdrop-blur-md"
-          : "border-b border-transparent bg-transparent"
-      }`}
+      className="sticky top-0 z-50 border-b"
+      style={{
+        backgroundColor: isScrolled || isOpen ? "#0a0806" : "transparent",
+        borderColor: isScrolled || isOpen ? "rgba(255,248,235,0.07)" : "transparent",
+        backdropFilter: isScrolled || isOpen ? "blur(12px)" : "none",
+        transition: isOpen
+          ? "none"
+          : "background-color 500ms, border-color 500ms, backdrop-filter 500ms",
+      }}
     >
       <nav className="section-shell flex h-[72px] items-center justify-between">
         <a href="/" aria-label="GILD home" className="relative h-8 w-24">
