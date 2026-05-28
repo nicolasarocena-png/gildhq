@@ -143,7 +143,7 @@ export function WhyGildExists() {
             {/* Text block */}
             <div>
               <p className="section-label">Why GILD Exists</p>
-              <h2 className="font-serif text-[36px] font-normal leading-[1.05] tracking-[-0.02em] text-white md:text-[56px] lg:text-[72px] xl:text-[82px] 2xl:text-[92px]">
+              <h2 className="font-serif text-[32px] font-normal leading-[1.1] tracking-[-0.015em] text-white md:text-[42px] lg:text-[48px]">
                 Apply To The GILD Network
               </h2>
               <p className="mt-5 max-w-[360px] text-[14px] leading-[1.88] text-white/46 lg:max-w-[400px] lg:text-[15px]">

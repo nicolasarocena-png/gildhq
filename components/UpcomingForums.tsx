@@ -85,20 +85,16 @@ export function UpcomingForums() {
               href={event.url}
               target="_blank"
               rel="noreferrer"
-              className="group relative overflow-hidden rounded-[5px] border transition-all duration-300 hover:shadow-[0_6px_32px_rgba(0,0,0,0.5)]"
-              style={{
-                backgroundColor: event.cardColor,
-                borderColor: event.borderColor,
-              }}
+              className="group relative overflow-hidden rounded-[5px] border border-[#364a5a] transition-all duration-300 hover:shadow-[0_6px_32px_rgba(0,0,0,0.5)]"
+              style={{ backgroundColor: event.cardColor }}
             >
               {/* Left-edge accent — full card height */}
               <div
-                className="pointer-events-none absolute bottom-0 left-0 top-0 w-[4px]"
-                style={{ backgroundColor: event.borderColor }}
+                className="pointer-events-none absolute bottom-0 left-0 top-0 w-[4px] bg-[#364a5a]"
               />
 
               {/* Main row */}
-              <div className="relative flex items-start gap-4 px-5 pb-4 pt-5">
+              <div className="relative flex items-start gap-4 px-6 pb-5 pt-6">
 
                 {/* Left: content */}
                 <div className="min-w-0 flex-1">
@@ -108,7 +104,7 @@ export function UpcomingForums() {
                   </p>
 
                   {/* Title */}
-                  <p className="mb-2.5 text-[15px] font-bold leading-[1.4] text-white md:text-[16px]">
+                  <p className="mb-3 text-[15px] font-bold leading-[1.4] text-white md:text-[16px]">
                     {event.title}
                   </p>
 
@@ -124,21 +120,21 @@ export function UpcomingForums() {
                   </div>
 
                   {/* CTA button */}
-                  <span className="inline-block bg-white/10 px-5 py-2 text-[12px] font-semibold text-white ring-1 ring-white/30 transition-all duration-300 group-hover:bg-white/18 group-hover:ring-white/50">
+                  <span className="inline-block border border-[#364a5a] bg-white/8 px-5 py-2 text-[12px] font-semibold text-white transition-all duration-300 group-hover:bg-white/15 group-hover:border-[#4a6580]">
                     Request Invite
                   </span>
                 </div>
 
                 {/* Right: thumbnail */}
                 <div
-                  className="relative mt-0.5 h-[104px] w-[104px] shrink-0 overflow-hidden rounded-[4px] border"
-                  style={{ borderColor: event.borderColor, backgroundColor: event.cardColor }}
+                  className="relative mt-0.5 h-[116px] w-[116px] shrink-0 overflow-hidden rounded-[4px] border border-[#364a5a]"
+                  style={{ backgroundColor: event.cardColor }}
                 >
                   <Image
                     src={event.coverUrl}
                     alt=""
                     fill
-                    sizes="104px"
+                    sizes="116px"
                     className="object-contain p-1.5"
                     unoptimized
                   />
@@ -146,13 +142,13 @@ export function UpcomingForums() {
               </div>
 
               {/* Status badges — bottom right */}
-              <div className="relative flex items-center justify-end gap-2 px-5 pb-4">
+              <div className="relative flex items-center justify-end gap-2 px-6 pb-5">
                 {event.isNextUp && (
                   <span className="bg-[#5a9a9b]/20 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#5a9a9b]">
                     Next Up
                   </span>
                 )}
-                <span className="border border-[#5a9a9b]/40 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#5a9a9b]/80">
+                <span className="border border-[#364a5a] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#5a9a9b]/80">
                   Open
                 </span>
               </div>
