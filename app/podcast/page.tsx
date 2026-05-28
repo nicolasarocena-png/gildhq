@@ -17,7 +17,7 @@ export default function PodcastPage() {
       <main>
 
         {/* ── Hero ─────────────────────────────────────────────── */}
-        <section className="relative overflow-hidden bg-[#050403] pb-0 pt-20 md:pt-28">
+        <section className="relative overflow-hidden bg-[#07090c] pb-0 pt-20 md:pt-28">
           {/* Subtle teal glow top-left */}
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_0%_0%,rgba(90,154,155,0.08),transparent)]" />
 
@@ -86,7 +86,7 @@ export default function PodcastPage() {
                     style={{ objectPosition: "center top" }}
                     priority
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#050403]/60 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#07090c]/60 via-transparent to-transparent" />
                 </div>
               </div>
             </div>
@@ -94,7 +94,7 @@ export default function PodcastPage() {
         </section>
 
         {/* ── Episodes ─────────────────────────────────────────── */}
-        <section className="section-pad bg-[#080604]">
+        <section className="section-pad bg-[#07090c]">
           <div className="section-shell">
             <div className="mb-12 flex items-end justify-between">
               <p className="section-label mb-0">Episodes</p>
@@ -115,7 +115,7 @@ export default function PodcastPage() {
                   href={episode.url}
                   target="_blank"
                   rel="noreferrer"
-                  className="group overflow-hidden rounded-card border border-[rgba(255,248,235,0.07)] bg-[#0c0a08] transition-all duration-300 hover:border-[rgba(255,248,235,0.14)] hover:shadow-[0_8px_40px_rgba(0,0,0,0.5)]"
+                  className="group flex flex-col overflow-hidden rounded-card border border-[rgba(255,248,235,0.07)] bg-[#0c0a08] transition-all duration-300 hover:border-[rgba(255,248,235,0.14)] hover:shadow-[0_8px_40px_rgba(0,0,0,0.5)]"
                 >
                   {/* Thumbnail */}
                   <div className="relative aspect-video overflow-hidden bg-[#0a0806]">
@@ -138,14 +138,33 @@ export default function PodcastPage() {
                   </div>
 
                   {/* Meta */}
-                  <div className="p-5">
+                  <div className="flex flex-1 flex-col p-5">
                     <p className="text-[10px] font-medium uppercase tracking-[0.24em] text-white/35">
                       {episode.published}
                     </p>
                     <h3 className="mt-2.5 font-serif text-[16px] leading-[1.38] text-white/88 transition-colors duration-300 group-hover:text-white">
                       {episode.title}
                     </h3>
-                    <p className="mt-4 text-[10px] font-medium uppercase tracking-[0.2em] text-[#5a9a9b]">
+                    {/* Guest */}
+                    <div className="mt-4 flex items-center gap-2.5">
+                      <div className="h-px w-4 shrink-0 bg-[#5a9a9b]/50" />
+                      <div>
+                        <p className="text-[12px] font-medium text-white/70">{episode.guest}</p>
+                        <p className="text-[11px] text-white/35">{episode.guestTitle}</p>
+                      </div>
+                    </div>
+                    {/* Tags */}
+                    <div className="mt-4 flex flex-wrap gap-1.5">
+                      {episode.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="rounded-sm border border-[rgba(90,154,155,0.25)] px-2 py-0.5 text-[9px] font-medium uppercase tracking-[0.18em] text-[#5a9a9b]/70"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <p className="mt-auto pt-4 text-[10px] font-medium uppercase tracking-[0.2em] text-[#5a9a9b]">
                       Watch on YouTube →
                     </p>
                   </div>
@@ -156,7 +175,7 @@ export default function PodcastPage() {
         </section>
 
         {/* ── Spotify ──────────────────────────────────────────── */}
-        <section className="section-pad bg-[#050403]">
+        <section className="section-pad bg-[#0b1520]">
           <div className="section-shell">
             <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr] lg:items-center">
               <div>
@@ -197,7 +216,7 @@ export default function PodcastPage() {
         </section>
 
         {/* ── About ────────────────────────────────────────────── */}
-        <section className="section-pad bg-[#080604]">
+        <section className="section-pad bg-[#07090c]">
           <div className="section-shell">
             <div className="grid gap-16 lg:grid-cols-2 lg:gap-24">
 
@@ -235,7 +254,7 @@ export default function PodcastPage() {
         </section>
 
         {/* ── Subscribe CTA ────────────────────────────────────── */}
-        <section className="section-pad border-t border-[rgba(255,248,235,0.06)] bg-[#050403]">
+        <section className="section-pad border-t border-[rgba(255,248,235,0.06)] bg-[#0f1c28]">
           <div className="section-shell text-center">
             <h2 className="font-serif text-[30px] leading-[1.2] tracking-[-0.015em] text-white md:text-[38px]">
               Stay close to the conversation.
