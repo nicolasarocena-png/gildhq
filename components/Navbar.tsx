@@ -67,6 +67,12 @@ export function Navbar() {
           >
             Request Access
           </button>
+          <a
+            href="/member-access"
+            className="text-[10px] font-medium uppercase tracking-[0.18em] text-white/28 transition-colors duration-300 hover:text-[#5a9a9b]"
+          >
+            Member Access
+          </a>
         </div>
         <button
           type="button"
@@ -114,6 +120,13 @@ export function Navbar() {
             >
               Request Access
             </button>
+            <a
+              href="/member-access"
+              onClick={() => setIsOpen(false)}
+              className="mt-1 w-fit text-[10px] font-medium uppercase tracking-[0.22em] text-white/30 transition-colors duration-200 hover:text-[#5a9a9b]"
+            >
+              Member Access
+            </a>
           </div>
         </div>
       ) : null}
