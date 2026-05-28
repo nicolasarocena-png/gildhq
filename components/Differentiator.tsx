@@ -14,7 +14,7 @@ const notFitItems = [
 
 export function Differentiator() {
   return (
-    <section id="fit" className="section-pad bg-[#0a0806]">
+    <section id="fit" className="section-pad section-bridge bg-[#0a0806]">
       <div className="mx-auto max-w-[1100px] px-6 md:px-12 lg:px-16">
         <div className="relative aspect-[2.45] min-h-[260px] overflow-hidden rounded-card bg-[#080605] md:min-h-[380px]">
           <Image

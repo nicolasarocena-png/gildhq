@@ -2,7 +2,7 @@ import { NetworkCards } from "@/components/NetworkCards";
 
 export function WhyGildExists() {
   return (
-    <section id="why" className="section-pad bg-[#0d0b09]">
+    <section id="why" className="section-pad section-bridge bg-[#0d0b09]">
       <div className="section-shell">
         <p className="section-label">Why GILD Exists</p>
         <div className="max-w-4xl">

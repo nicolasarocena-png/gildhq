@@ -76,7 +76,7 @@ export function SocialProof() {
   return (
     <section
       ref={sectionRef}
-      className={`section-pad bg-[#0a0806] transition-all duration-700 ${
+      className={`section-pad section-bridge bg-[#0a0806] transition-all duration-700 ${
         sectionVisible ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
       }`}
     >
@@ -84,7 +84,7 @@ export function SocialProof() {
         <h2 className="mx-auto mb-16 max-w-3xl text-center font-sans text-[13px] font-medium uppercase tracking-[0.28em] text-white/35">
           Companies whose leadership is attending GILD events
         </h2>
-        <div ref={marqueeRef} className="marquee-mask overflow-hidden">
+        <div ref={marqueeRef} className="overflow-hidden">
           {hasMarquee ? (
             <div
               className={`flex w-max gap-[50px] md:gap-[100px] ${
@@ -102,7 +102,7 @@ export function SocialProof() {
                       alt={logo.name}
                       width={112}
                       height={28}
-                      className="max-h-5 w-auto object-contain opacity-40 transition-opacity duration-500 hover:opacity-70 md:max-h-7"
+                      className="max-h-5 w-auto object-contain opacity-65 transition-opacity duration-500 hover:opacity-90 md:max-h-7"
                     />
                   ) : (
                     logo.name
@@ -138,7 +138,7 @@ export function SocialProof() {
             <article
               key={testimonial.name}
               data-card-key={testimonial.name}
-              className={`rounded-card border border-[rgba(255,248,235,0.06)] bg-[#110f0c] p-7 shadow-[0_2px_24px_rgba(0,0,0,0.45)] transition-all duration-700 hover:-translate-y-0.5 hover:border-[rgba(255,248,235,0.11)] hover:shadow-[0_8px_36px_rgba(0,0,0,0.55)] ${
+              className={`rounded-card border border-[rgba(255,248,235,0.06)] bg-[#110f0c] p-7 shadow-[0_2px_24px_rgba(0,0,0,0.45)] transition-all duration-700 hover:-translate-y-0.5 hover:border-[rgba(255,248,235,0.11)] hover:shadow-[0_8px_36px_rgba(0,0,0,0.55)] ${index >= 4 ? "hidden md:block" : ""} ${
                 visibleCards.has(testimonial.name)
                   ? "translate-y-0 opacity-100"
                   : "translate-y-3 opacity-0"

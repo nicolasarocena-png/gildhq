@@ -31,7 +31,7 @@ export function Hero() {
       <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-[#0d0b09] to-transparent" />
 
       <div className="section-shell relative z-10 flex min-h-[calc(100vh-72px)] items-center py-28">
-        <div className="max-w-[860px] text-left">
+        <div className="hero-drift max-w-[860px] text-left">
           <h1 className="text-[44px] font-normal leading-[1.04] tracking-[-0.025em] text-white md:text-[62px] lg:text-[80px]">
             Invite-only Networking &amp; Community for AI Leaders
           </h1>
