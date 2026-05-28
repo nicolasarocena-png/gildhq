@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { spotifyShow, youtubeEpisodes } from "@/lib/podcast";
@@ -142,14 +143,12 @@ export default function PodcastPage() {
                   key={episode.videoId}
                   className="group flex flex-col overflow-hidden rounded-card bg-white shadow-[0_2px_16px_rgba(0,0,0,0.18)] transition-shadow duration-300 hover:shadow-[0_6px_32px_rgba(0,0,0,0.28)]"
                 >
-                  {/* Thumbnail — clicking goes to YouTube */}
-                  <a
-                    href={episode.url}
-                    target="_blank"
-                    rel="noreferrer"
+                  {/* Thumbnail — clicking opens internal episode page */}
+                  <Link
+                    href={`/podcast/${episode.slug}`}
                     className="relative block aspect-video overflow-hidden bg-[#0a0806]"
                     tabIndex={-1}
-                    aria-label={`Watch "${episode.title}" on YouTube`}
+                    aria-label={`View episode: ${episode.title}`}
                   >
                     <Image
                       src={`https://img.youtube.com/vi/${episode.videoId}/maxresdefault.jpg`}
@@ -166,7 +165,7 @@ export default function PodcastPage() {
                         </svg>
                       </div>
                     </div>
-                  </a>
+                  </Link>
 
                   {/* Content */}
                   <div className="flex flex-1 flex-col p-6">
@@ -182,11 +181,11 @@ export default function PodcastPage() {
                     </p>
 
                     {/* Title */}
-                    <a href={episode.url} target="_blank" rel="noreferrer">
+                    <Link href={`/podcast/${episode.slug}`}>
                       <h3 className="mt-3 text-[15px] font-semibold leading-[1.4] text-[#111827] transition-colors duration-300 hover:text-[#5a9a9b]">
                         {episode.title}
                       </h3>
-                    </a>
+                    </Link>
 
                     {/* Description */}
                     <p className="mt-3 line-clamp-3 text-[13px] leading-[1.8] text-[#6b7280]">

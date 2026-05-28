@@ -9,6 +9,8 @@ export type YouTubeEpisode = {
   description: string;
   duration: string;
   tags: string[];
+  /** URL-safe identifier used for internal preview pages */
+  slug: string;
 };
 
 export const youtubeEpisodes: YouTubeEpisode[] = [
@@ -23,7 +25,8 @@ export const youtubeEpisodes: YouTubeEpisode[] = [
     description:
       "Kirsten built a consumer health company to massive scale with a tiny team. She shares the operating model, the AI stack, and the decisions that made lean growth possible.",
     duration: "48m",
-    tags: ["Leadership", "Startups", "Growth"]
+    tags: ["Leadership", "Startups", "Growth"],
+    slug: "building-a-billion-dollar-company-with-10-employees"
   },
   {
     title: "Why In-Person Networking is About to Explode (Again)",
@@ -36,7 +39,8 @@ export const youtubeEpisodes: YouTubeEpisode[] = [
     description:
       "As AI saturates digital channels, Thom argues the pendulum is swinging back to in-person connection. A conversation about community, trust, and what networking actually produces.",
     duration: "42m",
-    tags: ["Networking", "Community", "AI"]
+    tags: ["Networking", "Community", "AI"],
+    slug: "why-in-person-networking-is-about-to-explode-again"
   },
   {
     title: "AI Is Stealing Your Traffic (And You Can't Track It)",
@@ -47,9 +51,10 @@ export const youtubeEpisodes: YouTubeEpisode[] = [
     guest: "Ross Hudgens",
     guestTitle: "CEO, Siege Media",
     description:
-      "AI-generated answers are absorbing traffic that used to reach your site. Ross breaks down what&apos;s happening to search, how to measure invisible losses, and where content still wins.",
+      "AI-generated answers are absorbing traffic that used to reach your site. Ross breaks down what's happening to search, how to measure invisible losses, and where content still wins.",
     duration: "51m",
-    tags: ["AI", "Marketing", "SEO"]
+    tags: ["AI", "Marketing", "SEO"],
+    slug: "ai-is-stealing-your-traffic-and-you-cant-track-it"
   },
   {
     title: "AI Is Breaking Cybersecurity, And Most Companies Aren't Ready",
@@ -62,7 +67,8 @@ export const youtubeEpisodes: YouTubeEpisode[] = [
     description:
       "Yasmin explains why AI has fundamentally shifted the threat landscape and what security teams need to rethink now — from tooling to culture to board-level communication.",
     duration: "45m",
-    tags: ["AI", "Cybersecurity", "Risk"]
+    tags: ["AI", "Cybersecurity", "Risk"],
+    slug: "ai-is-breaking-cybersecurity-and-most-companies-arent-ready"
   },
   {
     title: "How AI Is Changing Hiring",
@@ -75,7 +81,8 @@ export const youtubeEpisodes: YouTubeEpisode[] = [
     description:
       "Prakhar walks through how AI is restructuring the recruiting funnel — from sourcing to screening to offer — and what it means for teams that still rely on old-school hiring.",
     duration: "39m",
-    tags: ["AI", "Hiring", "HR Tech"]
+    tags: ["AI", "Hiring", "HR Tech"],
+    slug: "how-ai-is-changing-hiring"
   },
   {
     title: "How AI Is Creating One-Person Teams",
@@ -88,7 +95,8 @@ export const youtubeEpisodes: YouTubeEpisode[] = [
     description:
       "Sagar shares how solo operators and small teams are now doing the work of full departments using AI — and what that shift means for how companies are built and staffed.",
     duration: "44m",
-    tags: ["AI", "Future of Work", "Productivity"]
+    tags: ["AI", "Future of Work", "Productivity"],
+    slug: "how-ai-is-creating-one-person-teams"
   }
 ];
 
