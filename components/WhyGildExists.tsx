@@ -114,7 +114,7 @@ export function WhyGildExists() {
           priority
           sizes="100vw"
           className="object-cover opacity-60 [filter:saturate(0.78)_contrast(1.06)]"
-          style={{ objectPosition: "center 40%" }}
+          style={{ objectPosition: "center 62%" }}
         />
         {/* Dark overlays */}
         <div className="absolute inset-0 bg-black/50" />
