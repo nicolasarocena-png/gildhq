@@ -88,11 +88,6 @@ export function UpcomingForums() {
               className="group relative overflow-hidden rounded-[5px] border border-[#364a5a] transition-all duration-300 hover:shadow-[0_6px_32px_rgba(0,0,0,0.5)]"
               style={{ backgroundColor: event.cardColor }}
             >
-              {/* Left-edge accent — full card height */}
-              <div
-                className="pointer-events-none absolute bottom-0 left-0 top-0 w-[4px] bg-[#364a5a]"
-              />
-
               {/* Main row */}
               <div className="relative flex items-start gap-4 px-6 pb-5 pt-6">
 
