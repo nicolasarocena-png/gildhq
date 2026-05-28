@@ -102,6 +102,16 @@ summary::-webkit-details-marker {
   animation: marquee 45s linear infinite;
 }
 
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 @media (min-width: 768px) {
   .sponsor-marquee {
     animation-duration: 70s;
