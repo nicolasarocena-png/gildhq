@@ -169,10 +169,10 @@ export default function PodcastPage() {
                   </a>
 
                   {/* Content */}
-                  <div className="flex flex-1 flex-col p-5">
+                  <div className="flex flex-1 flex-col p-6">
                     {/* Guest + duration */}
                     <div className="flex items-center justify-between gap-3">
-                      <p className="text-[13px] font-semibold text-[#111827]">{episode.guest}</p>
+                      <p className="text-[14px] font-semibold text-[#1e3a4f]">{episode.guest}</p>
                       <span className="shrink-0 text-[12px] text-[#6b7280]">{episode.duration}</span>
                     </div>
 
@@ -181,16 +181,15 @@ export default function PodcastPage() {
                       {episode.published}
                     </p>
 
-                    {/* Title with play icon */}
+                    {/* Title */}
                     <a href={episode.url} target="_blank" rel="noreferrer">
-                      <h3 className="mt-1.5 flex gap-2 text-[15px] font-semibold leading-[1.4] text-[#111827] transition-colors duration-300 hover:text-[#5a9a9b]">
-                        <span className="mt-0.5 shrink-0 text-[#111827]">▶</span>
+                      <h3 className="mt-3 text-[15px] font-semibold leading-[1.4] text-[#111827] transition-colors duration-300 hover:text-[#5a9a9b]">
                         {episode.title}
                       </h3>
                     </a>
 
                     {/* Description */}
-                    <p className="mt-2.5 line-clamp-3 text-[13px] leading-[1.75] text-[#6b7280]">
+                    <p className="mt-3 line-clamp-3 text-[13px] leading-[1.8] text-[#6b7280]">
                       {episode.description}
                     </p>
 
@@ -199,44 +198,34 @@ export default function PodcastPage() {
                       {episode.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="rounded-full border border-[#d1e9ea] px-3 py-1 text-[11px] font-medium text-[#5a9a9b]"
+                          className="rounded-full bg-[#e8edf3] px-3 py-1 text-[11px] font-medium text-[#1e3a4f]"
                         >
                           {tag}
                         </span>
                       ))}
                     </div>
 
-                    {/* Platform buttons — black SVG style */}
-                    <div className="mt-auto flex items-center gap-3 pt-5">
+                    {/* Platform buttons — pill style */}
+                    <div className="mt-auto flex flex-wrap items-center gap-2.5 pt-5">
                       <a
                         href={episode.url}
                         target="_blank"
                         rel="noreferrer"
-                        className="transition-opacity duration-300 hover:opacity-75"
                         aria-label="Watch on YouTube"
+                        className="flex items-center gap-2 rounded-full border border-[#d0d8e0] bg-white px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#1e3a4f] transition-all duration-200 hover:border-[#1e3a4f]/30 hover:bg-[#f0f4f8]"
                       >
-                        <Image
-                          src="/images/69c52506ac8138b8bae35b02_watch_on_youtube_mono_black.svg"
-                          alt="Watch on YouTube"
-                          width={130}
-                          height={36}
-                          className="h-9 w-auto"
-                        />
+                        <YouTubeIcon className="h-3.5 w-3.5 text-[#1e3a4f]" />
+                        YouTube
                       </a>
                       <a
                         href={episode.spotifyUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="transition-opacity duration-300 hover:opacity-75"
                         aria-label="Listen on Spotify"
+                        className="flex items-center gap-2 rounded-full border border-[#d0d8e0] bg-white px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#1e3a4f] transition-all duration-200 hover:border-[#1e3a4f]/30 hover:bg-[#f0f4f8]"
                       >
-                        <Image
-                          src="/images/69c52506c929d82c40aaa2d8_listen_on_spotify_mono_black.svg"
-                          alt="Listen on Spotify"
-                          width={130}
-                          height={36}
-                          className="h-9 w-auto"
-                        />
+                        <SpotifyIcon className="h-3.5 w-3.5 text-[#1e3a4f]" />
+                        Spotify
                       </a>
                     </div>
                   </div>
@@ -302,31 +291,6 @@ export default function PodcastPage() {
           </div>
         </section>
 
-        {/* ── Spotify Embed ────────────────────────────────────── */}
-        <section className="section-pad bg-[#07090c]">
-          <div className="section-shell">
-            <div className="grid gap-12 lg:grid-cols-[1fr_1.5fr] lg:items-center">
-              <div>
-                <p className="section-label">Also on Spotify</p>
-                <h2 className="font-serif text-[28px] leading-[1.2] tracking-[-0.015em] text-white md:text-[36px]">
-                  Listen wherever you are.
-                </h2>
-                <p className="mt-4 text-[14px] leading-[1.9] text-white/45">
-                  {spotifyShow.description}
-                </p>
-              </div>
-              <div className="overflow-hidden rounded-card border border-[rgba(255,248,235,0.07)]">
-                <iframe
-                  className="block h-[352px] w-full"
-                  src={spotifyShow.embedUrl}
-                  title={spotifyShow.title}
-                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                  loading="lazy"
-                />
-              </div>
-            </div>
-          </div>
-        </section>
 
       </main>
       <Footer />
