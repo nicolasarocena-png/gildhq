@@ -38,75 +38,86 @@ export default function PodcastPage() {
       <main>
 
         {/* ── Hero ─────────────────────────────────────────────── */}
-        <section className="relative min-h-[560px] overflow-hidden bg-[#07090c] pb-0 pt-20 md:min-h-[600px] md:pt-28">
-          {/* Background glow */}
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_15%_50%,rgba(90,154,155,0.07),transparent)]" />
+        <section className="relative overflow-hidden pt-[72px]">
+          {/* Background image — Frame 3.avif (dark navy) */}
+          <div className="absolute inset-0">
+            <Image
+              src="/images/GILD PODcats Banner_files/69c52b65285924258f9d85a3_890cd5a1c508425c19134bdc2771c8ad_Frame 3.avif"
+              alt=""
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover object-center"
+            />
+            {/* Left-to-right fade so text stays readable */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0a1520]/95 via-[#0a1520]/70 to-[#0a1520]/20" />
+            {/* Bottom fade into page bg */}
+            <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#07090c] to-transparent" />
+          </div>
 
           <div className="section-shell relative z-10">
-            <div className="grid items-end gap-0 lg:grid-cols-[1fr_380px] xl:grid-cols-[1fr_420px]">
+            <div className="grid min-h-[280px] items-center md:min-h-[320px] lg:grid-cols-[1fr_auto]">
 
               {/* Left: text */}
-              <div className="pb-16 md:pb-24 lg:pb-0 lg:py-20">
-                <p className="section-label mb-6">Podcast</p>
-                <h1 className="font-serif text-[38px] font-normal leading-[1.06] tracking-[-0.018em] text-white md:text-[54px] lg:text-[62px] xl:text-[70px]">
+              <div className="py-12 md:py-16 lg:py-20">
+                <h1 className="font-serif text-[36px] font-normal leading-[1.05] tracking-[-0.018em] text-white md:text-[50px] lg:text-[58px] xl:text-[64px]">
                   The GILD Podcast
                 </h1>
-                <p className="mt-5 max-w-[460px] text-[15px] leading-[1.85] text-white/50 md:text-[17px]">
+                <p className="mt-4 max-w-[520px] text-[14px] leading-[1.8] text-white/70 md:text-[16px]">
                   Conversations with leaders shaping the future of work,
                   leadership, and growth.
                 </p>
 
-                {/* Host line */}
-                <div className="mt-6 flex items-center gap-3">
-                  <div className="h-px w-5 bg-[#5a9a9b]/60" />
-                  <p className="text-[12px] font-medium uppercase tracking-[0.2em] text-white/40">
-                    Hosted by Gino Ferrand
-                  </p>
-                </div>
-
-                {/* Platform subscribe buttons */}
-                <div className="mt-10 flex flex-wrap items-center gap-4">
+                {/* Platform buttons using SVG images from gildhq.com */}
+                <div className="mt-8 flex flex-wrap items-center gap-5">
                   <a
                     href="https://www.youtube.com/@GILDhq"
                     target="_blank"
                     rel="noreferrer"
-                    className="flex items-center gap-2.5 border border-[rgba(255,255,255,0.12)] px-5 py-2.5 text-[11px] font-medium uppercase tracking-[0.18em] text-white/75 transition-all duration-300 hover:border-white/30 hover:text-white"
+                    className="transition-opacity duration-300 hover:opacity-80"
+                    aria-label="Watch on YouTube"
                   >
-                    <YouTubeIcon className="h-4 w-4 text-[#FF0000]" />
-                    Subscribe on YouTube
+                    <Image
+                      src="/images/GILD PODcats Banner_files/69c4671ae1a5ade096c2e4c0_watch_on_youtube.svg"
+                      alt="Watch on YouTube"
+                      width={160}
+                      height={44}
+                      className="h-11 w-auto"
+                    />
                   </a>
                   <a
                     href={spotifyShow.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex items-center gap-2.5 border border-[rgba(255,255,255,0.12)] px-5 py-2.5 text-[11px] font-medium uppercase tracking-[0.18em] text-white/75 transition-all duration-300 hover:border-white/30 hover:text-white"
+                    className="transition-opacity duration-300 hover:opacity-80"
+                    aria-label="Listen on Spotify"
                   >
-                    <SpotifyIcon className="h-4 w-4 text-[#1DB954]" />
-                    Follow on Spotify
+                    <Image
+                      src="/images/GILD PODcats Banner_files/69c52391c4cd90002297f65a_listen_on_spotify-button-white.svg"
+                      alt="Listen on Spotify"
+                      width={160}
+                      height={44}
+                      className="h-11 w-auto"
+                    />
                   </a>
                 </div>
               </div>
 
-              {/* Right: host photo flush to bottom */}
-              <div className="hidden self-end overflow-hidden lg:block">
-                <div className="relative" style={{ aspectRatio: "3/4", maxHeight: "520px" }}>
+              {/* Right: host photo flush to bottom-right */}
+              <div className="hidden self-end lg:block">
+                <div className="relative" style={{ width: "340px", height: "310px" }}>
                   <Image
-                    src="/images/69c443191b1e58b9ce64b73c_b90b69231f2ce13203919586724fa1ee_bEdwXXOIlkda412XJUjib.avif"
+                    src="/images/GILD PODcats Banner_files/69c57c5d68047b5eac9380c9_7c28024a6ea89ff6008e1946a5b2533f_Frame 6 (1).avif"
                     alt="Gino Ferrand — Host of The GILD Podcast"
                     fill
-                    sizes="420px"
-                    className="object-cover object-top [filter:saturate(0.85)]"
+                    sizes="340px"
+                    className="object-contain object-bottom"
                     priority
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#07090c] via-transparent to-transparent" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#07090c]/30 to-transparent" />
                 </div>
               </div>
             </div>
           </div>
-
-          {/* Bottom fade */}
-          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#07090c] to-transparent" />
         </section>
 
         {/* ── Featured Episode ─────────────────────────────────── */}
