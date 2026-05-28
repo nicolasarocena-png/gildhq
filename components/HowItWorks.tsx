@@ -7,7 +7,7 @@ const steps = [
   {
     number: "01",
     title: "Apply to the Network",
-    body: "We review every application personally. Two-week response."
+    body: "We review every application personally."
   },
   {
     number: "02",
@@ -18,7 +18,7 @@ const steps = [
     number: "03",
     title: "Get Introduced to the Right People",
     body: "You don't browse a directory. You don't send cold messages. You tell us what you're working on. We find the right person.",
-    note: "Sara, our Community Manager, reaches out periodically with what might be useful."
+    note: undefined
   },
   {
     number: "04",
