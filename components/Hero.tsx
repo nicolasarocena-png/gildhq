@@ -105,9 +105,9 @@ export function Hero() {
 
       {/* Logo strip — visible on load, no scroll needed */}
       <div ref={logosRef} className="relative z-10 border-t border-white/[0.07] bg-black/20 backdrop-blur-sm">
-        <div className="mx-auto max-w-[1600px] px-6 py-5 md:px-12 lg:px-16 xl:px-20 2xl:px-28">
-          <p className="mb-4 text-[13px] font-medium uppercase tracking-[0.14em] text-white/55">
-            Where leaders from these companies come to think and connect
+        <div className="mx-auto max-w-[1600px] px-6 py-6 md:px-12 lg:px-16 xl:px-20 2xl:px-28">
+          <p className="mb-5 text-center text-[13px] font-medium uppercase tracking-[0.14em] text-white/55">
+            Companies whose leadership is attending GILD events
           </p>
           <div
             className="overflow-hidden"
@@ -130,10 +130,10 @@ export function Hero() {
                       alt={logo.name}
                       width={96}
                       height={22}
-                      className="max-h-[18px] w-auto object-contain opacity-50"
+                      className="max-h-[18px] w-auto object-contain opacity-70 [filter:brightness(0)_invert(1)]"
                     />
                   ) : (
-                    <span className="text-[10px] font-medium uppercase tracking-[0.14em] text-white/30">
+                    <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-white/55">
                       {logo.name}
                     </span>
                   )}
