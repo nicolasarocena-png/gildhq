@@ -178,10 +178,10 @@ export function WhyGildExists() {
 
               {/* Text */}
               <div className="p-6">
-                <h3 className="text-[13px] font-bold uppercase tracking-[0.08em] leading-snug text-white">
+                <h3 className="text-[14px] font-bold uppercase tracking-[0.08em] leading-snug text-white">
                   {title}
                 </h3>
-                <p className="mt-3 text-[13px] leading-[1.8] text-white/55">{body}</p>
+                <p className="mt-3 text-[14px] leading-[1.8] text-white/55">{body}</p>
               </div>
             </div>
           ))}
@@ -192,14 +192,14 @@ export function WhyGildExists() {
 
         <div className="mt-8 grid gap-8 sm:grid-cols-2 sm:gap-10 lg:gap-20">
           <div ref={fitRef}>
-            <p className="text-[10px] font-medium uppercase tracking-[0.32em] text-[#5a9a9b]">
+            <p className="text-[12px] font-medium uppercase tracking-[0.24em] text-[#5a9a9b]">
               For
             </p>
             <ul className="mt-5 space-y-3">
               {fitItems.map((item) => (
                 <li
                   key={item}
-                  className="flex items-baseline gap-4 text-[13px] leading-[1.72] text-white/72"
+                  className="flex items-baseline gap-4 text-[15px] leading-[1.72] text-white/72"
                 >
                   <span className="mt-[9px] h-px w-4 shrink-0 bg-[#5a9a9b]/50" />
                   {item}
@@ -209,14 +209,14 @@ export function WhyGildExists() {
           </div>
 
           <div ref={notFitRef}>
-            <p className="text-[10px] font-medium uppercase tracking-[0.32em] text-white/28">
+            <p className="text-[12px] font-medium uppercase tracking-[0.24em] text-white/28">
               Not for
             </p>
             <ul className="mt-5 space-y-3">
               {notFitItems.map((item) => (
                 <li
                   key={item}
-                  className="flex items-baseline gap-4 text-[13px] leading-[1.72] text-white/32"
+                  className="flex items-baseline gap-4 text-[15px] leading-[1.72] text-white/32"
                 >
                   <span className="mt-[9px] h-px w-4 shrink-0 bg-white/12" />
                   {item}

@@ -36,23 +36,23 @@ function EventRow({ date, title, location, href }: EventData) {
   const inner = (
     <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-8">
       <div className="flex flex-col gap-1.5 sm:flex-row sm:items-baseline sm:gap-7">
-        <p className={`w-[140px] shrink-0 text-[10px] font-medium uppercase tracking-[0.28em] transition-colors duration-200 ${
+        <p className={`w-[160px] shrink-0 text-[12px] font-medium uppercase tracking-[0.22em] transition-colors duration-200 ${
           href ? "text-[#5a9a9b] group-hover:text-[#6db0b1]" : "text-[#5a9a9b]"
         }`}>
           {date}
         </p>
-        <p className={`font-serif text-[17px] leading-snug transition-colors duration-200 ${
+        <p className={`font-serif text-[19px] leading-snug transition-colors duration-200 ${
           href ? "text-white/85 group-hover:text-white" : "text-white/85"
         }`}>
           {title}
           {href && (
-            <span className="ml-3 inline-block translate-x-0 text-[13px] text-[#5a9a9b] opacity-0 transition-all duration-200 group-hover:translate-x-1 group-hover:opacity-100">
+            <span className="ml-3 inline-block translate-x-0 text-[15px] text-[#5a9a9b] opacity-0 transition-all duration-200 group-hover:translate-x-1 group-hover:opacity-100">
               →
             </span>
           )}
         </p>
       </div>
-      <p className={`shrink-0 text-[11px] uppercase tracking-[0.18em] transition-colors duration-200 ${
+      <p className={`shrink-0 text-[13px] uppercase tracking-[0.14em] transition-colors duration-200 ${
         href ? "text-white/32 group-hover:text-white/48" : "text-white/32"
       }`}>
         {location}
@@ -78,12 +78,12 @@ function EventRow({ date, title, location, href }: EventData) {
       className="flex flex-col gap-1 border-b border-[rgba(255,248,235,0.06)] py-5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-8"
     >
       <div className="flex flex-col gap-1.5 sm:flex-row sm:items-baseline sm:gap-7">
-        <p className="w-[140px] shrink-0 text-[10px] font-medium uppercase tracking-[0.28em] text-[#5a9a9b]">
+        <p className="w-[160px] shrink-0 text-[12px] font-medium uppercase tracking-[0.22em] text-[#5a9a9b]">
           {date}
         </p>
-        <p className="font-serif text-[17px] leading-snug text-white/85">{title}</p>
+        <p className="font-serif text-[19px] leading-snug text-white/85">{title}</p>
       </div>
-      <p className="shrink-0 text-[11px] uppercase tracking-[0.18em] text-white/32">{location}</p>
+      <p className="shrink-0 text-[13px] uppercase tracking-[0.14em] text-white/32">{location}</p>
     </div>
   );
 }
@@ -188,7 +188,7 @@ export function PastForums() {
         <button
           type="button"
           onClick={toggle}
-          className="mt-8 flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.22em] text-white/40 transition-colors duration-300 hover:text-white/75"
+          className="mt-8 flex items-center gap-3 text-[13px] font-medium uppercase tracking-[0.18em] text-white/40 transition-colors duration-300 hover:text-white/75"
         >
           <span
             className="inline-block text-[#5a9a9b] transition-transform duration-300"

@@ -87,7 +87,7 @@ export function Hero() {
           </h1>
           <p
             ref={subRef}
-            className="mt-6 max-w-[480px] text-[14px] leading-[1.9] text-white/60 md:text-[16px] lg:text-[17px] 2xl:max-w-[560px] 2xl:text-[19px]"
+            className="mt-6 max-w-[480px] text-[15px] leading-[1.9] text-white/60 md:text-[16px] lg:text-[17px] 2xl:max-w-[560px] 2xl:text-[19px]"
           >
             GILD is a curated network of senior AI and engineering leaders, strategists,
             and technical operators. Join the network to be in our next AI Forum.
@@ -106,7 +106,7 @@ export function Hero() {
       {/* Logo strip — visible on load, no scroll needed */}
       <div ref={logosRef} className="relative z-10 border-t border-white/[0.07] bg-black/20 backdrop-blur-sm">
         <div className="mx-auto max-w-[1600px] px-6 py-6 md:px-12 lg:px-16 xl:px-20 2xl:px-28">
-          <p className="mb-5 text-center text-[13px] font-medium uppercase tracking-[0.14em] text-white/55">
+          <p className="mb-5 text-center text-[14px] font-medium uppercase tracking-[0.12em] text-white/55">
             Companies whose leadership is attending GILD events
           </p>
           <div

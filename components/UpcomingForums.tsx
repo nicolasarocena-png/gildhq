@@ -94,22 +94,22 @@ export function UpcomingForums() {
                 {/* Left: content */}
                 <div className="min-w-0 flex-1">
                   {/* Date + time */}
-                  <p className="mb-2 text-[12px] font-medium text-white/60">
+                  <p className="mb-2 text-[13px] font-medium text-white/60">
                     {event.date}, {event.meta}
                   </p>
 
                   {/* Title */}
-                  <p className="mb-3 text-[15px] font-bold leading-[1.4] text-white md:text-[16px]">
+                  <p className="mb-3 text-[16px] font-bold leading-[1.4] text-white md:text-[17px]">
                     {event.title}
                   </p>
 
                   {/* Description */}
-                  <p className="mb-3 line-clamp-2 text-[13px] leading-[1.65] text-white/55">
+                  <p className="mb-3 line-clamp-2 text-[14px] leading-[1.65] text-white/60">
                     {event.description}
                   </p>
 
                   {/* Location */}
-                  <div className="mb-5 flex items-center gap-1.5 text-[12px] text-white/45">
+                  <div className="mb-5 flex items-center gap-1.5 text-[13px] text-white/45">
                     <PinIcon />
                     <span>{event.locationFull}</span>
                   </div>

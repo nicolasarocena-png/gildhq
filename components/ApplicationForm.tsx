@@ -27,7 +27,7 @@ const initialState: FormState = {
 };
 
 const inputClass =
-  "w-full rounded-none border border-[rgba(255,248,235,0.1)] bg-[#0d1a26] px-4 py-3 text-[13px] text-white/85 placeholder:text-white/25 focus:border-[rgba(90,154,155,0.5)] focus:outline focus:outline-2 focus:outline-[rgba(90,154,155,0.12)]";
+  "w-full rounded-none border border-[rgba(255,248,235,0.1)] bg-[#0d1a26] px-4 py-3 text-[15px] text-white/85 placeholder:text-white/25 focus:border-[rgba(90,154,155,0.5)] focus:outline focus:outline-2 focus:outline-[rgba(90,154,155,0.12)]";
 
 export function ApplicationForm() {
   const [form, setForm] = useState<FormState>(initialState);
@@ -87,7 +87,7 @@ export function ApplicationForm() {
             <h2 className="font-serif text-[32px] leading-[1.1] tracking-[-0.015em] text-white md:text-[42px] lg:text-[48px]">
               Apply to the network.
             </h2>
-            <p className="mt-6 text-[14px] leading-[1.9] text-white/50">
+            <p className="mt-6 text-[15px] leading-[1.9] text-white/50">
               We review every application personally. You&apos;ll hear back within two
               weeks.
             </p>
@@ -99,7 +99,7 @@ export function ApplicationForm() {
                 <h3 className="font-serif text-3xl leading-[1.2] text-white/90">
                   Thanks. We&apos;ll be in touch within two weeks.
                 </h3>
-                <p className="mt-6 text-[14px] leading-[1.9] text-white/50">
+                <p className="mt-6 text-[15px] leading-[1.9] text-white/50">
                   Our team will review your application and follow up personally if
                   there&apos;s a fit for the network.
                 </p>
@@ -107,7 +107,7 @@ export function ApplicationForm() {
             ) : (
               <form onSubmit={submit} className="grid gap-5">
                 <div className="grid gap-5 md:grid-cols-2">
-                  <label className="text-[11px] font-medium uppercase tracking-[0.1em] text-white/45">
+                  <label className="text-[13px] font-medium uppercase tracking-[0.08em] text-white/45">
                     First Name
                     <input
                       className={`${inputClass} mt-2`}
@@ -116,7 +116,7 @@ export function ApplicationForm() {
                       onChange={(event) => update("firstName", event.target.value)}
                     />
                   </label>
-                  <label className="text-[11px] font-medium uppercase tracking-[0.1em] text-white/45">
+                  <label className="text-[13px] font-medium uppercase tracking-[0.08em] text-white/45">
                     Last Name
                     <input
                       className={`${inputClass} mt-2`}
@@ -127,7 +127,7 @@ export function ApplicationForm() {
                   </label>
                 </div>
 
-                <label className="text-[11px] font-medium uppercase tracking-[0.1em] text-white/45">
+                <label className="text-[13px] font-medium uppercase tracking-[0.08em] text-white/45">
                   Job Title
                   <input
                     className={`${inputClass} mt-2`}
@@ -137,7 +137,7 @@ export function ApplicationForm() {
                   />
                 </label>
 
-                <label className="text-[11px] font-medium uppercase tracking-[0.1em] text-white/45">
+                <label className="text-[13px] font-medium uppercase tracking-[0.08em] text-white/45">
                   Work Email
                   <input
                     className={`${inputClass} mt-2`}
@@ -148,7 +148,7 @@ export function ApplicationForm() {
                   />
                 </label>
 
-                <label className="text-[11px] font-medium uppercase tracking-[0.1em] text-white/45">
+                <label className="text-[13px] font-medium uppercase tracking-[0.08em] text-white/45">
                   Company
                   <input
                     className={`${inputClass} mt-2`}
@@ -158,7 +158,7 @@ export function ApplicationForm() {
                   />
                 </label>
 
-                <label className="text-[11px] font-medium uppercase tracking-[0.1em] text-white/45">
+                <label className="text-[13px] font-medium uppercase tracking-[0.08em] text-white/45">
                   LinkedIn URL
                   <input
                     className={`${inputClass} mt-2`}
@@ -169,7 +169,7 @@ export function ApplicationForm() {
                   />
                 </label>
 
-                <label className="text-[11px] font-medium uppercase tracking-[0.1em] text-white/45">
+                <label className="text-[13px] font-medium uppercase tracking-[0.08em] text-white/45">
                   Which community?
                   <select
                     className={`${inputClass} mt-2`}
@@ -182,7 +182,7 @@ export function ApplicationForm() {
                   </select>
                 </label>
 
-                <label className="text-[11px] font-medium uppercase tracking-[0.1em] text-white/45">
+                <label className="text-[13px] font-medium uppercase tracking-[0.08em] text-white/45">
                   What&apos;s your biggest leadership challenge right now?
                   <textarea
                     className={`${inputClass} mt-2 min-h-32 resize-y leading-[1.8]`}

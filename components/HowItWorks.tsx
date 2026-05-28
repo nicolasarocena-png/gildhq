@@ -120,9 +120,9 @@ export function HowItWorks() {
                 <h2 className="mt-8 font-serif text-2xl leading-[1.25] text-white/90">
                   {step.title}
                 </h2>
-                <p className="mt-4 text-[14px] leading-[1.85] text-white/55">{step.body}</p>
+                <p className="mt-4 text-[15px] leading-[1.85] text-white/55">{step.body}</p>
                 {step.note ? (
-                  <p className="mt-4 text-[13px] italic leading-[1.7] text-white/35">{step.note}</p>
+                  <p className="mt-4 text-[14px] italic leading-[1.7] text-white/35">{step.note}</p>
                 ) : null}
               </article>
             ))}
@@ -196,7 +196,7 @@ export function HowItWorks() {
                       {step.body}
                     </p>
                     {step.note ? (
-                      <p className="mt-6 max-w-xl text-[13px] italic leading-[1.75] text-white/35">
+                      <p className="mt-6 max-w-xl text-[14px] italic leading-[1.75] text-white/35">
                         {step.note}
                       </p>
                     ) : null}

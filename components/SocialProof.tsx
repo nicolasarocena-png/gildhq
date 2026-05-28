@@ -74,7 +74,7 @@ export function SocialProof() {
             <article
               key={testimonial.name}
               data-card-key={testimonial.name}
-              className={`rounded-card border border-[rgba(255,248,235,0.06)] bg-[#0f1d2a] p-8 shadow-[0_2px_24px_rgba(0,0,0,0.45)] transition-all duration-700 hover:-translate-y-0.5 hover:border-[rgba(255,248,235,0.11)] hover:shadow-[0_8px_36px_rgba(0,0,0,0.55)] ${index >= 4 ? "hidden md:block" : ""} ${
+              className={`rounded-card border border-[rgba(255,248,235,0.06)] bg-[#0f1d2a] p-9 shadow-[0_2px_24px_rgba(0,0,0,0.45)] transition-all duration-700 hover:-translate-y-0.5 hover:border-[rgba(255,248,235,0.11)] hover:shadow-[0_8px_36px_rgba(0,0,0,0.55)] ${index >= 4 ? "hidden md:block" : ""} ${
                 visibleCards.has(testimonial.name)
                   ? "translate-y-0 opacity-100"
                   : "translate-y-3 opacity-0"
@@ -86,22 +86,22 @@ export function SocialProof() {
                   <Image
                     src={testimonial.photoUrl}
                     alt={testimonial.name}
-                    width={64}
-                    height={64}
+                    width={72}
+                    height={72}
                     unoptimized
-                    className="h-16 w-16 shrink-0 rounded-full object-cover opacity-90 [filter:saturate(0.85)]"
+                    className="h-[72px] w-[72px] shrink-0 rounded-full object-cover opacity-90 [filter:saturate(0.85)]"
                   />
                 ) : (
-                  <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-[#2e2820] text-[15px] font-medium text-white/60">
+                  <div className="flex h-[72px] w-[72px] shrink-0 items-center justify-center rounded-full bg-[#2e2820] text-[16px] font-medium text-white/60">
                     {initials(testimonial.name)}
                   </div>
                 )}
                 <div>
-                  <p className="text-[15px] font-medium text-white/90">{testimonial.name}</p>
-                  <p className="mt-1 text-[13px] leading-5 text-white/45">{testimonial.caption}</p>
+                  <p className="text-[16px] font-medium text-white/90">{testimonial.name}</p>
+                  <p className="mt-1 text-[14px] leading-[1.5] text-white/50">{testimonial.caption}</p>
                 </div>
               </div>
-              <p className="mt-8 text-[16px] leading-[1.85] text-white/70">
+              <p className="mt-8 text-[17px] leading-[1.85] text-white/72">
                 &quot;{testimonial.quote}&quot;
               </p>
             </article>

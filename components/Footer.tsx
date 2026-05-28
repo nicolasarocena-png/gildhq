@@ -75,7 +75,7 @@ export function Footer() {
                 className="object-contain object-left opacity-80"
               />
             </a>
-            <p className="mt-5 max-w-xs text-[13px] leading-[1.75] text-white/40">
+            <p className="mt-5 max-w-xs text-[15px] leading-[1.75] text-white/40">
               An exclusive space where senior leaders come together to connect.
             </p>
             <div className="mt-5 flex items-center gap-5">
@@ -101,7 +101,7 @@ export function Footer() {
           </div>
 
           <div className="flex flex-col gap-5 md:items-end">
-            <nav className="flex flex-wrap items-center gap-x-4 gap-y-3 text-[12px] text-white/35">
+            <nav className="flex flex-wrap items-center gap-x-4 gap-y-3 text-[14px] text-white/35">
               <a href="#" className="transition-colors duration-300 hover:text-white/65">
                 Privacy
               </a>
@@ -139,7 +139,7 @@ export function Footer() {
             className="mb-6 h-px bg-[rgba(255,248,235,0.06)]"
             style={{ transformOrigin: "center center" }}
           />
-          <p className="text-[11px] uppercase tracking-[0.1em] text-white/20">&copy; 2026 Gild</p>
+          <p className="text-[13px] uppercase tracking-[0.08em] text-white/20">&copy; 2026 Gild</p>
         </div>
       </div>
     </footer>
