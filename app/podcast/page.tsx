@@ -10,112 +10,205 @@ export const metadata: Metadata = {
     "Candid conversations with founders, executives, and senior operators about AI, leadership, and building real companies. Hosted by Gino Ferrand."
 };
 
+/* ── YouTube SVG icon ─────────────────────────────────────────── */
+function YouTubeIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden>
+      <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z" />
+    </svg>
+  );
+}
+
+/* ── Spotify SVG icon ─────────────────────────────────────────── */
+function SpotifyIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden>
+      <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.52 17.28c-.24.36-.66.48-1.02.24-2.82-1.74-6.36-2.1-10.56-1.14-.42.12-.78-.18-.9-.54-.12-.42.18-.78.54-.9 4.56-1.02 8.52-.6 11.64 1.32.42.18.48.66.3 1.02zm1.44-3.3c-.3.42-.84.6-1.26.3-3.24-1.98-8.16-2.58-11.94-1.38-.48.12-.96-.12-1.08-.6-.12-.48.12-.96.6-1.08 4.38-1.32 9.78-.66 13.5 1.62.36.18.54.78.18 1.14zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.3c-.6.18-1.2-.18-1.38-.72-.18-.6.18-1.2.72-1.38 4.26-1.26 11.28-1.02 15.72 1.62.54.3.72 1.02.42 1.56-.3.42-1.02.6-1.56.3z" />
+    </svg>
+  );
+}
+
 export default function PodcastPage() {
+  const featured = youtubeEpisodes[0];
+  const rest = youtubeEpisodes.slice(1);
+
   return (
     <>
       <Navbar />
       <main>
 
         {/* ── Hero ─────────────────────────────────────────────── */}
-        <section className="relative overflow-hidden bg-[#07090c] pb-0 pt-20 md:pt-28">
-          {/* Subtle teal glow top-left */}
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_0%_0%,rgba(90,154,155,0.08),transparent)]" />
+        <section className="relative min-h-[560px] overflow-hidden bg-[#07090c] pb-0 pt-20 md:min-h-[600px] md:pt-28">
+          {/* Background glow */}
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_15%_50%,rgba(90,154,155,0.07),transparent)]" />
 
           <div className="section-shell relative z-10">
-            <div className="grid items-end gap-12 lg:grid-cols-[1fr_380px] xl:grid-cols-[1fr_440px]">
+            <div className="grid items-end gap-0 lg:grid-cols-[1fr_380px] xl:grid-cols-[1fr_420px]">
 
               {/* Left: text */}
-              <div className="pb-16 md:pb-24">
-                <p className="section-label">Podcast</p>
-                <h1 className="font-serif text-[40px] font-normal leading-[1.08] tracking-[-0.018em] text-white md:text-[54px] lg:text-[64px]">
+              <div className="pb-16 md:pb-24 lg:pb-0 lg:py-20">
+                <p className="section-label mb-6">Podcast</p>
+                <h1 className="font-serif text-[38px] font-normal leading-[1.06] tracking-[-0.018em] text-white md:text-[54px] lg:text-[62px] xl:text-[70px]">
                   The GILD Podcast
                 </h1>
-                <p className="mt-5 max-w-[500px] text-[16px] leading-[1.8] text-white/55 md:text-[18px]">
+                <p className="mt-5 max-w-[460px] text-[15px] leading-[1.85] text-white/50 md:text-[17px]">
                   Conversations with leaders shaping the future of work,
                   leadership, and growth.
                 </p>
-                <p className="mt-4 text-[12px] font-medium uppercase tracking-[0.22em] text-white/35">
-                  Hosted by Gino Ferrand
-                </p>
 
-                {/* Platform badges */}
-                <div className="mt-10 flex flex-wrap items-center gap-5">
+                {/* Host line */}
+                <div className="mt-6 flex items-center gap-3">
+                  <div className="h-px w-5 bg-[#5a9a9b]/60" />
+                  <p className="text-[12px] font-medium uppercase tracking-[0.2em] text-white/40">
+                    Hosted by Gino Ferrand
+                  </p>
+                </div>
+
+                {/* Platform subscribe buttons */}
+                <div className="mt-10 flex flex-wrap items-center gap-4">
                   <a
                     href="https://www.youtube.com/@GILDhq"
                     target="_blank"
                     rel="noreferrer"
-                    className="transition-opacity duration-300 hover:opacity-75"
-                    aria-label="Subscribe on YouTube"
+                    className="flex items-center gap-2.5 border border-[rgba(255,255,255,0.12)] px-5 py-2.5 text-[11px] font-medium uppercase tracking-[0.18em] text-white/75 transition-all duration-300 hover:border-white/30 hover:text-white"
                   >
-                    <Image
-                      src="/images/69c52616133b590e75afa227_subscribe_on_youtube.svg"
-                      alt="Subscribe on YouTube"
-                      width={160}
-                      height={40}
-                      className="h-9 w-auto"
-                    />
+                    <YouTubeIcon className="h-4 w-4 text-[#FF0000]" />
+                    Subscribe on YouTube
                   </a>
                   <a
                     href={spotifyShow.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="transition-opacity duration-300 hover:opacity-75"
-                    aria-label="Follow on Spotify"
+                    className="flex items-center gap-2.5 border border-[rgba(255,255,255,0.12)] px-5 py-2.5 text-[11px] font-medium uppercase tracking-[0.18em] text-white/75 transition-all duration-300 hover:border-white/30 hover:text-white"
                   >
-                    <Image
-                      src="/images/69c526166b38b8ba821a58db_follow_on_spotify.svg"
-                      alt="Follow on Spotify"
-                      width={144}
-                      height={40}
-                      className="h-9 w-auto"
-                    />
+                    <SpotifyIcon className="h-4 w-4 text-[#1DB954]" />
+                    Follow on Spotify
                   </a>
                 </div>
               </div>
 
-              {/* Right: podcast cover image flush to bottom */}
-              <div className="hidden overflow-hidden rounded-t-[6px] lg:block"
-                style={{ aspectRatio: "3/4" }}>
-                <div className="relative h-full w-full">
+              {/* Right: host photo flush to bottom */}
+              <div className="hidden self-end overflow-hidden lg:block">
+                <div className="relative" style={{ aspectRatio: "3/4", maxHeight: "520px" }}>
                   <Image
                     src="/images/69c443191b1e58b9ce64b73c_b90b69231f2ce13203919586724fa1ee_bEdwXXOIlkda412XJUjib.avif"
-                    alt="The GILD Podcast"
+                    alt="Gino Ferrand — Host of The GILD Podcast"
                     fill
-                    sizes="440px"
-                    className="object-cover [filter:saturate(0.85)]"
-                    style={{ objectPosition: "center top" }}
+                    sizes="420px"
+                    className="object-cover object-top [filter:saturate(0.85)]"
                     priority
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#07090c]/60 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#07090c] via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#07090c]/30 to-transparent" />
                 </div>
               </div>
             </div>
           </div>
+
+          {/* Bottom fade */}
+          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#07090c] to-transparent" />
         </section>
 
-        {/* ── Episodes ─────────────────────────────────────────── */}
+        {/* ── Featured Episode ─────────────────────────────────── */}
+        <section className="bg-[#07090c] pb-0 pt-4">
+          <div className="section-shell">
+            <div className="h-px bg-[rgba(255,248,235,0.07)]" />
+            <div className="py-14 md:py-18">
+              <p className="section-label mb-8">Latest Episode</p>
+              <a
+                href={featured.url}
+                target="_blank"
+                rel="noreferrer"
+                className="group grid gap-8 lg:grid-cols-[1fr_520px] lg:items-center"
+              >
+                {/* Text */}
+                <div>
+                  <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-white/35">
+                    {featured.published} &nbsp;·&nbsp; {featured.duration}
+                  </p>
+                  <h2 className="mt-4 font-serif text-[26px] leading-[1.15] tracking-[-0.015em] text-white transition-colors duration-300 group-hover:text-[#6db0b1] md:text-[34px] lg:text-[40px]">
+                    {featured.title}
+                  </h2>
+                  <div className="mt-5 flex items-center gap-3">
+                    <div className="h-px w-4 shrink-0 bg-[#5a9a9b]/50" />
+                    <div>
+                      <p className="text-[13px] font-medium text-white/80">{featured.guest}</p>
+                      <p className="text-[12px] text-white/38">{featured.guestTitle}</p>
+                    </div>
+                  </div>
+                  <p className="mt-5 max-w-[440px] text-[14px] leading-[1.85] text-white/45">
+                    {featured.description}
+                  </p>
+                  {/* Tags */}
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {featured.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="border border-[rgba(90,154,155,0.28)] px-3 py-1 text-[10px] font-medium uppercase tracking-[0.18em] text-[#5a9a9b]/70"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  {/* Watch link */}
+                  <div className="mt-8 flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center border border-white/15 transition-colors duration-300 group-hover:border-white/35">
+                      <YouTubeIcon className="h-4 w-4 text-white/60 group-hover:text-white" />
+                    </div>
+                    <span className="text-[11px] font-medium uppercase tracking-[0.2em] text-white/45 transition-colors duration-300 group-hover:text-white/80">
+                      Watch on YouTube
+                    </span>
+                  </div>
+                </div>
+
+                {/* Thumbnail */}
+                <div className="relative aspect-video overflow-hidden rounded-card border border-[rgba(255,248,235,0.07)] bg-[#0a0806]">
+                  <Image
+                    src={`https://img.youtube.com/vi/${featured.videoId}/maxresdefault.jpg`}
+                    alt={featured.title}
+                    fill
+                    sizes="(min-width: 1024px) 520px, 100vw"
+                    className="object-cover opacity-90 transition-all duration-500 group-hover:scale-[1.02] group-hover:opacity-100 [filter:saturate(0.85)]"
+                    unoptimized
+                  />
+                  {/* Play overlay */}
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/90 shadow-lg">
+                      <svg width="18" height="20" viewBox="0 0 18 20" fill="none" aria-hidden>
+                        <path d="M2 1.5L16 10L2 18.5V1.5Z" fill="#07090c" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div className="h-px bg-[rgba(255,248,235,0.07)]" />
+          </div>
+        </section>
+
+        {/* ── All Episodes ─────────────────────────────────────── */}
         <section className="section-pad bg-[#07090c]">
           <div className="section-shell">
-            <div className="mb-12 flex items-end justify-between">
-              <p className="section-label mb-0">Episodes</p>
+            <div className="mb-10 flex items-end justify-between">
+              <p className="section-label mb-0">All Episodes</p>
               <a
                 href="https://www.youtube.com/@GILDhq"
                 target="_blank"
                 rel="noreferrer"
-                className="text-[11px] font-medium uppercase tracking-[0.2em] text-[#5a9a9b] transition-colors duration-300 hover:text-white/80"
+                className="text-[11px] font-medium uppercase tracking-[0.2em] text-[#5a9a9b] transition-colors duration-300 hover:text-white/70"
               >
                 View all →
               </a>
             </div>
 
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {youtubeEpisodes.map((episode) => (
+            <div className="grid gap-px border border-[rgba(255,248,235,0.07)] bg-[rgba(255,248,235,0.07)] sm:grid-cols-2 lg:grid-cols-3">
+              {rest.map((episode) => (
                 <a
                   key={episode.videoId}
                   href={episode.url}
                   target="_blank"
                   rel="noreferrer"
-                  className="group flex flex-col overflow-hidden rounded-card border border-[rgba(255,248,235,0.07)] bg-[#0c0a08] transition-all duration-300 hover:border-[rgba(255,248,235,0.14)] hover:shadow-[0_8px_40px_rgba(0,0,0,0.5)]"
+                  className="group flex flex-col bg-[#07090c] transition-colors duration-300 hover:bg-[#0c1319]"
                 >
                   {/* Thumbnail */}
                   <div className="relative aspect-video overflow-hidden bg-[#0a0806]">
@@ -123,50 +216,62 @@ export default function PodcastPage() {
                       src={`https://img.youtube.com/vi/${episode.videoId}/maxresdefault.jpg`}
                       alt={episode.title}
                       fill
-                      sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                      className="object-cover opacity-90 transition-all duration-500 group-hover:scale-[1.03] group-hover:opacity-100 [filter:saturate(0.85)]"
+                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                      className="object-cover opacity-85 transition-all duration-500 group-hover:scale-[1.03] group-hover:opacity-100 [filter:saturate(0.82)]"
                       unoptimized
                     />
-                    {/* Play button overlay */}
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/25 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/90">
-                        <svg width="16" height="18" viewBox="0 0 16 18" fill="none" aria-hidden>
-                          <path d="M2 1.5L14 9L2 16.5V1.5Z" fill="#080604" />
+                    {/* Play overlay */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                      <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white/85">
+                        <svg width="14" height="16" viewBox="0 0 14 16" fill="none" aria-hidden>
+                          <path d="M1.5 1L12.5 8L1.5 15V1Z" fill="#07090c" />
                         </svg>
                       </div>
                     </div>
                   </div>
 
-                  {/* Meta */}
-                  <div className="flex flex-1 flex-col p-5">
-                    <p className="text-[10px] font-medium uppercase tracking-[0.24em] text-white/35">
+                  {/* Content */}
+                  <div className="flex flex-1 flex-col p-6">
+                    {/* Guest + duration row */}
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <p className="text-[13px] font-medium text-white/80">{episode.guest}</p>
+                        <p className="mt-0.5 text-[11px] text-white/35">{episode.guestTitle}</p>
+                      </div>
+                      <span className="shrink-0 text-[11px] font-medium text-white/30">
+                        {episode.duration}
+                      </span>
+                    </div>
+
+                    {/* Date */}
+                    <p className="mt-4 text-[10px] font-medium uppercase tracking-[0.22em] text-white/30">
                       {episode.published}
                     </p>
-                    <h3 className="mt-2.5 font-serif text-[16px] leading-[1.38] text-white/88 transition-colors duration-300 group-hover:text-white">
+
+                    {/* Title */}
+                    <h3 className="mt-2 font-serif text-[17px] leading-[1.35] tracking-[-0.01em] text-white/88 transition-colors duration-300 group-hover:text-white">
                       {episode.title}
                     </h3>
-                    {/* Guest */}
-                    <div className="mt-4 flex items-center gap-2.5">
-                      <div className="h-px w-4 shrink-0 bg-[#5a9a9b]/50" />
-                      <div>
-                        <p className="text-[12px] font-medium text-white/70">{episode.guest}</p>
-                        <p className="text-[11px] text-white/35">{episode.guestTitle}</p>
-                      </div>
-                    </div>
-                    {/* Tags */}
-                    <div className="mt-4 flex flex-wrap gap-1.5">
-                      {episode.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="rounded-sm border border-[rgba(90,154,155,0.25)] px-2 py-0.5 text-[9px] font-medium uppercase tracking-[0.18em] text-[#5a9a9b]/70"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <p className="mt-auto pt-4 text-[10px] font-medium uppercase tracking-[0.2em] text-[#5a9a9b]">
-                      Watch on YouTube →
+
+                    {/* Description */}
+                    <p className="mt-3 text-[13px] leading-[1.8] text-white/38">
+                      {episode.description}
                     </p>
+
+                    {/* Tags + YouTube icon row */}
+                    <div className="mt-auto flex items-end justify-between gap-3 pt-5">
+                      <div className="flex flex-wrap gap-1.5">
+                        {episode.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="border border-[rgba(90,154,155,0.22)] px-2 py-0.5 text-[9px] font-medium uppercase tracking-[0.16em] text-[#5a9a9b]/60"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <YouTubeIcon className="h-4 w-4 shrink-0 text-white/20 transition-colors duration-300 group-hover:text-white/60" />
+                    </div>
                   </div>
                 </a>
               ))}
@@ -174,33 +279,74 @@ export default function PodcastPage() {
           </div>
         </section>
 
-        {/* ── Spotify ──────────────────────────────────────────── */}
+        {/* ── About Host ───────────────────────────────────────── */}
         <section className="section-pad bg-[#0b1520]">
           <div className="section-shell">
-            <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr] lg:items-center">
+            <div className="grid gap-16 lg:grid-cols-[1fr_1fr] lg:gap-24 xl:grid-cols-[3fr_4fr]">
+
+              {/* About the Podcast */}
+              <div>
+                <p className="section-label">About the Show</p>
+                <p className="text-[15px] leading-[1.95] text-white/55">
+                  The GILD Podcast is a broadcast window into the caliber of thinking inside GILD.
+                  Each episode features a founder, executive, or senior operator in a candid,
+                  unscripted conversation — no panel formats, no talking points. Real decisions,
+                  real companies, real AI.
+                </p>
+                <div className="mt-10 flex flex-wrap items-center gap-4">
+                  <a
+                    href="https://www.youtube.com/@GILDhq"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center gap-2.5 border border-[rgba(255,255,255,0.12)] px-5 py-2.5 text-[11px] font-medium uppercase tracking-[0.18em] text-white/70 transition-all duration-300 hover:border-white/30 hover:text-white"
+                  >
+                    <YouTubeIcon className="h-3.5 w-3.5 text-[#FF0000]" />
+                    YouTube
+                  </a>
+                  <a
+                    href={spotifyShow.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center gap-2.5 border border-[rgba(255,255,255,0.12)] px-5 py-2.5 text-[11px] font-medium uppercase tracking-[0.18em] text-white/70 transition-all duration-300 hover:border-white/30 hover:text-white"
+                  >
+                    <SpotifyIcon className="h-3.5 w-3.5 text-[#1DB954]" />
+                    Spotify
+                  </a>
+                </div>
+              </div>
+
+              {/* About the Host */}
+              <div className="border-t border-[rgba(255,248,235,0.07)] pt-10 lg:border-l lg:border-t-0 lg:pl-16 lg:pt-0">
+                <p className="section-label">The Host</p>
+                <p className="font-serif text-[22px] leading-[1.2] tracking-[-0.01em] text-white/90">
+                  Gino Ferrand
+                </p>
+                <p className="mt-1.5 text-[11px] font-medium uppercase tracking-[0.2em] text-white/35">
+                  Founder & CEO, GILD and Tecla
+                </p>
+                <p className="mt-6 text-[15px] leading-[1.95] text-white/55">
+                  Gino speaks with founders, executives, and industry leaders about the ideas,
+                  challenges, and trends shaping modern companies. He brings experience working
+                  with high-growth businesses to discussions on leadership, hiring, AI, and the
+                  future of work.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Spotify Embed ────────────────────────────────────── */}
+        <section className="section-pad bg-[#07090c]">
+          <div className="section-shell">
+            <div className="grid gap-12 lg:grid-cols-[1fr_1.5fr] lg:items-center">
               <div>
                 <p className="section-label">Also on Spotify</p>
-                <h2 className="font-serif text-[30px] leading-[1.2] tracking-[-0.015em] text-white md:text-[38px]">
+                <h2 className="font-serif text-[28px] leading-[1.2] tracking-[-0.015em] text-white md:text-[36px]">
                   Listen wherever you are.
                 </h2>
-                <p className="mt-5 text-[14px] leading-[1.9] text-white/50">
+                <p className="mt-4 text-[14px] leading-[1.9] text-white/45">
                   {spotifyShow.description}
                 </p>
-                <a
-                  href={spotifyShow.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mt-8 inline-block transition-opacity duration-300 hover:opacity-75"
-                  aria-label="Follow on Spotify"
-                >
-                  <Image
-                    src="/images/69c526166b38b8ba821a58db_follow_on_spotify.svg"
-                    alt="Follow on Spotify"
-                    width={144}
-                    height={40}
-                    className="h-9 w-auto"
-                  />
-                </a>
               </div>
               <div className="overflow-hidden rounded-card border border-[rgba(255,248,235,0.07)]">
                 <iframe
@@ -211,89 +357,6 @@ export default function PodcastPage() {
                   loading="lazy"
                 />
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ── About ────────────────────────────────────────────── */}
-        <section className="section-pad bg-[#07090c]">
-          <div className="section-shell">
-            <div className="grid gap-16 lg:grid-cols-2 lg:gap-24">
-
-              {/* About the Podcast */}
-              <div>
-                <p className="section-label">About the Podcast</p>
-                <p className="text-[15px] leading-[1.95] text-white/55">
-                  The GILD Podcast is a broadcast window into the caliber of
-                  thinking inside GILD: founder journeys, AI operating models,
-                  technical leadership, and the decisions senior teams are
-                  navigating right now. Each episode is a candid, unscripted
-                  conversation — no panel formats, no talking points.
-                </p>
-              </div>
-
-              {/* About the Host */}
-              <div>
-                <p className="section-label">About the Host</p>
-                <p className="font-serif text-[20px] leading-[1.3] text-white/90">
-                  Gino Ferrand
-                </p>
-                <p className="mt-1 text-[11px] font-medium uppercase tracking-[0.2em] text-white/35">
-                  Founder & CEO, GILD and Tecla
-                </p>
-                <p className="mt-5 text-[15px] leading-[1.95] text-white/55">
-                  Gino speaks with founders, executives, and industry leaders
-                  about the ideas, challenges, and trends shaping modern
-                  companies. He brings experience working with high-growth
-                  businesses to discussions on leadership, hiring, AI, and the
-                  future of work.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ── Subscribe CTA ────────────────────────────────────── */}
-        <section className="section-pad border-t border-[rgba(255,248,235,0.06)] bg-[#0f1c28]">
-          <div className="section-shell text-center">
-            <h2 className="font-serif text-[30px] leading-[1.2] tracking-[-0.015em] text-white md:text-[38px]">
-              Stay close to the conversation.
-            </h2>
-            <p className="mx-auto mt-5 max-w-lg text-[14px] leading-[1.9] text-white/45">
-              New episodes every two weeks. Founders, executives, and operators
-              sharing what&apos;s actually working.
-            </p>
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-5">
-              <a
-                href="https://www.youtube.com/@GILDhq"
-                target="_blank"
-                rel="noreferrer"
-                className="transition-opacity duration-300 hover:opacity-75"
-                aria-label="Subscribe on YouTube"
-              >
-                <Image
-                  src="/images/69c52616133b590e75afa227_subscribe_on_youtube.svg"
-                  alt="Subscribe on YouTube"
-                  width={160}
-                  height={40}
-                  className="h-9 w-auto"
-                />
-              </a>
-              <a
-                href={spotifyShow.url}
-                target="_blank"
-                rel="noreferrer"
-                className="transition-opacity duration-300 hover:opacity-75"
-                aria-label="Follow on Spotify"
-              >
-                <Image
-                  src="/images/69c526166b38b8ba821a58db_follow_on_spotify.svg"
-                  alt="Follow on Spotify"
-                  width={144}
-                  height={40}
-                  className="h-9 w-auto"
-                />
-              </a>
             </div>
           </div>
         </section>
