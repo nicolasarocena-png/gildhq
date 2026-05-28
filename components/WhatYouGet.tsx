@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { trackApplyClick } from "@/lib/analytics";
 import { openRequestInviteModal } from "@/components/RequestInviteModal";
-import { gsap, reduced } from "@/lib/gsap";
+import { gsap, ScrollTrigger, reduced } from "@/lib/gsap";
 
 const heroImage =
   "/images/698fafaef71444e6a1a61008_3278742058c10b66de59b113217d901e_website_hero_desktop.avif";
@@ -76,17 +76,29 @@ export function WhatYouGet() {
         });
       }
 
-      // Benefit cards cascade
+      // Benefit cards — use onEnter to avoid transition-transform on <article>
+      // conflicting with GSAP's initial transform set on mount
       if (cardsRef.current) {
-        const cards = cardsRef.current.querySelectorAll("article");
-        gsap.from(Array.from(cards), {
-          opacity: 0,
-          y: 48,
-          scale: 0.97,
-          duration: 0.75,
-          stagger: 0.1,
-          ease: "power2.out",
-          scrollTrigger: { trigger: cardsRef.current, start: "top 82%", once: true },
+        const cards = Array.from(cardsRef.current.querySelectorAll("article"));
+        ScrollTrigger.create({
+          trigger: cardsRef.current,
+          start: "top 82%",
+          once: true,
+          onEnter: () => {
+            gsap.fromTo(
+              cards,
+              { opacity: 0, y: 48, scale: 0.97 },
+              {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                duration: 0.75,
+                stagger: 0.1,
+                ease: "power2.out",
+                clearProps: "opacity,transform",
+              }
+            );
+          },
         });
       }
 

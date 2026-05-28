@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef } from "react";
-import { gsap, reduced } from "@/lib/gsap";
+import { gsap, ScrollTrigger, reduced } from "@/lib/gsap";
 import { forumEvents } from "@/lib/events";
 
 export function UpcomingForums() {
@@ -25,15 +25,28 @@ export function UpcomingForums() {
       });
 
       if (gridRef.current) {
-        const cards = gridRef.current.querySelectorAll("a");
-        gsap.from(Array.from(cards), {
-          opacity: 0,
-          y: 44,
-          scale: 0.97,
-          duration: 0.72,
-          stagger: 0.1,
-          ease: "power2.out",
-          scrollTrigger: { trigger: gridRef.current, start: "top 84%", once: true },
+        const cards = Array.from(gridRef.current.querySelectorAll("a"));
+        // Use onEnter to avoid CSS transition-all on the <a> cards fighting
+        // GSAP's initial state set on mount (which would make cards invisible)
+        ScrollTrigger.create({
+          trigger: gridRef.current,
+          start: "top 84%",
+          once: true,
+          onEnter: () => {
+            gsap.fromTo(
+              cards,
+              { opacity: 0, y: 44, scale: 0.97 },
+              {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                duration: 0.72,
+                stagger: 0.1,
+                ease: "power2.out",
+                clearProps: "opacity,transform",
+              }
+            );
+          },
         });
       }
     });
