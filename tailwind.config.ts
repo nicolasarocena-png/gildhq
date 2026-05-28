@@ -23,7 +23,7 @@ const config: Config = {
         white: "#FFFFFF"
       },
       maxWidth: {
-        content: "1440px"
+        content: "1600px"
       },
       borderRadius: {
         card: "6px"
