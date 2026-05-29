@@ -105,9 +105,23 @@ export default function PodcastPage() {
                 </div>
               </div>
 
-              {/* Right: host photo flush to bottom-right */}
-              <div className="hidden self-end lg:block">
-                <div className="relative" style={{ width: "340px", height: "310px" }}>
+              {/* Right: host info + photo */}
+              <div className="hidden items-end gap-5 self-end lg:flex">
+                {/* Host text — sits beside the photo, aligned to bottom */}
+                <div className="mb-6 text-right">
+                  <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-white/40">
+                    The Host
+                  </p>
+                  <p className="mt-2 font-serif text-[22px] leading-[1.15] text-white">
+                    Gino Ferrand
+                  </p>
+                  <p className="mt-1 text-[12px] text-white/50">
+                    Founder &amp; CEO, GILD and Tecla
+                  </p>
+                </div>
+
+                {/* Photo */}
+                <div className="relative shrink-0" style={{ width: "340px", height: "310px" }}>
                   <Image
                     src="/images/GILD PODcats Banner_files/69c57c5d68047b5eac9380c9_7c28024a6ea89ff6008e1946a5b2533f_Frame 6 (1).avif"
                     alt="Gino Ferrand — Host of The GILD Podcast"
