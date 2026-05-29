@@ -85,7 +85,7 @@ export function ApplicationForm() {
           <div ref={leftRef}>
             <p className="section-label">Apply</p>
             <h2 className="font-serif text-[32px] leading-[1.1] tracking-[-0.015em] text-white md:text-[42px] lg:text-[48px]">
-              Apply to the network.
+              Apply to the Network.
             </h2>
             <p className="mt-6 text-[15px] leading-[1.9] text-white/50">
               We review every application personally. You&apos;ll hear back within two

@@ -87,7 +87,7 @@ export function Hero() {
           </h1>
           <p
             ref={subRef}
-            className="mt-6 max-w-[480px] text-[15px] leading-[1.9] text-white/60 md:text-[16px] lg:text-[17px] 2xl:max-w-[560px] 2xl:text-[19px] 3xl:max-w-[640px] 3xl:text-[21px]"
+            className="mt-6 max-w-[480px] text-[15px] leading-[1.9] text-white/80 md:text-[16px] lg:text-[17px]"
           >
             GILD is a curated network of senior AI and engineering leaders, strategists,
             and technical operators. Join the network to be in our next AI Forum.

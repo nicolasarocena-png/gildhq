@@ -163,7 +163,7 @@ export function RequestInviteModal() {
                   Your details
                 </p>
                 <h2 className="mt-3 font-serif text-[26px] leading-[1.2] text-white/90 md:text-[32px]">
-                  Apply to join GILD.
+                  Apply to Join GILD.
                 </h2>
               </div>
 
@@ -296,7 +296,7 @@ export function RequestInviteModal() {
                   A bit more
                 </p>
                 <h2 className="mt-3 font-serif text-[26px] leading-[1.2] text-white/90 md:text-[32px]">
-                  Tell us what you&apos;re navigating.
+                  Tell Us What You&apos;re Navigating.
                 </h2>
               </div>
 

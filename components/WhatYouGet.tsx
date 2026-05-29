@@ -97,7 +97,7 @@ export function WhatYouGet() {
         <div ref={headingBlockRef} className="max-w-2xl">
           <p className="section-label">What You Get</p>
           <h3 className="font-serif text-[30px] leading-[1.2] tracking-[-0.015em] text-white md:text-[40px] 3xl:text-[50px] 4xl:text-[62px]">
-            What you get as a member of GILD.
+            What You Get as a Member of GILD.
           </h3>
           <p className="mt-6 text-[13px] leading-[1.85] text-white/50 md:text-[14px] 3xl:text-[15px] 4xl:text-[18px]">
             GILD is more than dinners. The network is built to make every member more

@@ -7,7 +7,7 @@ export function NoSlackMoment() {
           <br />
           No Discord.
           <br />
-          No virtual forum.
+          No Virtual Forum.
         </p>
         <p className="mt-10 text-2xl leading-9 text-slate-300 3xl:text-[28px] 4xl:text-[34px]">
           Just a table, the right people, and a conversation worth having.

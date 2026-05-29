@@ -127,7 +127,7 @@ export default function EventDetailPage() {
               <div>
                 <p className="section-label">Room Theme</p>
                 <h2 className="font-serif text-[26px] leading-[1.2] tracking-[-0.015em] text-white/90 md:text-[32px]">
-                  What the room explored
+                  What the Room Explored
                 </h2>
                 <p className="mt-5 text-[14px] leading-[1.88] text-white/46">
                   This dinner brought together senior engineering leaders, founders,
@@ -163,7 +163,7 @@ export default function EventDetailPage() {
             <div className="mb-12">
               <p className="section-label">Inside the room</p>
               <p className="max-w-xl font-serif text-[22px] leading-[1.4] text-white/75 md:text-[26px]">
-                Selected moments from the May 12 GILD dinner in Austin.
+                Selected Moments from the May 12 GILD Dinner in Austin.
               </p>
             </div>
 
@@ -253,7 +253,7 @@ export default function EventDetailPage() {
             <div className="border-t border-[rgba(255,248,235,0.07)] pt-14">
               <p className="section-label">Next rooms</p>
               <h2 className="max-w-xl font-serif text-[30px] leading-[1.15] tracking-[-0.015em] text-white md:text-[40px]">
-                Want to be in the next room?
+                Want to Be in the Next Room?
               </h2>
               <p className="mt-5 max-w-md text-[14px] leading-[1.9] text-white/46">
                 GILD is invitation‑first and intentionally curated. Request access to

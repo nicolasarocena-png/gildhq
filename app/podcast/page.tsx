@@ -49,23 +49,25 @@ export default function PodcastPage() {
               sizes="100vw"
               className="object-cover object-center"
             />
+            {/* Overall dark overlay */}
+            <div className="absolute inset-0 bg-black/55" />
             {/* Left black gradient */}
-            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.96)_0%,rgba(0,0,0,0.75)_25%,rgba(0,0,0,0.15)_50%,rgba(0,0,0,0.0)_60%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.98)_0%,rgba(0,0,0,0.82)_25%,rgba(0,0,0,0.30)_50%,rgba(0,0,0,0.0)_65%)]" />
             {/* Right black gradient */}
-            <div className="absolute inset-0 bg-[linear-gradient(270deg,rgba(0,0,0,0.92)_0%,rgba(0,0,0,0.60)_20%,rgba(0,0,0,0.0)_45%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(270deg,rgba(0,0,0,0.95)_0%,rgba(0,0,0,0.70)_20%,rgba(0,0,0,0.0)_50%)]" />
             {/* Bottom fade into page bg */}
             <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#07090c] to-transparent" />
           </div>
 
           <div className="section-shell relative z-10">
-            <div className="grid min-h-[280px] items-center md:min-h-[320px] lg:grid-cols-[1fr_auto]">
+            <div className="grid min-h-[320px] items-center md:min-h-[380px] lg:min-h-[420px] lg:grid-cols-[1fr_auto]">
 
               {/* Left: text */}
               <div className="py-12 md:py-16 lg:py-20">
                 <h1 className="font-serif text-[36px] font-normal leading-[1.05] tracking-[-0.018em] text-white md:text-[50px] lg:text-[58px] xl:text-[64px]">
                   The GILD Podcast
                 </h1>
-                <p className="mt-4 max-w-[520px] text-[14px] leading-[1.8] text-white/70 md:text-[16px]">
+                <p className="mt-4 max-w-[520px] text-[14px] leading-[1.8] text-white/85 md:text-[16px]">
                   Conversations with leaders shaping the future of work,
                   leadership, and growth.
                 </p>
@@ -79,8 +81,8 @@ export default function PodcastPage() {
                     aria-label="Watch on YouTube"
                     className="flex items-center gap-3 rounded-full bg-white/10 px-5 py-3 backdrop-blur-sm transition-all duration-300 hover:bg-white/18"
                   >
-                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#FF0000]">
-                      <YouTubeIcon className="h-3.5 w-3.5 text-white" />
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#FF0000]">
+                      <YouTubeIcon className="h-5 w-5 text-white" />
                     </span>
                     <span className="flex flex-col leading-tight">
                       <span className="text-[10px] font-medium text-white/60">Watch on</span>
@@ -94,8 +96,8 @@ export default function PodcastPage() {
                     aria-label="Listen on Spotify"
                     className="flex items-center gap-3 rounded-full bg-white/10 px-5 py-3 backdrop-blur-sm transition-all duration-300 hover:bg-white/18"
                   >
-                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#1DB954]">
-                      <SpotifyIcon className="h-3.5 w-3.5 text-white" />
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#1DB954]">
+                      <SpotifyIcon className="h-5 w-5 text-white" />
                     </span>
                     <span className="flex flex-col leading-tight">
                       <span className="text-[10px] font-medium text-white/60">Listen on</span>
@@ -105,28 +107,14 @@ export default function PodcastPage() {
                 </div>
               </div>
 
-              {/* Right: host info + photo */}
-              <div className="hidden items-end gap-5 self-end lg:flex">
-                {/* Host text — sits beside the photo, aligned to bottom */}
-                <div className="mb-6 text-right">
-                  <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-white/40">
-                    The Host
-                  </p>
-                  <p className="mt-2 font-serif text-[22px] leading-[1.15] text-white">
-                    Gino Ferrand
-                  </p>
-                  <p className="mt-1 text-[12px] text-white/50">
-                    Founder &amp; CEO, GILD and Tecla
-                  </p>
-                </div>
-
-                {/* Photo */}
-                <div className="relative shrink-0" style={{ width: "340px", height: "310px" }}>
+              {/* Right: host photo only */}
+              <div className="hidden self-end lg:block">
+                <div className="relative shrink-0" style={{ width: "420px", height: "420px" }}>
                   <Image
                     src="/images/GILD PODcats Banner_files/69c57c5d68047b5eac9380c9_7c28024a6ea89ff6008e1946a5b2533f_Frame 6 (1).avif"
                     alt="Gino Ferrand — Host of The GILD Podcast"
                     fill
-                    sizes="340px"
+                    sizes="420px"
                     className="object-contain object-bottom"
                     priority
                   />

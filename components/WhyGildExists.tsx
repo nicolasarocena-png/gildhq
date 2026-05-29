@@ -148,7 +148,7 @@ export function WhyGildExists() {
         {/* Header */}
         <div className="mb-10 text-center">
           <h2 className="font-serif text-[32px] font-normal leading-[1.1] tracking-[-0.015em] text-white md:text-[42px] lg:text-[48px] 3xl:text-[60px] 4xl:text-[74px]">
-            What you get as a member of GILD.
+            What You Get as a Member of GILD.
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-[14px] leading-[1.85] text-white/45 md:text-[15px] 3xl:text-[16px] 4xl:text-[19px]">
             GILD is more than dinners. The network is built to make every member more connected, more informed, and more effective.
