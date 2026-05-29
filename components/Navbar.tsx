@@ -109,8 +109,8 @@ export function Navbar() {
   return (
     <>
       <header ref={headerRef} className="sticky top-0 z-50 border-b">
-        <nav className="section-shell flex h-[72px] items-center justify-between 2xl:h-[88px] 3xl:h-[100px]">
-          <a href="/" aria-label="GILD home" className="relative h-8 w-24 2xl:h-10 2xl:w-28 3xl:h-12 3xl:w-32">
+        <nav className="section-shell flex h-[72px] items-center justify-between 3xl:h-[88px] 4xl:h-[100px]">
+          <a href="/" aria-label="GILD home" className="relative h-8 w-24 3xl:h-10 3xl:w-28 4xl:h-12 4xl:w-32">
             <Image
               src="/images/logo%20gild.png"
               alt="GILD"
@@ -123,22 +123,22 @@ export function Navbar() {
 
           {/* Desktop links */}
           <div className="hidden items-center gap-10 md:flex">
-            <a href="/#events" className="text-[11px] font-medium uppercase tracking-[0.2em] text-white transition-colors duration-300 hover:text-white/75 2xl:text-[13px]">
+            <a href="/#events" className="text-[11px] font-medium uppercase tracking-[0.2em] text-white transition-colors duration-300 hover:text-white/75 3xl:text-[13px]">
               Events
             </a>
-            <a href="/#why" className="text-[11px] font-medium uppercase tracking-[0.2em] text-white transition-colors duration-300 hover:text-white/75 2xl:text-[13px]">
+            <a href="/#why" className="text-[11px] font-medium uppercase tracking-[0.2em] text-white transition-colors duration-300 hover:text-white/75 3xl:text-[13px]">
               Network
             </a>
-            <a href="/podcast" className="text-[11px] font-medium uppercase tracking-[0.2em] text-white transition-colors duration-300 hover:text-white/75 2xl:text-[13px]">
+            <a href="/podcast" className="text-[11px] font-medium uppercase tracking-[0.2em] text-white transition-colors duration-300 hover:text-white/75 3xl:text-[13px]">
               Podcast
             </a>
-            <a href="/newsletter" className="text-[11px] font-medium uppercase tracking-[0.2em] text-white transition-colors duration-300 hover:text-white/75 2xl:text-[13px]">
+            <a href="/newsletter" className="text-[11px] font-medium uppercase tracking-[0.2em] text-white transition-colors duration-300 hover:text-white/75 3xl:text-[13px]">
               Newsletter
             </a>
             <button
               type="button"
               onClick={apply}
-              className="bg-[#5a9a9b] px-6 py-2.5 text-[11px] font-medium uppercase tracking-[0.16em] text-white transition-colors duration-300 hover:bg-[#4d8889] 2xl:px-8 2xl:py-3 2xl:text-[13px]"
+              className="bg-[#5a9a9b] px-6 py-2.5 text-[11px] font-medium uppercase tracking-[0.16em] text-white transition-colors duration-300 hover:bg-[#4d8889] 3xl:px-8 3xl:py-3 3xl:text-[13px]"
             >
               Request Access
             </button>

@@ -186,13 +186,13 @@ export function HowItWorks() {
                         : "translate-y-2 border-[rgba(255,248,235,0.04)] bg-[#111e2c] opacity-25"
                     }`}
                   >
-                    <p className="text-[72px] font-light leading-none text-[#5a9a9b] 2xl:text-[96px] 3xl:text-[112px]">
+                    <p className="text-[72px] font-light leading-none text-[#5a9a9b] 3xl:text-[90px] 4xl:text-[112px]">
                       {step.number}
                     </p>
-                    <h2 className="mt-12 max-w-3xl font-serif text-[28px] leading-[1.12] text-white/92 md:text-[40px] lg:text-[48px] 2xl:text-[60px] 3xl:text-[72px]">
+                    <h2 className="mt-12 max-w-3xl font-serif text-[28px] leading-[1.12] text-white/92 md:text-[40px] lg:text-[48px] 3xl:text-[58px] 4xl:text-[72px]">
                       {step.title}
                     </h2>
-                    <p className="mt-7 max-w-2xl text-[15px] leading-[1.9] text-white/55 2xl:text-[17px] 3xl:text-[19px]">
+                    <p className="mt-7 max-w-2xl text-[15px] leading-[1.9] text-white/55 3xl:text-[17px] 4xl:text-[19px]">
                       {step.body}
                     </p>
                     {step.note ? (

@@ -75,7 +75,7 @@ export function Footer() {
                 className="object-contain object-left opacity-80"
               />
             </a>
-            <p className="mt-5 max-w-xs text-[15px] leading-[1.75] text-white/40 2xl:text-[17px]">
+            <p className="mt-5 max-w-xs text-[15px] leading-[1.75] text-white/40 3xl:text-[17px]">
               An exclusive space where senior leaders come together to connect.
             </p>
             <div className="mt-5 flex items-center gap-5">

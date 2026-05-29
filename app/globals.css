@@ -81,7 +81,7 @@ summary::-webkit-details-marker {
 }
 
 .section-pad {
-  @apply py-10 md:py-20 lg:py-28 2xl:py-36 3xl:py-44;
+  @apply py-10 md:py-20 lg:py-28 3xl:py-36 4xl:py-44;
 }
 
 .section-label {

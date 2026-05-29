@@ -97,11 +97,11 @@ export function SocialProof() {
                   </div>
                 )}
                 <div>
-                  <p className="text-[16px] font-medium text-white/90 2xl:text-[18px]">{testimonial.name}</p>
-                  <p className="mt-1 text-[14px] leading-[1.5] text-white/50 2xl:text-[15px]">{testimonial.caption}</p>
+                  <p className="text-[16px] font-medium text-white/90 3xl:text-[18px]">{testimonial.name}</p>
+                  <p className="mt-1 text-[14px] leading-[1.5] text-white/50 3xl:text-[15px]">{testimonial.caption}</p>
                 </div>
               </div>
-              <p className="mt-8 text-[17px] leading-[1.85] text-white/72 2xl:text-[19px] 3xl:text-[21px]">
+              <p className="mt-8 text-[17px] leading-[1.85] text-white/72 3xl:text-[19px] 4xl:text-[21px]">
                 &quot;{testimonial.quote}&quot;
               </p>
             </article>

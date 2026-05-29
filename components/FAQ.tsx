@@ -57,7 +57,7 @@ function FaqItem({ question, answer }: { question: string; answer: string }) {
         type="button"
         onClick={toggle}
         aria-expanded={open}
-        className="flex w-full items-center justify-between gap-6 py-6 text-left font-serif text-lg leading-[1.4] text-white/80 transition-colors duration-300 hover:text-white 2xl:text-[22px] 3xl:text-[26px]"
+        className="flex w-full items-center justify-between gap-6 py-6 text-left font-serif text-lg leading-[1.4] text-white/80 transition-colors duration-300 hover:text-white 3xl:text-[21px] 4xl:text-[26px]"
       >
         <span>{question}</span>
         <span
@@ -69,7 +69,7 @@ function FaqItem({ question, answer }: { question: string; answer: string }) {
         </span>
       </button>
       <div ref={bodyRef} style={{ display: "none", overflow: "hidden" }}>
-        <p className="max-w-3xl pb-7 text-[14px] leading-[1.9] text-white/45 2xl:text-[16px] 3xl:text-[18px]">{answer}</p>
+        <p className="max-w-3xl pb-7 text-[14px] leading-[1.9] text-white/45 3xl:text-[16px] 4xl:text-[18px]">{answer}</p>
       </div>
     </div>
   );
