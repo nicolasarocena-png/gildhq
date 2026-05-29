@@ -63,7 +63,7 @@ export function UpcomingForums() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="events" className="section-pad bg-[#0b1520]">
+    <section ref={sectionRef} id="events" className="section-pad bg-[#1a2f45]">
       <div className="section-shell">
 
         {/* Header */}
@@ -93,7 +93,7 @@ export function UpcomingForums() {
             <Link
               key={event.slug}
               href={`/events/${event.slug}`}
-              className="group relative overflow-hidden rounded-[5px] border border-[#364a5a] transition-all duration-300 hover:shadow-[0_6px_32px_rgba(0,0,0,0.5)]"
+              className="group relative overflow-hidden rounded-[5px] border border-[#364a5a] text-white transition-all duration-300 hover:shadow-[0_6px_32px_rgba(0,0,0,0.5)]"
               style={{ backgroundColor: event.cardColor }}
             >
               {/* Main row */}
@@ -123,7 +123,7 @@ export function UpcomingForums() {
                   </div>
 
                   {/* CTA button */}
-                  <span className="inline-block border border-[#364a5a] bg-white/8 px-5 py-2 text-[12px] font-semibold text-white transition-all duration-300 group-hover:bg-white/15 group-hover:border-[#4a6580]">
+                  <span className="inline-block bg-white px-5 py-2 text-[12px] font-semibold text-[#07090c] transition-all duration-300 group-hover:bg-white/90">
                     Request Invite
                   </span>
                 </div>
