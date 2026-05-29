@@ -66,8 +66,8 @@ export function Hero() {
 
       {/* Main content — grows to fill space */}
       <div className="relative z-10 mx-auto flex w-full max-w-[1920px] flex-1 items-center px-6 py-16 md:px-12 md:py-24 lg:px-16 xl:px-20 2xl:px-28 3xl:px-36">
-        <div className="hero-drift max-w-[820px] text-left 2xl:max-w-[960px] 3xl:max-w-[1100px]">
-          <h1 className="text-[24px] font-normal leading-[1.08] tracking-[-0.018em] text-white sm:text-[30px] md:text-[40px] lg:text-[50px] xl:text-[56px] 2xl:text-[64px] 3xl:text-[76px] 4xl:text-[88px]">
+        <div className="hero-drift max-w-[640px] text-left 3xl:max-w-[780px]">
+          <h1 className="text-[32px] font-normal leading-[1.1] tracking-[-0.015em] text-white md:text-[42px] lg:text-[48px] 3xl:text-[60px] 4xl:text-[74px]">
             <span className="block overflow-hidden">
               <span
                 className="block"
