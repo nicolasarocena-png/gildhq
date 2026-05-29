@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     title: "Upcoming GILD Events — AI and Engineering Leaders Forums",
     description:
       "Invite-only AI Forums for senior engineering and AI leaders in Austin, Dallas, and Miami. Small rooms, off-the-record conversations.",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
+    images: [{ url: "/og-image.svg", width: 1200, height: 630 }],
     type: "website",
   },
   twitter: {
