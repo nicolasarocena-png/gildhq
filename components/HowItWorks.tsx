@@ -119,7 +119,7 @@ export function HowItWorks() {
                 </div>
                 <h3 className="mt-8 font-serif text-2xl leading-[1.25] text-white/90">
                   {step.title}
-                </h2>
+                </h3>
                 <p className="mt-4 text-[15px] leading-[1.85] text-white/55">{step.body}</p>
                 {step.note ? (
                   <p className="mt-4 text-[14px] italic leading-[1.7] text-white/35">{step.note}</p>
@@ -191,7 +191,7 @@ export function HowItWorks() {
                     </p>
                     <h3 className="mt-12 max-w-3xl font-serif text-[28px] leading-[1.12] text-white/92 md:text-[40px] lg:text-[48px] 3xl:text-[58px] 4xl:text-[72px]">
                       {step.title}
-                    </h2>
+                    </h3>
                     <p className="mt-7 max-w-2xl text-[15px] leading-[1.9] text-white/55 3xl:text-[17px] 4xl:text-[19px]">
                       {step.body}
                     </p>

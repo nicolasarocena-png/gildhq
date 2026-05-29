@@ -107,9 +107,12 @@ function PostModal({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
+    // Move focus to close button when modal opens
+    closeButtonRef.current?.focus();
     return () => {
       document.body.style.overflow = "";
     };
@@ -152,13 +155,21 @@ function PostModal({
       onClick={handleOverlayClick}
       className="fixed inset-0 z-[200] flex items-start justify-center overflow-y-auto bg-black/75 backdrop-blur-sm"
       style={{ padding: "24px 16px 80px" }}
+      aria-hidden="true"
     >
-      <div className="relative w-full max-w-3xl rounded-card bg-[#0d1822] shadow-[0_24px_80px_rgba(0,0,0,0.7)]">
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="newsletter-modal-heading"
+        className="relative w-full max-w-3xl rounded-card bg-[#0d1822] shadow-[0_24px_80px_rgba(0,0,0,0.7)]"
+        aria-hidden="false"
+      >
         {/* Close button */}
         <button
+          ref={closeButtonRef}
           type="button"
           onClick={onClose}
-          aria-label="Close"
+          aria-label="Close article"
           className="absolute right-4 top-4 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/5 text-white/50 transition-colors hover:bg-white/10 hover:text-white/80"
         >
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden>
@@ -198,7 +209,7 @@ function PostModal({
           </div>
 
           {/* Title */}
-          <h1 className="font-serif text-[28px] leading-[1.15] tracking-[-0.015em] text-white md:text-[36px]">
+          <h1 id="newsletter-modal-heading" className="font-serif text-[28px] leading-[1.15] tracking-[-0.015em] text-white md:text-[36px]">
             {item.title}
           </h1>
 

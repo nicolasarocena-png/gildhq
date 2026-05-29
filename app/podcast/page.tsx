@@ -133,6 +133,7 @@ export default function PodcastPage() {
                 href="https://www.youtube.com/@GILDhq"
                 target="_blank"
                 rel="noreferrer"
+                aria-label="View all GILD Podcast episodes on YouTube"
                 className="text-[11px] font-medium uppercase tracking-[0.2em] text-[#5a9a9b] transition-colors duration-300 hover:text-[#374151]"
               >
                 View all →

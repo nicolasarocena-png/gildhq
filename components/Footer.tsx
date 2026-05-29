@@ -101,18 +101,18 @@ export function Footer() {
           </div>
 
           <div className="flex flex-col gap-5 md:items-end">
-            <nav className="flex flex-wrap items-center gap-x-4 gap-y-3 text-[14px] text-white/35">
-              <a href="#" className="transition-colors duration-300 hover:text-white/65">
+            <nav aria-label="Footer links" className="flex flex-wrap items-center gap-x-4 gap-y-3 text-[14px] text-white/35">
+              <span aria-disabled="true" className="cursor-default">
                 Privacy
-              </a>
-              <span className="text-white/15">|</span>
-              <a href="#" className="transition-colors duration-300 hover:text-white/65">
+              </span>
+              <span className="text-white/15" aria-hidden="true">|</span>
+              <span aria-disabled="true" className="cursor-default">
                 Code of Conduct
-              </a>
-              <span className="text-white/15">|</span>
-              <a href="#" className="transition-colors duration-300 hover:text-white/65">
+              </span>
+              <span className="text-white/15" aria-hidden="true">|</span>
+              <span aria-disabled="true" className="cursor-default">
                 Contact
-              </a>
+              </span>
             </nav>
             <div className="flex flex-col gap-3 sm:flex-row">
               <button
@@ -125,6 +125,7 @@ export function Footer() {
               <button
                 type="button"
                 onClick={requestInvite}
+                aria-label="Explore partnerships — opens access request form"
                 className="border border-[rgba(255,248,235,0.18)] px-6 py-3 text-center text-[11px] font-medium uppercase tracking-[0.14em] text-white/55 transition-all duration-400 hover:border-[rgba(255,248,235,0.4)] hover:text-white/80"
               >
                 Explore Partnerships

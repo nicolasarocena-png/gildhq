@@ -62,7 +62,7 @@ export default function EventDetailPage() {
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main-content">
 
         {/* ─────────────────────────────────────────────
             HERO
