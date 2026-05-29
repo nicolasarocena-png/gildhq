@@ -35,7 +35,7 @@ export default function PodcastPage() {
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main-content">
 
         {/* ── Hero ─────────────────────────────────────────────── */}
         <section className="relative overflow-hidden pt-[72px]">

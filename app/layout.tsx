@@ -87,8 +87,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${montserrat.variable} ${dmSerif.variable}`}>
+    <html lang="en" dir="ltr" className={`${montserrat.variable} ${dmSerif.variable}`}>
       <body className="font-sans">
+        {/* Skip to main content — WCAG 2.4.1 */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[9999] focus:bg-[#5a9a9b] focus:px-4 focus:py-2 focus:text-[13px] focus:font-medium focus:text-white focus:outline-none"
+        >
+          Skip to main content
+        </a>
         <ScrollBackground />
         <RequestInviteModal />
         <MobileCtaBar />

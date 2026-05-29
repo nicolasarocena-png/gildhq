@@ -100,7 +100,7 @@ export function HowItWorks() {
     <section id="how-it-works" ref={sectionRef} className="bg-[#0f1c28] md:h-[360vh]">
       <div className="section-shell py-24 md:sticky md:top-[72px] md:flex md:min-h-[calc(100vh-72px)] md:flex-col md:justify-center md:py-0">
         <div ref={headerRef} className="mb-12 md:mb-16">
-          <p className="section-label mb-0">How It Works</p>
+          <h2 className="section-label mb-0">How It Works</h2>
         </div>
 
         {/* Mobile */}
@@ -117,7 +117,7 @@ export function HowItWorks() {
                   </p>
                   <div className="h-px flex-1 bg-[rgba(255,248,235,0.06)]" />
                 </div>
-                <h2 className="mt-8 font-serif text-2xl leading-[1.25] text-white/90">
+                <h3 className="mt-8 font-serif text-2xl leading-[1.25] text-white/90">
                   {step.title}
                 </h2>
                 <p className="mt-4 text-[15px] leading-[1.85] text-white/55">{step.body}</p>
@@ -189,7 +189,7 @@ export function HowItWorks() {
                     <p className="text-[72px] font-light leading-none text-[#5a9a9b] 3xl:text-[90px] 4xl:text-[112px]">
                       {step.number}
                     </p>
-                    <h2 className="mt-12 max-w-3xl font-serif text-[28px] leading-[1.12] text-white/92 md:text-[40px] lg:text-[48px] 3xl:text-[58px] 4xl:text-[72px]">
+                    <h3 className="mt-12 max-w-3xl font-serif text-[28px] leading-[1.12] text-white/92 md:text-[40px] lg:text-[48px] 3xl:text-[58px] 4xl:text-[72px]">
                       {step.title}
                     </h2>
                     <p className="mt-7 max-w-2xl text-[15px] leading-[1.9] text-white/55 3xl:text-[17px] 4xl:text-[19px]">

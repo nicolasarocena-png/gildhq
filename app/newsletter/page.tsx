@@ -503,7 +503,7 @@ export default function NewsletterPage() {
     <>
       <Navbar />
 
-      <main className="min-h-screen bg-[#07090c]">
+      <main id="main-content" className="min-h-screen bg-[#07090c]">
 
         {/* ── Hero ─────────────────────────────────────────────── */}
         <section className="border-b border-[rgba(255,248,235,0.07)] bg-[#07090c] pb-16 pt-16 md:pb-20 md:pt-20">

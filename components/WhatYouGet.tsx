@@ -96,9 +96,9 @@ export function WhatYouGet() {
       <div className="section-shell">
         <div ref={headingBlockRef} className="max-w-2xl">
           <p className="section-label">What You Get</p>
-          <h3 className="font-serif text-[30px] leading-[1.2] tracking-[-0.015em] text-white md:text-[40px] 3xl:text-[50px] 4xl:text-[62px]">
+          <h2 className="font-serif text-[30px] leading-[1.2] tracking-[-0.015em] text-white md:text-[40px] 3xl:text-[50px] 4xl:text-[62px]">
             What You Get as a Member of GILD.
-          </h3>
+          </h2>
           <p className="mt-6 text-[13px] leading-[1.85] text-white/50 md:text-[14px] 3xl:text-[15px] 4xl:text-[18px]">
             GILD is more than dinners. The network is built to make every member more
             connected, more informed, and more effective.

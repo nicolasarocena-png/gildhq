@@ -63,6 +63,9 @@ export function Navbar() {
     ? createPortal(
         // Full-screen overlay rendered directly in <body> — no stacking context issues
         <div
+          role="dialog"
+          aria-label="Navigation menu"
+          aria-modal="true"
           className="fixed inset-0 bg-[#0a0806] md:hidden"
           style={{ zIndex: 9999 }}
         >

@@ -69,6 +69,7 @@ export function SocialProof() {
       }`}
     >
       <div className="section-shell">
+        <h2 className="sr-only">What Members Say</h2>
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {testimonials.map((testimonial, index) => (
             <article

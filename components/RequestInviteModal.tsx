@@ -109,7 +109,12 @@ export function RequestInviteModal() {
   };
 
   return (
-    <div className="fixed inset-0 z-[100] bg-black/82 px-2 py-2 md:px-6 md:py-6">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-heading"
+      className="fixed inset-0 z-[100] bg-black/82 px-2 py-2 md:px-6 md:py-6"
+    >
       <div className="mx-auto flex h-full max-w-5xl flex-col overflow-hidden border border-[rgba(255,248,235,0.08)] bg-[#0c0a08] shadow-[0_32px_80px_rgba(0,0,0,0.7)]">
 
         {/* Header */}
@@ -162,13 +167,14 @@ export function RequestInviteModal() {
                 <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-[#5a9a9b]">
                   Your details
                 </p>
-                <h2 className="mt-3 font-serif text-[26px] leading-[1.2] text-white/90 md:text-[32px]">
+                <h2 id="modal-heading" className="mt-3 font-serif text-[26px] leading-[1.2] text-white/90 md:text-[32px]">
                   Apply to Join GILD.
                 </h2>
               </div>
 
               <div className="grid gap-5 md:grid-cols-2">
                 <input
+                  aria-label="First Name"
                   className={fieldClass}
                   required
                   placeholder="First Name*"
@@ -176,6 +182,7 @@ export function RequestInviteModal() {
                   onChange={(e) => update("firstName", e.target.value)}
                 />
                 <input
+                  aria-label="Last Name"
                   className={fieldClass}
                   required
                   placeholder="Last Name*"
@@ -185,6 +192,7 @@ export function RequestInviteModal() {
               </div>
 
               <input
+                aria-label="Work Email"
                 className={fieldClass}
                 required
                 type="email"
@@ -193,6 +201,7 @@ export function RequestInviteModal() {
                 onChange={(e) => update("workEmail", e.target.value)}
               />
               <input
+                aria-label="LinkedIn Profile URL"
                 className={fieldClass}
                 type="url"
                 placeholder="LinkedIn Profile URL"
@@ -202,6 +211,7 @@ export function RequestInviteModal() {
 
               <div className="grid gap-5 md:grid-cols-2">
                 <input
+                  aria-label="Job Title"
                   className={fieldClass}
                   required
                   placeholder="Job Title*"
@@ -209,6 +219,7 @@ export function RequestInviteModal() {
                   onChange={(e) => update("jobTitle", e.target.value)}
                 />
                 <input
+                  aria-label="Company"
                   className={fieldClass}
                   required
                   placeholder="Company*"

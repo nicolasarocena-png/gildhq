@@ -216,7 +216,7 @@ export function WhyGildExists() {
               {notFitItems.map((item) => (
                 <li
                   key={item}
-                  className="flex items-baseline gap-4 text-[15px] leading-[1.72] text-white/32 3xl:text-[17px] 4xl:text-[19px]"
+                  className="flex items-baseline gap-4 text-[15px] leading-[1.72] text-white/50 3xl:text-[17px] 4xl:text-[19px]"
                 >
                   <span className="mt-[9px] h-px w-4 shrink-0 bg-white/12" />
                   {item}

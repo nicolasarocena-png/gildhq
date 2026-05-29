@@ -4,10 +4,13 @@ import { useEffect, useRef, useState } from "react";
 import { gsap, mobileStart, reduced } from "@/lib/gsap";
 import { faqs } from "@/lib/faqs";
 
+let faqCounter = 0;
+
 function FaqItem({ question, answer }: { question: string; answer: string }) {
   const [open, setOpen] = useState(false);
   const bodyRef = useRef<HTMLDivElement>(null);
   const iconRef = useRef<HTMLSpanElement>(null);
+  const id = useRef(`faq-${++faqCounter}`);
 
   const toggle = () => {
     const el = bodyRef.current;
@@ -55,20 +58,29 @@ function FaqItem({ question, answer }: { question: string; answer: string }) {
     <div data-faq-item className="border-b border-[#5a9a9b]/30">
       <button
         type="button"
+        id={`${id.current}-btn`}
         onClick={toggle}
         aria-expanded={open}
+        aria-controls={`${id.current}-panel`}
         className="flex w-full items-center justify-between gap-6 py-6 text-left font-serif text-lg leading-[1.4] text-white/80 transition-colors duration-300 hover:text-white 3xl:text-[21px] 4xl:text-[26px]"
       >
         <span>{question}</span>
         <span
           ref={iconRef}
+          aria-hidden="true"
           className="shrink-0 text-[#5a9a9b] text-xl leading-none"
           style={{ display: "inline-block", transformOrigin: "center" }}
         >
           ›
         </span>
       </button>
-      <div ref={bodyRef} style={{ display: "none", overflow: "hidden" }}>
+      <div
+        id={`${id.current}-panel`}
+        role="region"
+        aria-labelledby={`${id.current}-btn`}
+        ref={bodyRef}
+        style={{ display: "none", overflow: "hidden" }}
+      >
         <p className="max-w-3xl pb-7 text-[14px] leading-[1.9] text-white/45 3xl:text-[16px] 4xl:text-[18px]">{answer}</p>
       </div>
     </div>

@@ -116,9 +116,7 @@ export function Hero() {
               maskImage: "linear-gradient(90deg, transparent, black 8%, black 92%, transparent)",
             }}
           >
-            <div className="flex w-max gap-[48px] md:gap-[80px]"
-              style={{ animation: "marquee 45s linear infinite" }}
-            >
+            <div className="sponsor-marquee flex w-max gap-[48px] md:gap-[80px]">
               {logoSet.map((logo, i) => (
                 <div
                   key={`${logo.name}-${i}`}
