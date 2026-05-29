@@ -26,7 +26,7 @@ export function GildPromise() {
           </div>
           <div className="max-w-3xl">
             {promises.map((promise) => (
-              <p key={promise} className="mb-8 font-serif text-[22px] leading-[1.8] text-white">
+              <p key={promise} className="mb-8 font-serif text-[22px] leading-[1.8] text-white 2xl:text-[28px] 3xl:text-[34px]">
                 {promise}
               </p>
             ))}

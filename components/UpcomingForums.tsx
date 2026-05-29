@@ -67,10 +67,10 @@ export function UpcomingForums() {
 
         {/* Header */}
         <div ref={headerRef} className="mb-10 text-center">
-          <h2 className="font-serif text-[32px] font-normal leading-[1.1] tracking-[-0.015em] text-white md:text-[42px] lg:text-[48px]">
+          <h2 className="font-serif text-[32px] font-normal leading-[1.1] tracking-[-0.015em] text-white md:text-[42px] lg:text-[48px] 2xl:text-[62px] 3xl:text-[74px]">
             Upcoming GILD Events
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-[14px] leading-[1.85] text-white/45 md:text-[15px]">
+          <p className="mx-auto mt-4 max-w-xl text-[14px] leading-[1.85] text-white/45 md:text-[15px] 2xl:max-w-2xl 2xl:text-[17px] 3xl:text-[19px]">
             GILD events are where the network gathers. Curated rooms for senior
             AI and engineering leaders.{" "}
             <span className="text-[#5a9a9b]">Invite-only and intentionally small.</span>
@@ -99,12 +99,12 @@ export function UpcomingForums() {
                   </p>
 
                   {/* Title */}
-                  <p className="mb-3 text-[16px] font-bold leading-[1.4] text-white md:text-[17px]">
+                  <p className="mb-3 text-[16px] font-bold leading-[1.4] text-white md:text-[17px] 2xl:text-[20px] 3xl:text-[23px]">
                     {event.title}
                   </p>
 
                   {/* Description */}
-                  <p className="mb-3 line-clamp-2 text-[14px] leading-[1.65] text-white/60">
+                  <p className="mb-3 line-clamp-2 text-[14px] leading-[1.65] text-white/60 2xl:text-[16px] 3xl:text-[17px]">
                     {event.description}
                   </p>
 

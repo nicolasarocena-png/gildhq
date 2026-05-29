@@ -125,10 +125,10 @@ export function WhyGildExists() {
           <p className="mb-6 text-[15px] font-medium uppercase tracking-[0.18em] text-white/65">
             Why GILD Exists
           </p>
-          <h2 className="font-serif text-[32px] font-normal leading-[1.1] tracking-[-0.015em] text-white md:text-[42px] lg:text-[48px]">
+          <h2 className="font-serif text-[32px] font-normal leading-[1.1] tracking-[-0.015em] text-white md:text-[42px] lg:text-[48px] 2xl:text-[62px] 3xl:text-[74px]">
             Apply To The GILD Network
           </h2>
-          <p className="mx-auto mt-5 max-w-[480px] text-[14px] leading-[1.88] text-white/55 md:text-[15px]">
+          <p className="mx-auto mt-5 max-w-[480px] text-[14px] leading-[1.88] text-white/55 md:text-[15px] 2xl:max-w-[620px] 2xl:text-[17px] 3xl:max-w-[740px] 3xl:text-[19px]">
             Senior operators. Curated rooms. Direct conversation around
             what&nbsp;is actually working.
           </p>
@@ -147,10 +147,10 @@ export function WhyGildExists() {
 
         {/* Header */}
         <div className="mb-10 text-center">
-          <h2 className="font-serif text-[32px] font-normal leading-[1.1] tracking-[-0.015em] text-white md:text-[42px] lg:text-[48px]">
+          <h2 className="font-serif text-[32px] font-normal leading-[1.1] tracking-[-0.015em] text-white md:text-[42px] lg:text-[48px] 2xl:text-[62px] 3xl:text-[74px]">
             What you get as a member of GILD.
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-[14px] leading-[1.85] text-white/45 md:text-[15px]">
+          <p className="mx-auto mt-4 max-w-2xl text-[14px] leading-[1.85] text-white/45 md:text-[15px] 2xl:text-[17px] 3xl:text-[19px]">
             GILD is more than dinners. The network is built to make every member more connected, more informed, and more effective.
           </p>
         </div>
@@ -178,10 +178,10 @@ export function WhyGildExists() {
 
               {/* Text */}
               <div className="p-6">
-                <h3 className="text-[14px] font-bold uppercase tracking-[0.08em] leading-snug text-white">
+                <h3 className="text-[14px] font-bold uppercase tracking-[0.08em] leading-snug text-white 2xl:text-[16px]">
                   {title}
                 </h3>
-                <p className="mt-3 text-[14px] leading-[1.8] text-white/55">{body}</p>
+                <p className="mt-3 text-[14px] leading-[1.8] text-white/55 2xl:text-[15px] 3xl:text-[16px]">{body}</p>
               </div>
             </div>
           ))}
@@ -199,7 +199,7 @@ export function WhyGildExists() {
               {fitItems.map((item) => (
                 <li
                   key={item}
-                  className="flex items-baseline gap-4 text-[15px] leading-[1.72] text-white/72"
+                  className="flex items-baseline gap-4 text-[15px] leading-[1.72] text-white/72 2xl:text-[17px] 3xl:text-[19px]"
                 >
                   <span className="mt-[9px] h-px w-4 shrink-0 bg-[#5a9a9b]/50" />
                   {item}
@@ -216,7 +216,7 @@ export function WhyGildExists() {
               {notFitItems.map((item) => (
                 <li
                   key={item}
-                  className="flex items-baseline gap-4 text-[15px] leading-[1.72] text-white/32"
+                  className="flex items-baseline gap-4 text-[15px] leading-[1.72] text-white/32 2xl:text-[17px] 3xl:text-[19px]"
                 >
                   <span className="mt-[9px] h-px w-4 shrink-0 bg-white/12" />
                   {item}

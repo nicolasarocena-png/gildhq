@@ -41,7 +41,7 @@ function EventRow({ date, title, location, href }: EventData) {
         }`}>
           {date}
         </p>
-        <p className={`font-serif text-[19px] leading-snug transition-colors duration-200 ${
+        <p className={`font-serif text-[19px] leading-snug transition-colors duration-200 2xl:text-[22px] 3xl:text-[25px] ${
           href ? "text-white/85 group-hover:text-white" : "text-white/85"
         }`}>
           {title}
@@ -81,7 +81,7 @@ function EventRow({ date, title, location, href }: EventData) {
         <p className="w-[160px] shrink-0 text-[12px] font-medium uppercase tracking-[0.22em] text-[#5a9a9b]">
           {date}
         </p>
-        <p className="font-serif text-[19px] leading-snug text-white/85">{title}</p>
+        <p className="font-serif text-[19px] leading-snug text-white/85 2xl:text-[22px] 3xl:text-[25px]">{title}</p>
       </div>
       <p className="shrink-0 text-[13px] uppercase tracking-[0.14em] text-white/32">{location}</p>
     </div>
