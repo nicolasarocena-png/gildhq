@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { youtubeEpisodes } from "@/lib/podcast";
+import { forumEvents } from "@/lib/events";
 
 const BASE = "https://gildhq.com";
 
@@ -12,6 +13,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "weekly",
       priority: 1.0,
+    },
+    {
+      url: `${BASE}/events`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.9,
     },
     {
       url: `${BASE}/newsletter`,
@@ -39,6 +46,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
+  const eventPages: MetadataRoute.Sitemap = forumEvents.map((ev) => ({
+    url: `${BASE}/events/${ev.slug}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 0.85,
+  }));
+
   const episodePages: MetadataRoute.Sitemap = youtubeEpisodes.map((ep) => ({
     url: `${BASE}/podcast/${ep.slug}`,
     lastModified: now,
@@ -46,5 +60,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticPages, ...episodePages];
+  return [...staticPages, ...eventPages, ...episodePages];
 }

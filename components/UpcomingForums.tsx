@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { gsap, mobileStart, ScrollTrigger, reduced } from "@/lib/gsap";
 import { forumEvents } from "@/lib/events";
@@ -75,16 +76,23 @@ export function UpcomingForums() {
             AI and engineering leaders.{" "}
             <span className="text-[#5a9a9b]">Invite-only and intentionally small.</span>
           </p>
+          <Link
+            href="/events"
+            className="mt-6 inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.2em] text-[#5a9a9b] transition-opacity hover:opacity-70"
+          >
+            View all events
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden>
+              <path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </Link>
         </div>
 
         {/* 2-col grid */}
         <div ref={gridRef} className="grid gap-[22px] md:grid-cols-2">
           {forumEvents.map((event) => (
-            <a
-              key={`${event.date}-${event.url}`}
-              href={event.url}
-              target="_blank"
-              rel="noreferrer"
+            <Link
+              key={event.slug}
+              href={`/events/${event.slug}`}
               className="group relative overflow-hidden rounded-[5px] border border-[#364a5a] transition-all duration-300 hover:shadow-[0_6px_32px_rgba(0,0,0,0.5)]"
               style={{ backgroundColor: event.cardColor }}
             >
@@ -147,7 +155,7 @@ export function UpcomingForums() {
                   Open
                 </span>
               </div>
-            </a>
+            </Link>
           ))}
         </div>
 

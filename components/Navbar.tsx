@@ -96,7 +96,7 @@ export function Navbar() {
           {/* Links */}
           <div className="flex flex-col gap-8 px-6 py-10">
             {[
-              { label: "Events", href: "/#events", sectionId: "events" },
+              { label: "Events", href: "/events" },
               { label: "Network", href: "/#why", sectionId: "why" },
               { label: "Podcast", href: "/podcast" },
               { label: "Newsletter", href: "/newsletter" },
@@ -140,7 +140,7 @@ export function Navbar() {
 
           {/* Desktop links */}
           <div className="hidden items-center gap-10 md:flex">
-            <a href="/#events" onClick={scrollToSection("events")} className="text-[11px] font-medium uppercase tracking-[0.2em] text-white transition-colors duration-300 hover:text-white/75 3xl:text-[13px]">
+            <a href="/events" className="text-[11px] font-medium uppercase tracking-[0.2em] text-white transition-colors duration-300 hover:text-white/75 3xl:text-[13px]">
               Events
             </a>
             <a href="/#why" onClick={scrollToSection("why")} className="text-[11px] font-medium uppercase tracking-[0.2em] text-white transition-colors duration-300 hover:text-white/75 3xl:text-[13px]">
